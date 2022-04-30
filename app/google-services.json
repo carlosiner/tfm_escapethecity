@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "949317849779",
+    "project_id": "tfm-escapethecity",
+    "storage_bucket": "tfm-escapethecity.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949317849779:android:51f727d04b4235424056c6",
+        "android_client_info": {
+          "package_name": "uoc.tfm.escapethecity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "949317849779-qv3tb19b148p22vsjlgvdqlklo38tvs5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCw_frHYMQL1IsD8OhWOwuRxpJ28idUadE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "949317849779-qv3tb19b148p22vsjlgvdqlklo38tvs5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

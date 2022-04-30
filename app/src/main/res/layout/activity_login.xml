@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/escape_carbon"
+    >
+
+
+    <TextView
+        android:id="@+id/tvAccess"
+        android:layout_width="match_parent"
+        android:layout_height="233dp"
+        android:gravity="center_horizontal"
+        android:paddingTop="50dp"
+        android:text="@string/access_title_access"
+        android:textColor="@color/escape_purple"
+        android:textSize="60dp" />
+
+    <EditText
+        android:id="@+id/etUser"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="@string/access_user"/>
+
+    <EditText
+        android:id="@+id/etPass"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/access_password"/>
+
+    <Button
+        android:id="@+id/bAccess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_margin="40dp"
+        android:onClick="access_access"
+        android:text="@string/access_button_access" />
+
+    <TextView
+        android:id="@+id/etForgotPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="forgotPass"
+        android:textAlignment="center"
+        android:textSize="18dp"
+        android:text="@string/access_button_remember" />
+
+</LinearLayout>

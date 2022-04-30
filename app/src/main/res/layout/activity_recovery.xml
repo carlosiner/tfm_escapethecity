@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/escape_carbon"
+    >
+
+    <TextView
+        android:id="@+id/tvRecovery"
+        android:layout_width="match_parent"
+        android:layout_height="233dp"
+        android:gravity="center_horizontal"
+        android:paddingTop="50dp"
+        android:text="@string/recovery_title_recovery"
+        android:textColor="@color/escape_purple"
+        android:textSize="60dp" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="@string/recovery_email"/>
+
+    <Button
+        android:id="@+id/bSendRecovery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_margin="40dp"
+        android:onClick="recovery_pass"
+        android:text="@string/recovery_button_send" />
+
+
+    <TextView
+        android:id="@+id/tvAccess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="access"
+        android:textAlignment="center"
+        android:textSize="18dp"
+        android:text="@string/recovery_button_access" />
+
+
+</LinearLayout>

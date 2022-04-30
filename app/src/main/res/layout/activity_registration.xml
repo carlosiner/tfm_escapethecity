@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/escape_carbon"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvAccess"
+        android:layout_width="match_parent"
+        android:layout_height="233dp"
+        android:gravity="center_horizontal"
+        android:paddingTop="50dp"
+        android:text="@string/registration_title_register"
+        android:textColor="@color/escape_purple"
+        android:textSize="60dp" />
+
+    <EditText
+        android:id="@+id/etUser"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="@string/access_user"/>
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="@string/registration_email"/>
+
+    <EditText
+        android:id="@+id/etPass"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/access_password"/>
+
+    <Button
+        android:id="@+id/bRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_margin="40dp"
+        android:onClick="registration"
+        android:text="@string/registration_button_register" />
+
+    <TextView
+        android:id="@+id/etAccess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="login"
+        android:textAlignment="center"
+        android:textSize="18dp"
+        android:text="@string/registration_button_access" />
+
+
+</LinearLayout>

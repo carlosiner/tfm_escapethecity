@@ -3,10 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2575" />
+        <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_home.xml" value="0.2520833333333333" />
         <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_login.xml" value="0.25" />
-        <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_recovery.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_registration.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/menu_profile.xml" value="0.33" />
+        <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/top_bar.xml" value="0.2520833333333333" />
+        <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/menu/lateral_menu_resources.xml" value="0.2520833333333333" />
       </map>
     </option>
   </component>

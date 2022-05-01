@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="escape_purple">#62389F</color>
+    <color name="escape_back_light_purple">#A591C3</color>
     <color name="escape_carbon">#D1D1D1</color>
     <color name="escape_vivid_purple">#7211FD</color>
     <color name="escape_dead_purple">#360B73</color>

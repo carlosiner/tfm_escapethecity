@@ -44,7 +44,15 @@ class RegistrationActivity : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
         val activeUser = auth.currentUser
-//        if (activeUser != null) goHome(activeUser.email.toString(), activeUser.providerId)
+        if (activeUser != null) goHome(activeUser.email.toString(), activeUser.providerId)
+    }
+
+    override fun onBackPressed() { // TODO
+//        super.onBackPressed()
+        val intent = Intent(Intent.ACTION_MAIN)
+        intent.addCategory(Intent.CATEGORY_HOME)
+        intent.flags =Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
     }
 
     // New user registration

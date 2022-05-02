@@ -25,6 +25,10 @@ class RecoveryActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        finish()
+    }
+
     //
     fun recovery_pass(view: View){
         recovery()
@@ -54,10 +58,7 @@ class RecoveryActivity : AppCompatActivity() {
     }
 
     private fun goAccess() {
-        // TODO remove this if is not useful
-//        var intent = Intent(this, LoginActivity::class.java)
-//        startActivity(intent)
-        finish()
+        onBackPressed()
     }
 
 }

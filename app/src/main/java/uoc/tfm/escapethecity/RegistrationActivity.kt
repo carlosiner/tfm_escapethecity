@@ -43,8 +43,9 @@ class RegistrationActivity : AppCompatActivity() {
     // Maintain the user session if present
     public override fun onStart() {
         super.onStart()
-        val activeUser = auth.currentUser
-        if (activeUser != null) goHome(activeUser.email.toString(), activeUser.providerId)
+        val activeSession = auth.currentUser
+        // TODO tomar el username de la DDBB
+        if (activeSession != null) goHome(activeSession.email.toString(),"dummy", activeSession.providerId)
     }
 
     override fun onBackPressed() { // TODO
@@ -66,8 +67,6 @@ class RegistrationActivity : AppCompatActivity() {
     }
 
 
-
-
     /* Private functions */
 
     // Register a new user and move to view: home
@@ -76,12 +75,19 @@ class RegistrationActivity : AppCompatActivity() {
         pass = etPass.text.toString()
         user = etUser.text.toString()
 
+        // Check if there are values in the fields
+        if (email.isEmpty() || pass.isEmpty() || user.isEmpty()){
+            Toast.makeText(this,"Por favor, complete su usuario, email y contraseña", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         // Check the password size
         if (pass.length<6){
             Toast.makeText(this,"La contraseña es demasiado corta", Toast.LENGTH_SHORT).show()
             return
         }
 
+        // Generation of new user
         auth.createUserWithEmailAndPassword(email,pass)
             .addOnCompleteListener(this){
                 if (it.isSuccessful){
@@ -93,7 +99,7 @@ class RegistrationActivity : AppCompatActivity() {
                         "registrationDate" to registrationDate
                     ))
                     Toast.makeText(this, "Tu registro se ha completado satisfactoriamente", Toast.LENGTH_SHORT).show()
-                    goHome(user, "email") // TODO inicio por mail, no necesario
+                    goHome(email, user, "email") // TODO inicio por mail, no necesario
                 }
                 else{
                     if("FirebaseAuthUserCollisionException" in it.exception.toString()){
@@ -105,8 +111,9 @@ class RegistrationActivity : AppCompatActivity() {
     }
 
     // Move to view: home
-    private fun goHome(username: String, provider: String){
-        user = username
+    private fun goHome(email: String, user: String, provider: String){
+        usermail = email
+        username = user
         providerSession = provider
 
         val intent = Intent(this, MainActivity::class.java)

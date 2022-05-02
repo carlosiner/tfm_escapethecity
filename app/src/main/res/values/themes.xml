@@ -13,7 +13,5 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/escape_purple</item>
         <!-- Customize your theme here. -->
 
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
     </style>
 </resources>

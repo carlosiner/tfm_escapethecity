@@ -23,7 +23,8 @@
     <include
         layout="@layout/top_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        />
 
 <!--    Lateral menu-->
     <com.google.android.material.navigation.NavigationView
@@ -31,6 +32,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        app:menu="@menu/lateral_menu_resources"/>
+        app:menu="@menu/lateral_menu_resources"
+
+        />
 
 </androidx.drawerlayout.widget.DrawerLayout>

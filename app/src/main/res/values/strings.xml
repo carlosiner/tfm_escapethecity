@@ -13,6 +13,7 @@
 <!--    Access-->
     <string name="access_title_access">Acceso</string>
     <string name="access_user">Usuario</string>
+    <string name="access_email">Email</string>
     <string name="access_password">Contraseña</string>
     <string name="access_button_access">Acceder</string>
     <string name="access_button_remember">¿Olvidaste la contraseña?</string>
@@ -37,6 +38,8 @@
         <string name="lateralmenu_profile_image">xxx</string>
         <string name="lateralmenu_profile_name">username</string>
         <string name="lateralmenu_profile_email">user@email.com</string>
+
+    <string name="lateralmenu_home">Inicio</string>
     <string name="lateralmenu_mygames">Mis juegos</string>
     <string name="lateralmenu_chat">Chat</string>
     <string name="lateralmenu_otheroptions">Opciones</string>

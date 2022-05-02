@@ -46,6 +46,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         var lateralBar: NavigationView = findViewById(R.id.lateralview)
         // Added a listener to allow actions in the lateralBar
         lateralBar.setNavigationItemSelectedListener(this)
+        // Allow to use the icon original colours
+        lateralBar.itemIconTintList= null
 
         // Added Profile header to the lateral menu
         var lateralView: View = LayoutInflater.from(this).inflate(
@@ -59,11 +61,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         
         //
         var tvUser: TextView = lateralView.findViewById(R.id.menu_profile_email)
-//        tvUser.text. //TODO selección de usuario/email
+//        tvUser.text.//TODO selección de usuario/email
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         TODO("Not yet implemented")
+
     }
 
 }

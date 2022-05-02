@@ -7,26 +7,30 @@ import android.view.ActionProvider
 import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.properties.Delegates
 
 class LoginActivity : AppCompatActivity() {
 
-    companion object{
-        lateinit var usermail: String
-        lateinit var user: String
-        lateinit var providerSession: String
-    }
-
-    // private var email by Delegates.notNull<String>()
-    private var username by Delegates.notNull<String>()
-    private var password by Delegates.notNull<String>()
-    // private lateinit var etEmail: EditText
-    private lateinit var etUser: EditText
-    private lateinit var etMail: EditText // TODO change it with mail if is easier than user
-    private lateinit var etPass: EditText
+//    companion object{
+//        lateinit var usermail: String
+//        lateinit var user: String
+//        lateinit var providerSession: String
+//    }
 
     private lateinit var auth: FirebaseAuth
+
+    private var email by Delegates.notNull<String>()
+//    private var user by Delegates.notNull<String>()
+    private var pass by Delegates.notNull<String>()
+
+    private lateinit var etEmail: EditText
+//    private lateinit var etUser: EditText
+    private lateinit var etPass: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +38,13 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        etUser = findViewById(R.id.etUser)
-//        etMail = findViewById(R.id.etMail)
+//        etUser = findViewById(R.id.etUser)
+        etEmail = findViewById(R.id.etEmail)
         etPass = findViewById(R.id.etPass)
+    }
+
+    override fun onBackPressed() {
+        finish()
     }
 
     fun login(view: View){
@@ -45,30 +53,43 @@ class LoginActivity : AppCompatActivity() {
 
     // Move to view: recovery
     fun forgotPass(view: View){
-        goRecovery(etUser.toString())
+        goRecovery(etEmail.toString())
     }
+
 
     //TODO to change it with mail
     private fun loginUser(){
-        username = etUser.toString()
-        password = etPass.toString()
+        email = etEmail.text.toString()
+        pass = etPass.text.toString()
+//        user = etUser.text.toString()
 
-        auth.signInWithEmailAndPassword(username,password)
-            .addOnCompleteListener(this){task ->
-                if (task.isSuccessful) goHome(username, "email") // TODO inicio por mail, no necesario
-                /*else{
-                    if ()
-                }*/
+        if (email.isEmpty() || pass.isEmpty()){
+            Toast.makeText(this,"Por favor, complete su email y contraseña", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        auth.signInWithEmailAndPassword(email, pass)
+            .addOnCompleteListener(this){
+                if (it.isSuccessful){
+                    Toast.makeText(this, "¡Bienvenido!", Toast.LENGTH_SHORT).show()
+                    goHome(email, "email")
+
+                } // TODO inicio por mail, no necesario
+                else{
+                    Toast.makeText(this,"Error en el acceso del usuario", Toast.LENGTH_SHORT).show()
+                }
             }
     }
 
     // Move to view: home
-    private fun goHome(username: String, provider: String){
-        user = user
-        providerSession = provider
+    private fun goHome(email: String, provider: String){
+        RegistrationActivity.usermail = email
+        RegistrationActivity.username = "dummy" // TODO obtener desde la BBDD
+        RegistrationActivity.providerSession = provider
 
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     // Move to view: recovery

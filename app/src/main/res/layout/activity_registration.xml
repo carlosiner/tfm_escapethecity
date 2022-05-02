@@ -9,9 +9,10 @@
     <TextView
         android:id="@+id/tvAccess"
         android:layout_width="match_parent"
-        android:layout_height="233dp"
+        android:layout_height="200dp"
         android:gravity="center_horizontal"
         android:paddingTop="50dp"
+        android:layout_margin="10dp"
         android:text="@string/registration_title_register"
         android:textColor="@color/escape_purple"
         android:textSize="60dp" />
@@ -19,7 +20,7 @@
     <EditText
         android:id="@+id/etUser"
         android:layout_width="match_parent"
-        android:layout_height="67dp"
+        android:layout_height="50dp"
         android:layout_margin="10dp"
         android:ems="10"
         android:inputType="textEmailAddress"
@@ -28,7 +29,7 @@
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
-        android:layout_height="67dp"
+        android:layout_height="50dp"
         android:layout_margin="10dp"
         android:ems="10"
         android:inputType="textEmailAddress"
@@ -37,7 +38,7 @@
     <EditText
         android:id="@+id/etPass"
         android:layout_width="match_parent"
-        android:layout_height="67dp"
+        android:layout_height="50dp"
         android:layout_margin="10dp"
         android:ems="10"
         android:inputType="textPassword"

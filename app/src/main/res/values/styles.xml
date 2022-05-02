@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Base application theme. -->
+<!--    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">-->
+<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/escape_purple</item>-->
+<!--        <item name="colorPrimaryDark">@color/escape_dead_purple</item>-->
+<!--        <item name="colorAccent">@color/escape_back_light_purple</item>-->
+<!--    </style>-->
+
+    <style name="Theme.EscapeTheCity.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
     
 </resources>

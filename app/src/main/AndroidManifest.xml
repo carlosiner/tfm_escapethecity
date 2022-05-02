@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="uoc.tfm.escapethecity">
 
-<!--    Main app configuration, with no ActionBar theme-->
-<!--    android:theme="@style/Theme.EscapeTheCity">-->
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_run_fast"
@@ -12,30 +10,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EscapeTheCity">
         <activity
-            android:name=".RecoveryActivity"
+            android:name=".ChatActivity"
             android:exported="false" />
-
-<!--        Set Registration as initial view -->
+        <activity
+            android:name=".RecoveryActivity"
+            android:exported="false" /> <!-- Set Registration as initial view -->
         <activity
             android:name=".RegistrationActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.EscapeTheCity.NoActionBar"/>
+            android:theme="@style/Theme.EscapeTheCity.NoActionBar" />
     </application>
 
 </manifest>

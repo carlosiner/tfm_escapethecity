@@ -1,16 +1,16 @@
 <resources>
 
-<!--    ***************************-->
-<!--    *Initial activities* -->
+    <!--    ***************************-->
+    <!--    *Initial activities* -->
     <string name="app_name">EscapeTheCity</string>
 
-<!--    Registration -->
+    <!--    Registration -->
     <string name="registration_title_register">Registro</string>
     <string name="registration_email">Email</string>
     <string name="registration_button_register">Registrar</string>
     <string name="registration_button_access">Acceder</string>
 
-<!--    Access-->
+    <!--    Access-->
     <string name="access_title_access">Acceso</string>
     <string name="access_user">Usuario</string>
     <string name="access_email">Email</string>
@@ -18,33 +18,32 @@
     <string name="access_button_access">Acceder</string>
     <string name="access_button_remember">¿Olvidaste la contraseña?</string>
 
-<!--    Password recovery -->
+    <!--    Password recovery -->
     <string name="recovery_title_recovery">Recuperar contraseña</string>
     <string name="recovery_email">Email</string>
     <string name="recovery_button_send">Enviar</string>
     <string name="recovery_button_access">Acceder</string>
 
-<!--    Errors -->
+    <!--    Errors -->
     <string name="error_email_already_registered">El email ya está registrado</string>
 
-<!--    ***************************-->
-<!--    *Top bar and lateral bar -->
+    <!--    ***************************-->
+    <!--    *Top bar and lateral bar -->
     <string name="top_bar_tittle">Inicio</string>
 
     <string name="lateralmenu_open">Abriendo menú</string>
     <string name="lateralmenu_close">Cerrando menú</string>
 
     <string name="lateralmenu_profile">Perfil</string>
-        <string name="lateralmenu_profile_image">xxx</string>
-        <string name="lateralmenu_profile_name">username</string>
-        <string name="lateralmenu_profile_email">user@email.com</string>
+    <string name="lateralmenu_profile_image">xxx</string>
+    <string name="lateralmenu_profile_name">username</string>
+    <string name="lateralmenu_profile_email">user@email.com</string>
 
     <string name="lateralmenu_home">Inicio</string>
     <string name="lateralmenu_mygames">Mis juegos</string>
     <string name="lateralmenu_chat">Chat</string>
     <string name="lateralmenu_otheroptions">Opciones</string>
-        <string name="lateralmenu_logout">Cerrar sesión</string>
-
+    <string name="lateralmenu_logout">Cerrar sesión</string>
 
 
 </resources>

@@ -1,14 +1,18 @@
 package uoc.tfm.escapethecity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     // Global vars
@@ -65,8 +69,43 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        TODO("Not yet implemented")
+        // Button selection
+        when (item.itemId){
+            R.id.lateralmenu_home -> goMain()
+            R.id.lateralmenu_mygames -> goMyGames()
+            R.id.lateralmenu_chat -> goChat()
+            R.id.lateralmenu_logout_button -> logout()
+        }
 
+        // Lateral menu closure
+        drawerL.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+    private fun goMain(){
+        var intent = Intent(this,MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun goMyGames(){
+        // TODO
+        var intent = Intent(this,MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun goChat(){
+        var intent = Intent(this,ChatActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun logout(){
+        FirebaseAuth.getInstance().signOut()
+        var intent = Intent(this,RegistrationActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 }

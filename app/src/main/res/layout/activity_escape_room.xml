@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EscapeRoomActivity"
+    tools:openDrawer="start">
+
+
+
+
+    <LinearLayout
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:scrollbars="vertical">
+
+<!--            Escape Room information -->
+            <RelativeLayout
+                android:id="@+id/rl_er_info"
+                android:tag="t_er_info"
+                android:layout_width="150dp"
+                android:layout_margin="20dp"
+                android:layout_gravity="top"
+                android:layout_height="175dp"
+                android:clickable="true"
+                android:onClick="er_selection">
+
+                <ImageView
+                    android:id="@+id/im_er_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="140dp"
+                    android:src="@drawable/icon_g_information"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/im_er_info"
+                    android:text="@string/tv_er_info"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textSize="20dp"/>
+            </RelativeLayout>
+
+<!--            Escape Room Multipurpose (Create-Join, Review Status, Start or Continue)-->
+            <RelativeLayout
+                android:id="@+id/rl_er_multirole"
+                android:tag="t_er_multirole"
+                android:layout_width="150dp"
+                android:layout_margin="20dp"
+                android:layout_gravity="top"
+                android:layout_height="175dp"
+                android:clickable="true"
+                android:onClick="er_selection">
+
+                <ImageView
+                    android:id="@+id/im_er_multirole"
+                    android:layout_width="wrap_content"
+                    android:layout_height="140dp"
+                    android:src="@drawable/icon_g_create_or_join"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/im_er_multirole"
+                    android:text="@string/tv_er_multirole"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textSize="20dp"/>
+            </RelativeLayout>
+
+<!--            Escape Room Achievements-->
+            <RelativeLayout
+                android:id="@+id/rl_er_achievements"
+                android:tag="t_er_achievements"
+                android:layout_width="150dp"
+                android:layout_margin="20dp"
+                android:layout_gravity="top"
+                android:layout_height="175dp"
+                android:clickable="true"
+                android:onClick="er_selection">
+
+                <ImageView
+                    android:id="@+id/im_er_achievements"
+                    android:layout_width="wrap_content"
+                    android:layout_height="140dp"
+                    android:src="@drawable/icon_g_achievements"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/im_er_achievements"
+                    android:text="@string/tv_er_achievements"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textSize="20dp"/>
+            </RelativeLayout>
+
+<!--            Escape Room Ranking-->
+            <RelativeLayout
+                android:id="@+id/rl_er_ranking"
+                android:tag="t_er_ranking"
+                android:layout_width="150dp"
+                android:layout_margin="20dp"
+                android:layout_gravity="top"
+                android:layout_height="175dp"
+                android:clickable="true"
+                android:onClick="er_selection">
+
+                <ImageView
+                    android:id="@+id/im_er_ranking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="140dp"
+                    android:src="@drawable/icon_g_ranking"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/im_er_ranking"
+                    android:text="@string/tv_er_ranking"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textSize="20dp"/>
+            </RelativeLayout>
+
+        </GridLayout>
+    </LinearLayout>
+
+
+    <!--    Top bar that supports lateral menu-->
+    <include
+        layout="@layout/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+        TODO RESTAURAR
+    <!--    Lateral menu-->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/lateralview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/lateral_menu_resources"
+        />
+
+    <FrameLayout
+        android:id="@+id/fragment_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.1">
+
+    </FrameLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

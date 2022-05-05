@@ -45,5 +45,22 @@
     <string name="lateralmenu_otheroptions">Opciones</string>
     <string name="lateralmenu_logout">Cerrar sesión</string>
 
+    <!--    ***************************-->
+    <!--    Home menu-->
+    <string name="tv_h_escapeName">El Secreto</string>
+
+
+    <!--    ***************************-->
+    <!--    Escape room menu-->
+    <string name="tv_er_info">Información</string>
+    <string name="tv_er_multirole">Crear o unirse</string>
+    <string name="tv_er_achievements">Logros</string>
+    <string name="tv_er_ranking">Ranking</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+<!--    ***************************-->
+
+
 
 </resources>

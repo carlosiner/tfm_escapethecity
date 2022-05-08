@@ -2,6 +2,7 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainDL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EscapeRoomActivity"
@@ -138,20 +139,20 @@
         </GridLayout>
     </LinearLayout>
 
-
     <!--    Top bar that supports lateral menu-->
     <include
         layout="@layout/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
-        TODO RESTAURAR
+
     <!--    Lateral menu-->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/lateralview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:translationZ="1dp"
         app:menu="@menu/lateral_menu_resources"
         />
 
@@ -159,8 +160,9 @@
         android:id="@+id/fragment_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.1">
+        >
 
     </FrameLayout>
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

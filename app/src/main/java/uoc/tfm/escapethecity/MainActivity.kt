@@ -17,7 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     // Global vars
     private lateinit var drawerL: DrawerLayout
 
@@ -26,10 +26,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+      //  layoutGenerator()
 
-        topBarActivation()
-        lateralBarActivation()
-        layoutGenerator()
+        drawerL = topBarActivation()
+        lateralBarActivation(this)
 
     }
 
@@ -56,45 +56,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
 
-    private fun topBarActivation(){
-        // Generate the variable from the top_bar layout
-        var topBar: androidx.appcompat.widget.Toolbar = findViewById(R.id.top_bar)
-        setSupportActionBar(topBar)
 
-        // Get the DL from the main activity
-        drawerL = findViewById(R.id.dl_main)
-        var toggle = ActionBarDrawerToggle(
-            this,
-            drawerL,
-            topBar,
-            R.string.lateralmenu_open,
-            R.string.lateralmenu_close)
 
-        drawerL.addDrawerListener(toggle)
-        toggle.syncState()
-    }
 
-    private fun lateralBarActivation(){
-        var lateralBar: NavigationView = findViewById(R.id.lateralview)
-        // Added a listener to allow actions in the lateralBar
-        lateralBar.setNavigationItemSelectedListener(this)
-        // Allow to use the icon original colours
-        lateralBar.itemIconTintList= null
-
-        // Added Profile header to the lateral menu
-        var lateralView: View = LayoutInflater.from(this).inflate(
-            R.layout.menu_profile,
-            lateralBar,
-            false)
-
-        // Reloads the view for new user login
-        lateralBar.removeHeaderView(lateralView)
-        lateralBar.addHeaderView(lateralView)
-
-        //
-        var tvUser: TextView = lateralView.findViewById(R.id.menu_profile_email)
-//        tvUser.text.//TODO selección de usuario/email
-    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Button selection
@@ -110,27 +74,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-    private fun goMain(){
-        var intent = Intent(this,MainActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun goMyGames(){
-        // TODO
-        var intent = Intent(this,MainActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun goChat(){
-        var intent = Intent(this,ChatActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun logout(){
-        FirebaseAuth.getInstance().signOut()
-        var intent = Intent(this,RegistrationActivity::class.java)
-        startActivity(intent)
-    }
 
     private fun goEscapeRoom(){
         var intent = Intent(this,EscapeRoomActivity::class.java)

@@ -1,5 +1,6 @@
 package uoc.tfm.escapethecity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,13 +17,10 @@ import java.util.*
 class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener  {
 
     private lateinit var drawerL: DrawerLayout
-    private lateinit var ft: FragmentTransaction
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_escape_room)
-
-        ft = supportFragmentManager.beginTransaction()
 
         // Menus: toolbar and navigation bar (top and lateral bars)
         var topBar: androidx.appcompat.widget.Toolbar = findViewById(R.id.top_bar)
@@ -33,17 +31,17 @@ class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
 
     fun er_selection(view:View){
         when(view.tag){
-            "t_er_info" -> goERInfoFragment()
+            "t_er_info" -> goERInformation()
         }
     }
 
-    private fun goERInfoFragment(){
-        val fragment = ERInfoFragment()
-//        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-        ft.replace(R.id.fragment_main,fragment)
-        ft.commit()
+    private fun goERInformation(){
+        var intent = Intent(this,ERInformationActivity::class.java)
+        startActivity(intent)
     }
 
+
+    // Common item selection for navigationMenu
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Button selection
         when (item.itemId){
@@ -52,11 +50,8 @@ class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             R.id.lateralmenu_chat -> goChat()
             R.id.lateralmenu_logout_button -> logout()
         }
-
         // Lateral menu closure
         drawerL.closeDrawer(GravityCompat.START)
         return true
     }
-
-
 }

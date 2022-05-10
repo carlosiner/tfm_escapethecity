@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="60dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainDL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ERInfoFragment"
-    android:clickable="true">
+    tools:context=".ERInformationActivity"
+    tools:openDrawer="start">
 
     <!-- TODO: Update blank fragment layout -->
-    <View
-        android:id="@+id/view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/escape_dead_purple"/>
+
     <LinearLayout
-        android:paddingTop="20dp"
+        android:paddingTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -25,22 +21,24 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:tag="bGoBack"
-                android:onClick="goBack"
+            <ImageButton
+                android:id="@+id/ib_goBack"
+                android:onClick="er_actions"
+                android:tag="goBack"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_weight=".8"
                 android:src="@drawable/icon_goback"
-                android:clickable="true"
-                />
+                android:scaleType="fitCenter"
+                android:background="@null"
+                android:layout_weight=".8"/>
+
 
             <TextView
+                android:id="@+id/tv_er_description"
                 android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight=".2"
-                android:textColor="@color/white"
                 android:textSize="30dp"
                 android:text="Información" />
 
@@ -51,9 +49,25 @@
             android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/white"
             android:text="@string/hello_blank_fragment" />
 
     </LinearLayout>
 
-</FrameLayout>
+    <!--    Top bar that supports lateral menu-->
+    <include
+        layout="@layout/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <!--    Lateral menu-->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/lateralview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:translationZ="1dp"
+        app:menu="@menu/lateral_menu_resources"
+        />
+
+</androidx.drawerlayout.widget.DrawerLayout>

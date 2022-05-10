@@ -40,6 +40,8 @@ class RegistrationActivity : AppCompatActivity() {
         etPass = findViewById(R.id.etPass)
 
     }
+
+
     // Maintain the user session if present
     public override fun onStart() {
         super.onStart()

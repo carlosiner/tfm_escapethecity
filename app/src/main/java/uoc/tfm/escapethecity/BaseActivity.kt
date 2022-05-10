@@ -34,6 +34,8 @@ open class BaseActivity : AppCompatActivity()  {
             R.string.lateralmenu_open,
             R.string.lateralmenu_close)
 
+
+
         drawerL.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -62,6 +64,8 @@ open class BaseActivity : AppCompatActivity()  {
 //        tvUser.text.//TODO selección de usuario/email
     }
 
+
+    /* Functions from NavigationMenu (lateral menu) */
     fun goMain(){
         var intent = Intent(this,MainActivity::class.java)
         startActivity(intent)
@@ -84,5 +88,9 @@ open class BaseActivity : AppCompatActivity()  {
         startActivity(intent)
     }
 
+    /* Other functions */
+    fun goBack(){
+        finish()
+    }
 
 }

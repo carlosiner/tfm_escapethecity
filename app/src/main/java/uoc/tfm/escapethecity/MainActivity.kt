@@ -55,11 +55,13 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
 
+    private fun goEscapeRoom(){
+        var intent = Intent(this,EscapeRoomActivity::class.java)
+        startActivity(intent)
+    }
 
 
-
-
-
+    // Common item selection for navigationMenu
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Button selection
         when (item.itemId){
@@ -68,17 +70,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.lateralmenu_chat -> goChat()
             R.id.lateralmenu_logout_button -> logout()
         }
-
         // Lateral menu closure
         drawerL.closeDrawer(GravityCompat.START)
         return true
     }
-
-
-    private fun goEscapeRoom(){
-        var intent = Intent(this,EscapeRoomActivity::class.java)
-        startActivity(intent)
-    }
-
-
 }

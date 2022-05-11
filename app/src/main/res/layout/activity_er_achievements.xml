@@ -42,15 +42,13 @@
 
         </LinearLayout>
 
-
-        <LinearLayout
-            android:id="@+id/ll_insertion"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_achievement" />
 
-        </LinearLayout>
 
     </LinearLayout>
 

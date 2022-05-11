@@ -1,4 +1,4 @@
-package uoc.tfm.escapethecity
+package uoc.tfm.escapethecity.data
 
 data class Escape(
     var name: String = ""

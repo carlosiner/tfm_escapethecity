@@ -47,7 +47,7 @@
             android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:text="@string/tv_er_ifno_description" />
 
     </LinearLayout>
 

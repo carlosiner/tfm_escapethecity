@@ -1,28 +1,35 @@
 package uoc.tfm.escapethecity
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
-import uoc.tfm.escapethecity.BaseActivity
-import uoc.tfm.escapethecity.R
 
-class ERInformationActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
+class ERRanking : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var drawerL: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_er_information)
+        setContentView(R.layout.activity_er_ranking)
 
         // Menus: toolbar and navigation bar (top and lateral bars)
         var topBar: androidx.appcompat.widget.Toolbar = findViewById(R.id.top_bar)
-        topBar.title = "Juego: El Secreto" //TODO cambiar por variable BBDD
+        topBar.title = "Juego: El Secreto" //TODO change by DDBB variable
         drawerL = topBarActivation()
         lateralBarActivation(this)
+
+        /* TODO
+            - Get information from the database and order the points result
+            - Get the information of the user
+            - Show the information in the table
+        */
     }
+
 
     // Override back
     override fun onBackPressed() {
@@ -36,11 +43,6 @@ class ERInformationActivity : BaseActivity(), NavigationView.OnNavigationItemSel
             "goBack" -> goBack()
         }
     }
-
-    private fun setInformationText(text: String){
-        // TODO set the text from the DDBB object
-    }
-
 
     // Common item selection for navigationMenu
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

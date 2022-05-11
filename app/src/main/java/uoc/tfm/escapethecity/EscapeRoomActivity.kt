@@ -1,18 +1,12 @@
 package uoc.tfm.escapethecity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
-import java.util.*
 
 class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener  {
 
@@ -33,17 +27,22 @@ class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         when(view.tag){
             "t_er_achievements" -> goERAchievements()
             "t_er_info" -> goERInformation()
-
+            "t_er_ranking" -> goERRanking()
         }
     }
 
     private fun goERInformation(){
-        var intent = Intent(this,ERInformationActivity::class.java)
+        var intent = Intent(this, ERInformationActivity::class.java)
         startActivity(intent)
     }
 
     private fun goERAchievements(){
-        var intent = Intent(this,ERAchievementsActivity::class.java)
+        var intent = Intent(this, ERAchievementsActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun goERRanking(){
+        var intent = Intent(this, ERRanking::class.java)
         startActivity(intent)
     }
 

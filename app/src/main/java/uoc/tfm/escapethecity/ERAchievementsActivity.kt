@@ -1,16 +1,18 @@
 package uoc.tfm.escapethecity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
+import androidx.recyclerview.widget.LinearLayoutManager
+import uoc.tfm.escapethecity.BaseActivity
+import uoc.tfm.escapethecity.CustomRVAdapter
+import uoc.tfm.escapethecity.R
+import uoc.tfm.escapethecity.data.ItemsViewModel
 
 class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -26,54 +28,35 @@ class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSe
         drawerL = topBarActivation()
         lateralBarActivation(this)
 
-        generateAchievements()
+        generateAchievementsList()
     }
 
+    private fun generateAchievementsList(){
+        val recyclerview: RecyclerView = findViewById(R.id.recyclerview)
 
-    private fun generateAchievements(){
+        // Manager of the view, in this case with an horizontal LinearLayout
+        recyclerview.layoutManager = LinearLayoutManager(this)
 
-        val mainLL: LinearLayout = findViewById(R.id.ll_insertion)
+        val data = ArrayList<ItemsViewModel>()
 
-//        for (i in 0..5){
-            var x: View = LayoutInflater.from(this).inflate(R.layout.achievement, mainLL, false)
-//            var img: ImageView = findViewById(R.id.iv_a_imageX)
-//            img.setId(i)
-//            var t: TextView = findViewById(R.id.tv_a_textX)
-//            t.setId(i)
-//            t.setText("Logro: ")
-//        }
-        mainLL.removeAllViews()
-        mainLL.addView(x)
+        /* TODO:
+            First time: Load from DB the default list of items with descriptions,
+                    - Use the "trophy" image
+                    - The items are blocked for the user
+            Next times: Load from the DB the status of this user related with the escape room game
+                    - Custom images
+         */
 
-//        var imageAndText =
-//        for (i in 0..5){
-//            val newLL: LinearLayout = LinearLayout(this)
-//            newLL.layoutParams = LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.MATCH_PARENT,
-//                LinearLayout.LayoutParams.WRAP_CONTENT)
-//
-//            var newIV: ImageView = ImageView(this)
-//            newIV.layoutParams = LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.WRAP_CONTENT,
-//                LinearLayout.LayoutParams.WRAP_CONTENT)
-//
-//            newIV.setImageResource(R.drawable.trophy)
-//            newIV.layoutParams.height = 150
-//            newIV.layoutParams.width = 150
-//
-//
-//            newLL.addView(newIV)
-//
-//            //mainLL.removeAllViews()
-//            var x = LayoutInflater.from(this).inflate(R.id.ll_insertion, null)
-//
-//            mainLL.addView(newLL)
-//        }
+        // Dummy array to load default data TODO: replace it with DB
+        data.add(ItemsViewModel("t_a1", R.drawable.trophy, "Rápido"))
+        data.add(ItemsViewModel("t_a2", R.drawable.trophy, "Llave dorada"))
+        data.add(ItemsViewModel("t_a3", R.drawable.trophy, "Final inesperado"))
 
+        // This will pass the ArrayList to our Adapter
+        val adapter = CustomRVAdapter(data)
 
-
-
-
+        // Setting the Adapter with the recyclerview
+        recyclerview.adapter = adapter
     }
 
     // Override back
@@ -84,8 +67,14 @@ class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSe
 
     // Actions selector
     fun er_actions(view: View){
+        // TODO change this with the "data" itemList information
+
         when(view.tag){
             "goBack" -> goBack()
+            "t_a1" -> Toast.makeText(this,"No has conseguido este logro", Toast.LENGTH_SHORT).show()
+            "t_a2" -> Toast.makeText(this,"No has conseguido este logro", Toast.LENGTH_SHORT).show()
+            "t_a3" -> Toast.makeText(this,"No has conseguido este logro", Toast.LENGTH_SHORT).show()
+
         }
     }
 

@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EscapeTheCity.NoActionBar">
         <activity
+            android:name=".ERCreateJoinActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ERRanking"
+            android:exported="false" />
+        <activity
             android:name=".ERAchievementsActivity"
             android:exported="false" />
         <activity

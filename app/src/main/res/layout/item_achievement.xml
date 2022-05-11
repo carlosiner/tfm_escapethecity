@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardElevation="10dp">
+
+    <LinearLayout
+        android:id="@+id/ll_a_container"
+        android:tag="t_a_default"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="er_actions"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/iv_a_imageX"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/trophy"
+            android:layout_weight=".8"
+            />
+        <TextView
+            android:id="@+id/tv_a_textX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:layout_marginLeft="10dp"
+            android:text="@string/tv_achievement_name"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

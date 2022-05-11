@@ -57,11 +57,14 @@
     <string name="tv_er_achievements">Logros</string>
     <string name="tv_er_ranking">Ranking</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tv_er_ifno_description">Est</string>
 
     <!--    ***************************-->
     <!--    Achievements -->
-
     <string name="tv_achievement_name">Example of achievement</string>
+
+    <!--    Ranking -->
+    <string name="tv_er_ranking_titleposition">Tu posición:</string>
+    <string name="tv_er_ranking_position">...</string>
 
 </resources>

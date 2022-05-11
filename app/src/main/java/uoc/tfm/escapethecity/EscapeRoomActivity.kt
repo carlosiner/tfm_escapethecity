@@ -31,12 +31,19 @@ class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
 
     fun er_selection(view:View){
         when(view.tag){
+            "t_er_achievements" -> goERAchievements()
             "t_er_info" -> goERInformation()
+
         }
     }
 
     private fun goERInformation(){
         var intent = Intent(this,ERInformationActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun goERAchievements(){
+        var intent = Intent(this,ERAchievementsActivity::class.java)
         startActivity(intent)
     }
 

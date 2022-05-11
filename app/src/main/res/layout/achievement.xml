@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_achievementX"
+    android:tag="achievement"
+    android:onClick="er_actions"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="10dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/iv_a_imageX"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/trophy"
+        android:layout_weight=".8"
+        />
+    <TextView
+        android:id="@+id/tv_a_textX"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight=".3"
+        android:layout_marginLeft="10dp"
+        android:text="@string/tv_achievement_name"
+        android:textSize="25dp"/>
+
+</LinearLayout>

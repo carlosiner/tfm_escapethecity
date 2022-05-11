@@ -61,7 +61,7 @@ open class BaseActivity : AppCompatActivity()  {
 
         //
         var tvUser: TextView = lateralView.findViewById(R.id.menu_profile_email)
-//        tvUser.text.//TODO selección de usuario/email
+        tvUser.setText("email@email.com")//TODO selección de usuario/email
     }
 
 

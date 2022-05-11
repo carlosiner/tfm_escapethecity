@@ -20,36 +20,6 @@ class ERInformationActivity : BaseActivity(), NavigationView.OnNavigationItemSel
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_er_information)
 
-        var db = FirebaseFirestore.getInstance()
-//        db.collection("users").document("test").set(hashMapOf(
-//            "email" to "myemail",
-//            "user" to "myUser",
-//            "registrationDate" to "01"
-//        ))
-        var textView: TextView = findViewById(R.id.tv_er_description)
-        var escape:Escape
-        db.collection("escapes").document("el_secreto").get()
-            .addOnSuccessListener {
-                println("----------------")
-                println(it.data)
-                escape = it.toObject(Escape::class.java)
-                println("----------------")
-            }
-            .addOnFailureListener{
-                println("Error in retrieving: " + it)
-            }
-
-//            .get()
-//            .addOnSuccessListener{result ->
-//                for (document in result){
-//                    println("DOCS: ")
-//                    println("${document.id} => ${document.data}")
-//                }
-//            }
-//            .addOnFailureListener{exception ->
-//                println(exception)
-//
-
         // Menus: toolbar and navigation bar (top and lateral bars)
         var topBar: androidx.appcompat.widget.Toolbar = findViewById(R.id.top_bar)
         topBar.title = "Juego: El Secreto" //TODO cambiar por variable BBDD
@@ -71,7 +41,7 @@ class ERInformationActivity : BaseActivity(), NavigationView.OnNavigationItemSel
     }
 
     private fun setInformationText(text: String){
-
+        // TODO set the text from the DDBB object
     }
 
 

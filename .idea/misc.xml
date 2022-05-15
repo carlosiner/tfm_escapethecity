@@ -3,16 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/drawable/button_on.xml" value="0.1465" />
         <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2575" />
         <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/drawable/ic_run_fast.xml" value="0.348" />
         <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/achievement.xml" value="0.20885416666666667" />
         <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_base.xml" value="0.1609375" />
         <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_chat.xml" value="0.2625" />
         <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_er_achievements.xml" value="0.22135416666666666" />
-        <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_er_information.xml" value="0.22" />
+        <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_er_create_join.xml" value="0.1" />
+        <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_er_information.xml" value="0.1" />
         <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_er_ranking.xml" value="0.33" />
         <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_erinformation.xml" value="0.23072916666666668" />
-        <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_escape_room.xml" value="0.2" />
+        <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_escape_room.xml" value="0.1" />
         <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_home.xml" value="0.2520833333333333" />
         <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/Carlos/workspace/kotlin/EscapeTheCity/app/src/main/res/layout/activity_main.xml" value="0.25" />

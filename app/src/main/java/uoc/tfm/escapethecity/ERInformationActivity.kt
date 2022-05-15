@@ -19,7 +19,7 @@ class ERInformationActivity : BaseActivity(), NavigationView.OnNavigationItemSel
 
         // Menus: toolbar and navigation bar (top and lateral bars)
         var topBar: androidx.appcompat.widget.Toolbar = findViewById(R.id.top_bar)
-        topBar.title = "Juego: El Secreto" //TODO cambiar por variable BBDD
+        topBar.title = "Juego: El Secreto" //TODO change with DB varaible
         drawerL = topBarActivation()
         lateralBarActivation(this)
     }

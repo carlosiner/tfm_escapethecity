@@ -8,22 +8,17 @@ import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import uoc.tfm.escapethecity.data.User
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.properties.Delegates
 
-class RegistrationActivity : AppCompatActivity() {
+class RegistrationActivity : BaseActivity(){
     companion object{
-        lateinit var usermail: String
-        lateinit var username: String
-        lateinit var providerSession: String
+        var userObj: User? = null
     }
 
     private lateinit var auth: FirebaseAuth
-
-    private var email by Delegates.notNull<String>()
-    private var user by Delegates.notNull<String>()
-    private var pass by Delegates.notNull<String>()
 
     private lateinit var etEmail: EditText
     private lateinit var etUser: EditText
@@ -46,8 +41,11 @@ class RegistrationActivity : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
         val activeSession = auth.currentUser
-        // TODO tomar el username de la DDBB
-        if (activeSession != null) goHome(activeSession.email.toString(),"dummy", activeSession.providerId)
+
+        if (activeSession != null){
+            getDBUser(activeSession.email!!) // Not null
+            goHome()
+        }
     }
 
     override fun onBackPressed() { // TODO
@@ -73,35 +71,31 @@ class RegistrationActivity : AppCompatActivity() {
 
     // Register a new user and move to view: home
     private fun registerUser(){
-        email = etEmail.text.toString()
-        pass = etPass.text.toString()
-        user = etUser.text.toString()
+        val emailStr = etEmail.text.toString()
+        val passStr = etPass.text.toString()
+        val userStr = etUser.text.toString()
 
         // Check if there are values in the fields
-        if (email.isEmpty() || pass.isEmpty() || user.isEmpty()){
+        if (emailStr.isEmpty() || passStr.isEmpty() || userStr.isEmpty()){
             Toast.makeText(this,"Por favor, complete su usuario, email y contraseña", Toast.LENGTH_SHORT).show()
             return
         }
 
         // Check the password size
-        if (pass.length<6){
+        if (passStr.length<6){
             Toast.makeText(this,"La contraseña es demasiado corta", Toast.LENGTH_SHORT).show()
             return
         }
 
         // Generation of new user
-        auth.createUserWithEmailAndPassword(email,pass)
+        auth.createUserWithEmailAndPassword(emailStr, passStr)
             .addOnCompleteListener(this){
                 if (it.isSuccessful){
                     var registrationDate = SimpleDateFormat("dd/MM/yyyy").format(Date())
-                    var db = FirebaseFirestore.getInstance()
-                    db.collection("users").document(email).set(hashMapOf(
-                        "email" to email,
-                        "user" to user,
-                        "registrationDate" to registrationDate
-                    ))
+                    userObj = User(userStr, registrationDate, emailStr, "player")
+                    setDBUser()
                     Toast.makeText(this, "Tu registro se ha completado satisfactoriamente", Toast.LENGTH_SHORT).show()
-                    goHome(email, user, "email") // TODO inicio por mail, no necesario
+                    goHome()
                 }
                 else{
                     if("FirebaseAuthUserCollisionException" in it.exception.toString()){
@@ -112,15 +106,31 @@ class RegistrationActivity : AppCompatActivity() {
             }
     }
 
-    // Move to view: home
-    private fun goHome(email: String, user: String, provider: String){
-        usermail = email
-        username = user
-        providerSession = provider
+    private fun setDBUser(){
+        var db = FirebaseFirestore.getInstance()
+        db.collection("users").document(userObj!!.email).set(userObj!!)
+    }
 
+    private fun getDBUser(email: String){
+        var db = FirebaseFirestore.getInstance()
+        db.collection("users").document(email).get()
+            .addOnSuccessListener {
+                userObj = User(
+                    it.data?.get("username") as String,
+                    it.data?.get("registrationDate") as String,
+                    it.data?.get("email") as String,
+                    it.data?.get("role") as String)
+                loadUserInProfile()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this,"Error en la obtención del usuario", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    // Move to view: home
+    private fun goHome(){
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish()
     }
 
     // Move to view: login

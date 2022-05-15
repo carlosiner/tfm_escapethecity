@@ -49,15 +49,17 @@
     <!--    Home menu-->
     <string name="tv_h_escapeName">El Secreto</string>
 
-
     <!--    ***************************-->
     <!--    Escape room menu-->
     <string name="tv_er_info">Información</string>
     <string name="tv_er_multirole">Crear o unirse</string>
     <string name="tv_er_achievements">Logros</string>
     <string name="tv_er_ranking">Ranking</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="tv_er_ifno_description">Est</string>
+    <!-- TODO: Change this placeholder text -->
+    <string name="tv_er_ifno_description">
+        Bienvenido a "El Secreto", un juego de misterio y aventura en el
+        centro de tu ciudad...
+    </string>
 
     <!--    ***************************-->
     <!--    Achievements -->
@@ -66,5 +68,18 @@
     <!--    Ranking -->
     <string name="tv_er_ranking_titleposition">Tu posición:</string>
     <string name="tv_er_ranking_position">...</string>
+
+    <!-- Multiroles -->
+    <string name="b_er_multirole_group">Grupos</string>
+    <string name="tv_er_multirole_group_title">Tu grupo es:</string>
+    <string name="tv_multirole_settings">Ajustes:</string>
+    <string name="tv_multirole_settings_time">Límite de tiempo:</string>
+    <string name="b_multirole_y">Si</string>
+    <string name="b_multirole_n">No</string>
+    <string name="tv_multirole_settings_date">Fecha prevista de inicio:</string>
+    <string name="b_multirole_date">Selección de fecha</string>
+    <string name="b_multirole_confirmation">Confirmar</string>
+
+
 
 </resources>

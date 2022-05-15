@@ -14,6 +14,9 @@ import com.google.firebase.auth.FirebaseAuth
 open class BaseActivity : AppCompatActivity()  {
 
     private lateinit var drawerL: DrawerLayout
+    private lateinit var lateralView: View
+    private lateinit var user: String
+    private lateinit var email: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,10 +50,10 @@ open class BaseActivity : AppCompatActivity()  {
         // Added a listener to allow actions in the lateralBar
         lateralBar.setNavigationItemSelectedListener(navVListener)
         // Allow to use the icon original colours
-        lateralBar.itemIconTintList= null
+        lateralBar.itemIconTintList = null
 
         // Added Profile header to the lateral menu
-        var lateralView: View = LayoutInflater.from(this).inflate(
+        lateralView = LayoutInflater.from(this).inflate(
             R.layout.menu_profile,
             lateralBar,
             false)
@@ -59,9 +62,25 @@ open class BaseActivity : AppCompatActivity()  {
         lateralBar.removeHeaderView(lateralView)
         lateralBar.addHeaderView(lateralView)
 
-        //
+
+        if (!this::user.isInitialized || !this::email.isInitialized ){
+            if (RegistrationActivity.userObj != null){
+                user = RegistrationActivity.userObj!!.username
+                email = RegistrationActivity.userObj!!.email
+            }
+            else {
+                user = "Username"
+                email = "email@email"
+            }
+        }
         var tvUser: TextView = lateralView.findViewById(R.id.menu_profile_email)
-        tvUser.setText("email@email.com")//TODO selección de usuario/email
+        tvUser.setText(email)
+        tvUser = lateralView.findViewById(R.id.menu_profile_name)
+        tvUser.setText(user)
+    }
+
+    fun loadUserInProfile(){
+
     }
 
 
@@ -72,7 +91,7 @@ open class BaseActivity : AppCompatActivity()  {
     }
 
     fun goMyGames(){
-        // TODO
+        // TODO - It should redirect to a Main with the games from the user (defined in the DB)
         var intent = Intent(this,MainActivity::class.java)
         startActivity(intent)
     }

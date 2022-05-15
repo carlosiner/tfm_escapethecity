@@ -28,7 +28,21 @@ class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             "t_er_achievements" -> goERAchievements()
             "t_er_info" -> goERInformation()
             "t_er_ranking" -> goERRanking()
+            "t_er_multirole" -> selectMulti()
         }
+    }
+
+    private fun selectMulti(){
+        /* TODO
+            This should change depending on the user status:
+                - Escape Room not created/joined or first time:
+                    The user should be sent to ERCreateJoinActivity
+                - Escape Room created, but confirmation pending or waiting until start date:
+                    The user should be sent to "Check status" activity
+                - About to start the escape room:
+                    The user should be sent to "Start ER" activity
+         */
+        goERCreateJoin()
     }
 
     private fun goERInformation(){
@@ -45,6 +59,12 @@ class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         var intent = Intent(this, ERRanking::class.java)
         startActivity(intent)
     }
+
+    private fun goERCreateJoin(){
+        var intent = Intent(this, ERCreateJoinActivity::class.java)
+        startActivity(intent)
+    }
+
 
 
     // Common item selection for navigationMenu

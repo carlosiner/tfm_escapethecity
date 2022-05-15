@@ -12,26 +12,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import uoc.tfm.escapethecity.data.User
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.properties.Delegates
 
 class LoginActivity : AppCompatActivity() {
 
-//    companion object{
-//        lateinit var usermail: String
-//        lateinit var user: String
-//        lateinit var providerSession: String
-//    }
-
     private lateinit var auth: FirebaseAuth
 
-    private var email by Delegates.notNull<String>()
-//    private var user by Delegates.notNull<String>()
-    private var pass by Delegates.notNull<String>()
-
     private lateinit var etEmail: EditText
-//    private lateinit var etUser: EditText
     private lateinit var etPass: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +30,6 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-//        etUser = findViewById(R.id.etUser)
         etEmail = findViewById(R.id.etEmail)
         etPass = findViewById(R.id.etPass)
     }
@@ -59,24 +48,21 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    //TODO to change it with mail
     private fun loginUser(){
-        email = etEmail.text.toString()
-        pass = etPass.text.toString()
-//        user = etUser.text.toString()
+        val emailStr = etEmail.text.toString()
+        val passStr = etPass.text.toString()
 
-        if (email.isEmpty() || pass.isEmpty()){
+        if (emailStr.isEmpty() || passStr.isEmpty()){
             Toast.makeText(this,"Por favor, complete su email y contraseña", Toast.LENGTH_SHORT).show()
             return
         }
 
-        auth.signInWithEmailAndPassword(email, pass)
+        auth.signInWithEmailAndPassword(emailStr, passStr)
             .addOnCompleteListener(this){
                 if (it.isSuccessful){
                     Toast.makeText(this, "¡Bienvenido!", Toast.LENGTH_SHORT).show()
-                    goHome(email, "email")
-
-                } // TODO inicio por mail, no necesario
+                    goHome()
+                }
                 else{
                     Toast.makeText(this,"Error en el acceso del usuario", Toast.LENGTH_SHORT).show()
                 }
@@ -84,14 +70,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     // Move to view: home
-    private fun goHome(email: String, provider: String){
-        RegistrationActivity.usermail = email
-        RegistrationActivity.username = "dummy" // TODO obtener desde la BBDD
-        RegistrationActivity.providerSession = provider
-
+    private fun goHome(){
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish()
     }
 
     // Move to view: recovery

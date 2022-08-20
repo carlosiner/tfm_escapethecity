@@ -1,12 +1,16 @@
 package uoc.tfm.escapethecity.data
 
-data class Escape(
-    var name: String = ""
-    ,var info: String = ""
-    ,var image: String = ""
-    ,var enabled: Boolean = false
-    ,var achievements: List<String>
-    ,var escapeName: String = ""
-)    {
+import android.sax.Element
+import com.google.protobuf.Value
+import java.security.Key
+import java.util.*
 
-}
+data class Escape(
+    var name: String ?= null
+    ,var info: String ?= null
+    ,var image: String ?= null
+    ,var enabled: Boolean ?= null
+    //,var achievements: List<String> // Fallo !
+    //,var achievements: ArrayList<String> = arrayListOf() // Works!
+    ,var achievements: ArrayList<HashMap<String,Any>> = arrayListOf() // Works!
+)

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.DynamicLayout
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -16,6 +17,9 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import uoc.tfm.escapethecity.data.Escape
+import kotlin.math.log
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     // Global vars
@@ -31,6 +35,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         drawerL = topBarActivation()
         lateralBarActivation(this)
 
+        load_db_escapes()
+
     }
 
     fun testingButton(view: View){
@@ -38,6 +44,31 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 //        relaLay.setOnClickListener{
 //        }
         goEscapeRoom()
+    }
+
+    private fun load_db_escapes(){
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("escapes").document("er1")
+            .get()
+            .addOnSuccessListener {
+                if (it.data?.size != null){
+                    // it.get("achievements")
+                    var objs = it.toObject(Escape::class.java)
+                    Log.println(Log.INFO,"DONE","Done")
+                }
+                else{
+//                   val dbUp: FirebaseFirestore = FirebaseFirestore.getInstance()
+//                   dbUp.collection("destino").document("usermail").set(hashMapOf(
+//                       // set default values
+//                        "my_field" to 0.0, ...
+//                   ))
+                    Log.d("Error in DB content", "Error when loading escapes list")
+                }
+            }
+            .addOnFailureListener {
+                Log.d("Error loading escapes", "get failed with ", it)
+            }
     }
 
     fun layoutGenerator(){

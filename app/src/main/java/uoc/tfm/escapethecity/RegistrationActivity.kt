@@ -121,6 +121,7 @@ class RegistrationActivity : BaseActivity(){
                     it.data?.get("email") as String,
                     it.data?.get("role") as String)
                 loadUserInProfile()
+                //TODO
             }
             .addOnFailureListener {
                 Toast.makeText(this,"Error en la obtención del usuario", Toast.LENGTH_SHORT).show()

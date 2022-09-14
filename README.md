@@ -35,3 +35,8 @@ user:
 ALTERNATIVAS
 ------------------------
 
+specific_scape: 
+    email:
+        status: 
+        points: 
+        

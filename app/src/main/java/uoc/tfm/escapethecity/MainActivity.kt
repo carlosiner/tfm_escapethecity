@@ -49,26 +49,42 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private fun load_db_escapes(){
         val db = FirebaseFirestore.getInstance()
 
-        db.collection("escapes").document("er1")
+        db.collection("escapes")
             .get()
             .addOnSuccessListener {
-                if (it.data?.size != null){
-                    // it.get("achievements")
-                    var objs = it.toObject(Escape::class.java)
-                    Log.println(Log.INFO,"DONE","Done")
+                for (sr in it.documents){
+                    var key: String = sr.id
+                    var escapeObj: Escape = sr.toObject(Escape::class.java)!! // Content of SR
+                    escapeList[key] = escapeObj
                 }
-                else{
-//                   val dbUp: FirebaseFirestore = FirebaseFirestore.getInstance()
-//                   dbUp.collection("destino").document("usermail").set(hashMapOf(
-//                       // set default values
-//                        "my_field" to 0.0, ...
-//                   ))
-                    Log.d("Error in DB content", "Error when loading escapes list")
-                }
+                Log.d("Contenido encontrado", "Hay contenido ")
             }
             .addOnFailureListener {
                 Log.d("Error loading escapes", "get failed with ", it)
             }
+        Log.d("Contenido encontrado", "Hay contenido ")
+
+//        db.collection("escapes").document("er1")
+//            .get()
+//            .addOnSuccessListener {
+//                if (it.data?.size != null){
+//                    // it.get("achievements")
+//                    //Log.println(Log.INFO,"DONE","Done")
+//                    var escapeObj: Escape = it.toObject(Escape::class.java)!!
+//                    escapeList.add(escapeObj)
+//                }
+//                else{
+////                   val dbUp: FirebaseFirestore = FirebaseFirestore.getInstance()
+////                   dbUp.collection("destino").document("usermail").set(hashMapOf(
+////                       // set default values
+////                        "my_field" to 0.0, ...
+////                   ))
+//                    Log.d("Error in DB content", "Error when loading escapes list")
+//                }
+//            }
+//            .addOnFailureListener {
+//                Log.d("Error loading escapes", "get failed with ", it)
+//            }
     }
 
     fun layoutGenerator(){
@@ -87,6 +103,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
 
     private fun goEscapeRoom(){
+        // TODO
+        // Define the escape room id when enter in one
+        // actualSR must get a value
         var intent = Intent(this,EscapeRoomActivity::class.java)
         startActivity(intent)
     }

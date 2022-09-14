@@ -12,11 +12,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import uoc.tfm.escapethecity.BaseActivity
 import uoc.tfm.escapethecity.CustomRVAdapter
 import uoc.tfm.escapethecity.R
+import uoc.tfm.escapethecity.data.Achievements
 import uoc.tfm.escapethecity.data.ItemsViewModel
+import java.util.HashMap
+
 
 class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var drawerL: DrawerLayout
+    private lateinit var data: ArrayList<ItemsViewModel>
+    private lateinit var dbAch: ArrayList<HashMap<String,Any>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +42,7 @@ class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSe
         // Manager of the view, in this case with an horizontal LinearLayout
         recyclerview.layoutManager = LinearLayoutManager(this)
 
-        val data = ArrayList<ItemsViewModel>()
+//        val data = ArrayList<ItemsViewModel>()
 
         /* TODO:
             First time: Load from DB the default list of items with descriptions,
@@ -46,13 +51,25 @@ class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSe
             Next times: Load from the DB the status of this user related with the escape room game
                     - Custom images
          */
+        data = ArrayList()
+        dbAch = arrayListOf()
+        // Get items from scape room list
+        if (escapeList!= null){
+            for ((key, obj) in escapeList){
+                for (ach in obj.achievements){
+                    var image = R.drawable.trophy
+                    if (ach["ac_active"] as Boolean){
+                        // TODO retrieve and set image from Storage
+                        image = ach["ac_img"] as Int
+                    }
+                    data.add(ItemsViewModel(ach["ac_id"].toString(), image, ach["ac_name"].toString()))
+                    dbAch.add(ach)
+                }
 
-        // Dummy array to load default data TODO: replace it with DB
-        data.add(ItemsViewModel("t_a1", R.drawable.trophy, "Rápido"))
-        data.add(ItemsViewModel("t_a2", R.drawable.trophy, "Llave dorada"))
-        data.add(ItemsViewModel("t_a3", R.drawable.trophy, "Final inesperado"))
+            }
+        }
 
-        // This will pass the ArrayList to our Adapter
+        // This will pass the ArrayList to the Adapter
         val adapter = CustomRVAdapter(data)
 
         // Setting the Adapter with the recyclerview
@@ -68,12 +85,19 @@ class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSe
     // Actions selector
     fun er_actions(view: View){
         // TODO change this with the "data" itemList information
-
-        when(view.tag){
-            "goBack" -> goBack()
-            "t_a1" -> Toast.makeText(this,"No has conseguido este logro", Toast.LENGTH_SHORT).show()
-            "t_a2" -> Toast.makeText(this,"No has conseguido este logro", Toast.LENGTH_SHORT).show()
-            "t_a3" -> Toast.makeText(this,"No has conseguido este logro", Toast.LENGTH_SHORT).show()
+        if (view.tag == "goBack"){ goBack() }
+        else{
+            var visible = false
+            for (i in dbAch){
+                if (i["ac_id"] == view.tag && i["ac_active"] as Boolean){
+                    visible = true
+                    // TODO make description and image visible
+                    break
+                }
+            }
+            if (!visible){
+                Toast.makeText(this,"No has conseguido este logro", Toast.LENGTH_SHORT).show()
+            }
 
         }
     }

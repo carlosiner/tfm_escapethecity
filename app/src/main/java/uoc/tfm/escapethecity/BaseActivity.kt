@@ -12,13 +12,22 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import uoc.tfm.escapethecity.data.Escape
 
 open class BaseActivity : AppCompatActivity()  {
+
+    companion object {
+       //var escapeList: ArrayList<Escape> = arrayListOf()
+        var escapeList: HashMap<String, Escape> = hashMapOf()
+        var actualSR: String = ""
+    }
 
     private lateinit var drawerL: DrawerLayout
     private lateinit var lateralView: View
     private lateinit var user: String
     private lateinit var email: String
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

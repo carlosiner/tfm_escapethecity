@@ -14,9 +14,7 @@ class CustomRVAdapter (private val itemList: List<ItemsViewModel>) : RecyclerVie
     // Override to generate a new vview holder to add the items from the list
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.item_achievement,
-            parent,
-            false)
+            R.layout.item_achievement, parent, false)
         return ViewHolder(view)
     }
 

@@ -12,7 +12,7 @@
 
     <LinearLayout
         android:layout_marginTop="60dp"
-        android:layout_width="match_parent"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="20dp">
@@ -24,30 +24,13 @@
             android:columnCount="2"
             android:scrollbars="vertical">
 
-            <RelativeLayout
-                android:id="@+id/rlDummyEscapeRoom"
-                android:layout_width="150dp"
+            <!-- Item: Escape_room goes in here -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_escaperoom"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="20dp"
-                android:layout_gravity="top"
-                android:clickable="true"
-                android:onClick="testingButton">
-
-                <ImageView
-                    android:id="@+id/imDummy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="140dp"
-                    android:src="@drawable/game_el_secreto"
-                    android:scaleType="center" />
-
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imDummy"
-                    android:text="@string/tv_h_escapeName"
-                    android:textAlignment="center"
-                    android:textSize="20dp"/>
-            </RelativeLayout>
+                tools:itemCount="5"
+                tools:listitem="@layout/item_escape_room" />
 
         </GridLayout>
 

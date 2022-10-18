@@ -1,30 +1,23 @@
 package uoc.tfm.escapethecity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.DynamicLayout
 import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.GridLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import uoc.tfm.escapethecity.data.Escape
-import kotlin.math.log
+import uoc.tfm.escapethecity.data.ItemsViewModel
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     // Global vars
     private lateinit var drawerL: DrawerLayout
-
+    private lateinit var data: ArrayList<Escape>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +51,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     escapeList[key] = escapeObj
                 }
                 Log.d("Contenido encontrado", "Hay contenido ")
+                generateEscapeList()
             }
             .addOnFailureListener {
                 Log.d("Error loading escapes", "get failed with ", it)
@@ -87,19 +81,36 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 //            }
     }
 
-    fun layoutGenerator(){
-        for (x in 1..10){
-            val rlDynamic: RelativeLayout.LayoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
-            rlDynamic.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+    private fun generateEscapeList(){
+        val recyclerView: RecyclerView = findViewById(R.id.rv_escaperoom)
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
 
-    //        val tv_dynamic = TextView(this)
-//            tv_dynamic.textSize = 20f
-//            tv_dynamic.text = "This is a dynamic TextView generated programmatically in Kotlin"
+        data = ArrayList()
+        if (escapeList!= null){
+            for ((key, obj) in escapeList){
+                //var image = R.drawable.game_el_secreto // TODO Set a dummy image (or get the image)
 
-            var gl: GridLayout = findViewById(R.id.gl_dinamic)
-//            gl.addView(rlDynamic)
+                data.add(obj)
+            }
         }
+
+        val adapter = MainAdapter(data)
+        recyclerView.adapter = adapter
     }
+
+//    fun layoutGenerator(){
+//        for (x in 1..10){
+//            val rlDynamic: RelativeLayout.LayoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
+//            rlDynamic.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+//
+//    //        val tv_dynamic = TextView(this)
+////            tv_dynamic.textSize = 20f
+////            tv_dynamic.text = "This is a dynamic TextView generated programmatically in Kotlin"
+//
+//            var gl: GridLayout = findViewById(R.id.gl_dinamic)
+////            gl.addView(rlDynamic)
+//        }
+//    }
 
 
     private fun goEscapeRoom(){

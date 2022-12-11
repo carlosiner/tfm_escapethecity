@@ -5,15 +5,17 @@
     android:id="@+id/mainDL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ERCreateJoinActivity"
+    tools:context=".ERCreateActivity"
     android:scrollbarAlwaysDrawHorizontalTrack="true"
     tools:openDrawer="start">
 
     <LinearLayout
+        android:id="@+id/ll_local_main"
         android:paddingTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,40 +55,42 @@
                 android:layout_margin="20dp"
                 android:orientation="vertical">
 
-                <Button
-                    android:tag="b_er_groups"
-                    android:onClick="er_actions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textAllCaps="false"
-                    android:textSize="20dp"
-                    android:text="@string/b_er_multirole_group"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/tv_er_multirole_group_title"
-                    android:textAlignment="center"
-                    android:textSize="30dp"/>
-
-                <TextView
-                    android:id="@+id/tv_group_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:background="@color/escape_back_light_purple"
-                    android:textAlignment="center"
-                    android:textStyle="bold"
-                    android:textSize="30dp"/>
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text="@string/tv_multirole_settings"
                     android:textSize="30dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/tv_multirole_settings_date"
+                    android:textAlignment="center"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/tv_group_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/escape_back_light_purple"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="0.5"
+                    android:onClick="er_actions"
+                    android:tag="b_er_date_selection"
+                    android:text="@string/b_multirole_date"
+                    android:textAllCaps="false"
+                    android:textSize="20dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -131,36 +135,6 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:textAlignment="center"
-                    android:text="@string/tv_multirole_settings_date"
-                    android:textSize="30dp"/>
-
-                <Button
-                    android:tag="b_er_date_selection"
-                    android:onClick="er_actions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="0.5"
-                    android:layout_gravity="center"
-                    android:textAllCaps="false"
-                    android:textSize="20dp"
-                    android:text="@string/b_multirole_date"/>
-
-
-                <TextView
-                    android:id="@+id/tv_group_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:background="@color/escape_back_light_purple"
-                    android:textAlignment="center"
-                    android:textStyle="bold"
-                    android:textSize="30dp"/>
 
                 <Button
                     android:tag="b_er_confirmation"
@@ -182,8 +156,27 @@
 
     </LinearLayout>
 
+<!--    <LinearLayout-->
+<!--        android:id="@+id/ll_popup_date"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="60dp"-->
+<!--        android:background="@color/white"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:visibility="visible">-->
 
+<!--        <DatePicker-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="600dp">-->
 
+<!--        </DatePicker>-->
+
+<!--        <TimePicker-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="200dp">-->
+
+<!--        </TimePicker>-->
+<!--    </LinearLayout>-->
 
     <!--    Top bar that supports lateral menu-->
     <include

@@ -71,6 +71,7 @@
                     android:scaleType="fitXY" />
 
                 <TextView
+                    android:id="@+id/tx_er_multirole"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/im_er_multirole"

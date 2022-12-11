@@ -1,52 +1,81 @@
 package uoc.tfm.escapethecity
 
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.net.toUri
 import androidx.drawerlayout.widget.DrawerLayout
+import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import uoc.tfm.escapethecity.data.Escape
+import uoc.tfm.escapethecity.data.User
+import uoc.tfm.escapethecity.data.UserEscape
 
 open class BaseActivity : AppCompatActivity()  {
 
     companion object {
-       //var escapeList: ArrayList<Escape> = arrayListOf()
+        /* General information */
         var escapeList: HashMap<String, Escape> = hashMapOf()
-        var actualSR: String = ""
+
+        /* User specific info */
+        var userInfo: User = User()
+
+        /* Selected escape room  */
+        var currentERId: String = ""
+        var currentERContent: Escape = Escape()
+        var currentERUser: UserEscape = UserEscape()
     }
+
+    /* Private variables */
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
 
     private lateinit var drawerL: DrawerLayout
     private lateinit var lateralView: View
-    private lateinit var user: String
-    private lateinit var email: String
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
 
-        init_db_escapes()
+        auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
     }
 
-    private fun init_db_escapes() {
-        // TODO
+    /*
+     ---------------    Functions     ---------------
+    */
+
+    fun getImageFromURL(context: Context, imageULR: String, imageView: ImageView){
+        Glide.with(context).load(imageULR).fitCenter().into(imageView)
     }
 
 
 
-
-    fun loadUserInProfile(){
-
+    fun loadUser(){
+        /* Load user config from Firebase Auth */
+        val authUser = auth.currentUser!!
+        userInfo.username = authUser.displayName
+        userInfo.email = authUser.email
+        userInfo.image = authUser.photoUrl.toString()
     }
 
+    fun updateUserEscapeRoom(){
+        // Updates the User's escape room with the current info
+        db.collection("escapes_by_users")
+            .document(userInfo.email!!).collection("escapes")
+            .document(currentERId).set(currentERUser)
+    }
 
     /* --- Toolbar and Navigation bars */
     fun topBarActivation(): DrawerLayout {
@@ -71,6 +100,7 @@ open class BaseActivity : AppCompatActivity()  {
         return drawerL
     }
 
+
     fun lateralBarActivation(navVListener: NavigationView.OnNavigationItemSelectedListener){
         var lateralBar: NavigationView = findViewById(R.id.lateralview)
         // Added a listener to allow actions in the lateralBar
@@ -89,20 +119,27 @@ open class BaseActivity : AppCompatActivity()  {
         lateralBar.addHeaderView(lateralView)
 
 
-        if (!this::user.isInitialized || !this::email.isInitialized ){
-            if (RegistrationActivity.userObj != null){
-                user = RegistrationActivity.userObj!!.username
-                email = RegistrationActivity.userObj!!.email
-            }
-            else {
-                user = "Username"
-                email = "email@email"
-            }
+//        if (!this::user.isInitialized || !this::email.isInitialized ){
+        if (userInfo.username == null || userInfo.email == null){
+//            if (RegistrationActivity.userObj != null){
+////                user = RegistrationActivity.userObj!!.username
+////                email = RegistrationActivity.userObj!!.email
+//                user = userInfo.username!!
+//                email = userInfo.email!!
+//            }
+//            else {
+//                user = "Username"
+//                email = "email@email"
+//            }
+            loadUser()
         }
         var tvUser: TextView = lateralView.findViewById(R.id.menu_profile_email)
-        tvUser.setText(email)
+        tvUser.text = userInfo.email
         tvUser = lateralView.findViewById(R.id.menu_profile_name)
-        tvUser.setText(user)
+        tvUser.text = userInfo.username
+        val tvUserImage: ImageView = lateralView.findViewById(R.id.menu_profile_image)
+        getImageFromURL(lateralView.context, userInfo.image!!, tvUserImage)
+        //Glide.with(lateralView.context).load(userInfo.image).fitCenter().into(tvUserImage)
     }
 
     /* Functions from NavigationMenu (lateral menu) */

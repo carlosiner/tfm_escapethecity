@@ -19,7 +19,7 @@ import uoc.tfm.escapethecity.data.ItemsViewModel
 
 class MainAdapter(private val erList: ArrayList<Escape>) : RecyclerView.Adapter<MainAdapter.MyViewHolder>() {
 
-    private lateinit var context: android.content.Context // TODO necesario ?
+    private lateinit var context: android.content.Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder{
         context = parent.context
@@ -32,17 +32,7 @@ class MainAdapter(private val erList: ArrayList<Escape>) : RecyclerView.Adapter<
     override fun onBindViewHolder(vHolder: MyViewHolder, position: Int){
         val items : Escape = erList[position]
         vHolder.constraintLayout.tag = items.id
-
-        // Image from URL (string)
-//        var image: Bitmap? = null
-//        var drawable : Drawable? = null
-//        val `in` = java.net.URL(items.image).openStream()
-//        image = BitmapFactory.decodeStream(`in`)
-//        drawable = (Resources.getSystem(), items.image)
         Glide.with(context).load(items.image).fitCenter().into(vHolder.imageView)
-
-//        vHolder.imageView.setImageResource(R.drawable.game_el_secreto)
-//        vHolder.imageView.setImageResource(R.drawable.game_el_secreto)
         vHolder.textView.text = items.name
     }
 

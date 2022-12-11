@@ -17,10 +17,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.properties.Delegates
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
 
     private lateinit var auth: FirebaseAuth
-
     private lateinit var etEmail: EditText
     private lateinit var etPass: EditText
 
@@ -60,7 +59,9 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(emailStr, passStr)
             .addOnCompleteListener(this){
                 if (it.isSuccessful){
-                    Toast.makeText(this, "¡Bienvenido!", Toast.LENGTH_SHORT).show()
+                    loadUser()
+                    Toast.makeText(this, "¡Hola de nuevo!", Toast.LENGTH_SHORT).show()
+                    //mailER = emailStr
                     goHome()
                 }
                 else{

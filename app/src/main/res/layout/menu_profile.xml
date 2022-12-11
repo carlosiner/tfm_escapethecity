@@ -30,9 +30,9 @@
     <ImageView
         android:id="@+id/menu_profile_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
 
-        tools:srcCompat="@tools:sample/avatars"/>
+        tools:src="@mipmap/ic_launcher"/>
 
 <!--    Username -->
     <TextView

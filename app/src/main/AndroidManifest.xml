@@ -9,7 +9,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EscapeTheCity.NoActionBar">
         <activity
-            android:name=".ERCreateJoinActivity"
+            android:name=".ERStatusActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ERCreateActivity"
             android:exported="false" />
         <activity
             android:name=".ERRanking"

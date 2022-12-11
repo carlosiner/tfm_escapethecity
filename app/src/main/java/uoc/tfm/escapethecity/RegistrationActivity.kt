@@ -1,21 +1,22 @@
 package uoc.tfm.escapethecity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.net.toUri
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import uoc.tfm.escapethecity.data.User
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.properties.Delegates
+
 
 class RegistrationActivity : BaseActivity(){
     companion object{
-        var userObj: User? = null
+//        var userObj: User? = null
     }
 
     private lateinit var auth: FirebaseAuth
@@ -37,13 +38,13 @@ class RegistrationActivity : BaseActivity(){
     }
 
 
-    // Maintain the user session if present
+
     public override fun onStart() {
         super.onStart()
-        val activeSession = auth.currentUser
-
-        if (activeSession != null){
-            getDBUser(activeSession.email!!) // Not null
+        /* Maintain the user session if present */
+        val user = auth.currentUser
+        if (user != null){
+            getDBUser(user.email!!) // Not null
             goHome()
         }
     }
@@ -69,8 +70,9 @@ class RegistrationActivity : BaseActivity(){
 
     /* Private functions */
 
-    // Register a new user and move to view: home
+
     private fun registerUser(){
+        /* Register a new user and move to view: home */
         val emailStr = etEmail.text.toString()
         val passStr = etPass.text.toString()
         val userStr = etUser.text.toString()
@@ -91,10 +93,28 @@ class RegistrationActivity : BaseActivity(){
         auth.createUserWithEmailAndPassword(emailStr, passStr)
             .addOnCompleteListener(this){
                 if (it.isSuccessful){
-                    var registrationDate = SimpleDateFormat("dd/MM/yyyy").format(Date())
-                    userObj = User(userStr, registrationDate, emailStr, "player")
+                    // TODO TESTING
+                    val registeredUser = auth.currentUser
+                    userInfo.username = userStr
+                    userInfo.registrationDate = SimpleDateFormat("dd/MM/yyyy").format(Date())
+                    userInfo.email = emailStr
+                    userInfo.role = "player"
+                    userInfo.image = "https://firebasestorage.googleapis.com/v0/b/tfm-escapethecity.appspot.com/o/default_resources%2Fdefault_user.png?alt=media&token=849fbfa5-a3ab-4799-9912-8973baee32da"
+
+//                    userObj = userInfo
                     setDBUser()
+
+                    if (registeredUser != null) {
+                        val profileUpdates = UserProfileChangeRequest.Builder()
+                            .setDisplayName(userInfo.username)
+                            .setPhotoUri((userInfo.image)!!.toUri())
+                            .build()
+                        registeredUser.updateProfile(profileUpdates)
+                    }
+
+
                     Toast.makeText(this, "Tu registro se ha completado satisfactoriamente", Toast.LENGTH_SHORT).show()
+//                    mailER = emailStr
                     goHome()
                 }
                 else{
@@ -107,20 +127,21 @@ class RegistrationActivity : BaseActivity(){
     }
 
     private fun setDBUser(){
+        // Saves the user information in Firebase
         var db = FirebaseFirestore.getInstance()
-        db.collection("users").document(userObj!!.email).set(userObj!!)
+        db.collection("users").document(userInfo.email!!).set(userInfo!!)
     }
 
     private fun getDBUser(email: String){
         var db = FirebaseFirestore.getInstance()
         db.collection("users").document(email).get()
             .addOnSuccessListener {
-                userObj = User(
-                    it.data?.get("username") as String,
-                    it.data?.get("registrationDate") as String,
-                    it.data?.get("email") as String,
-                    it.data?.get("role") as String)
-                loadUserInProfile()
+//                userObj = User(
+//                    it.data?.get("username") as String,
+//                    it.data?.get("registrationDate") as String,
+//                    it.data?.get("email") as String,
+//                    it.data?.get("role") as String)
+                loadUser()
                 //TODO
             }
             .addOnFailureListener {

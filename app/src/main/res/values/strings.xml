@@ -52,7 +52,7 @@
     <!--    ***************************-->
     <!--    Escape room menu-->
     <string name="tv_er_info">Información</string>
-    <string name="tv_er_multirole">Crear o unirse</string>
+    <string name="tv_er_multirole">Crear Partida</string>
     <string name="tv_er_achievements">Logros</string>
     <string name="tv_er_ranking">Ranking</string>
     <!-- TODO: Change this placeholder text -->
@@ -62,14 +62,14 @@
     </string>
 
     <!--    ***************************-->
-    <!--    Achievements -->
+    <!-- ER Achievements -->
     <string name="tv_achievement_name">Example of achievement</string>
 
-    <!--    Ranking -->
+    <!-- ER Ranking -->
     <string name="tv_er_ranking_titleposition">Tu posición:</string>
     <string name="tv_er_ranking_position">...</string>
 
-    <!-- Multiroles -->
+    <!-- ER Multiroles -->
     <string name="b_er_multirole_group">Grupos</string>
     <string name="tv_er_multirole_group_title">Tu grupo es:</string>
     <string name="tv_multirole_settings">Ajustes:</string>
@@ -78,8 +78,11 @@
     <string name="b_multirole_n">No</string>
     <string name="tv_multirole_settings_date">Fecha prevista de inicio:</string>
     <string name="b_multirole_date">Selección de fecha</string>
-    <string name="b_multirole_confirmation">Confirmar</string>
+    <string name="b_multirole_confirmation">Crear</string>
 
-
+    <!-- ER Status / -->
+    <string name="tv_er_status">Estado</string>
+    <string name="b_er_status_start">Empezar</string>
+    <string name="b_er_status_cancel">Cancelar</string>
 
 </resources>

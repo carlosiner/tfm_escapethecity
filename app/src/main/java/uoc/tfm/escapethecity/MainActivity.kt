@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
@@ -28,20 +29,20 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         drawerL = topBarActivation()
         lateralBarActivation(this)
 
+        // TODO Change this
+        //  To get the information from user collection!
+        //  If there is no user info, then copy the structure from
+        //  * The escapes collection
+        //  into the user
+
         load_db_escapes()
 
-    }
-
-    fun testingButton(view: View){
-//        var relaLay: RelativeLayout = findViewById(R.id.rlDummyEscapeRoom)
-//        relaLay.setOnClickListener{
-//        }
-        goEscapeRoom()
     }
 
     private fun load_db_escapes(){
         val db = FirebaseFirestore.getInstance()
 
+        // Gets the scape collection from the DB
         db.collection("escapes")
             .get()
             .addOnSuccessListener {
@@ -50,38 +51,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     var escapeObj: Escape = sr.toObject(Escape::class.java)!! // Content of SR
                     escapeList[key] = escapeObj
                 }
-                Log.d("Contenido encontrado", "Hay contenido ")
                 generateEscapeList()
             }
             .addOnFailureListener {
                 Log.d("Error loading escapes", "get failed with ", it)
             }
-        Log.d("Contenido encontrado", "Hay contenido ")
-
-//        db.collection("escapes").document("er1")
-//            .get()
-//            .addOnSuccessListener {
-//                if (it.data?.size != null){
-//                    // it.get("achievements")
-//                    //Log.println(Log.INFO,"DONE","Done")
-//                    var escapeObj: Escape = it.toObject(Escape::class.java)!!
-//                    escapeList.add(escapeObj)
-//                }
-//                else{
-////                   val dbUp: FirebaseFirestore = FirebaseFirestore.getInstance()
-////                   dbUp.collection("destino").document("usermail").set(hashMapOf(
-////                       // set default values
-////                        "my_field" to 0.0, ...
-////                   ))
-//                    Log.d("Error in DB content", "Error when loading escapes list")
-//                }
-//            }
-//            .addOnFailureListener {
-//                Log.d("Error loading escapes", "get failed with ", it)
-//            }
     }
 
     private fun generateEscapeList(){
+        // Generate the list view of the escapes collection using a recyclerViews
         val recyclerView: RecyclerView = findViewById(R.id.rv_escaperoom)
         recyclerView.layoutManager = GridLayoutManager(this, 2)
 
@@ -98,25 +76,22 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         recyclerView.adapter = adapter
     }
 
-//    fun layoutGenerator(){
-//        for (x in 1..10){
-//            val rlDynamic: RelativeLayout.LayoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
-//            rlDynamic.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
-//
-//    //        val tv_dynamic = TextView(this)
-////            tv_dynamic.textSize = 20f
-////            tv_dynamic.text = "This is a dynamic TextView generated programmatically in Kotlin"
-//
-//            var gl: GridLayout = findViewById(R.id.gl_dinamic)
-////            gl.addView(rlDynamic)
-//        }
-//    }
-
+    fun e_list_actions(view: View){
+        for (i in data){
+            if (i.id == view.tag){
+                if (i.enabled==true) {
+                    currentERId = i.id!!
+                    goEscapeRoom()
+                }
+                else{
+                    // ER not enabled, do nothing
+                    Toast.makeText(this,"Escape room no disponible", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 
     private fun goEscapeRoom(){
-        // TODO
-        // Define the escape room id when enter in one
-        // actualSR must get a value
         var intent = Intent(this,EscapeRoomActivity::class.java)
         startActivity(intent)
     }

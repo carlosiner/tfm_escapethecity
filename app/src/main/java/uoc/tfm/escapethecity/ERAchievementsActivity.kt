@@ -9,10 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import androidx.recyclerview.widget.LinearLayoutManager
-import uoc.tfm.escapethecity.BaseActivity
-import uoc.tfm.escapethecity.CustomRVAdapter
-import uoc.tfm.escapethecity.R
-import uoc.tfm.escapethecity.data.Achievements
+import uoc.tfm.escapethecity.data.ERAchievements
 import uoc.tfm.escapethecity.data.ItemsViewModel
 import java.util.HashMap
 
@@ -21,7 +18,7 @@ class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSe
 
     private lateinit var drawerL: DrawerLayout
     private lateinit var data: ArrayList<ItemsViewModel>
-    private lateinit var dbAch: ArrayList<HashMap<String,Any>>
+    private lateinit var dbAch: ArrayList<ERAchievements>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,11 +55,11 @@ class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSe
             for ((key, obj) in escapeList){
                 for (ach in obj.achievements){
                     var image = R.drawable.trophy
-                    if (ach["ac_active"] as Boolean){
+                    if (ach.ac_active as Boolean){
                         // TODO retrieve and set image from Storage
-                        image = ach["ac_img"] as Int
+                        image = ach.ac_image as Int
                     }
-                    data.add(ItemsViewModel(ach["ac_id"].toString(), image, ach["ac_name"].toString()))
+                    data.add(ItemsViewModel(ach.ac_id!!, image, ach.ac_name!!))
                     dbAch.add(ach)
                 }
 
@@ -89,7 +86,7 @@ class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSe
         else{
             var visible = false
             for (i in dbAch){
-                if (i["ac_id"] == view.tag && i["ac_active"] as Boolean){
+                if (i.ac_id == view.tag && i.ac_active){
                     visible = true
                     // TODO make description and image visible
                     break

@@ -30,8 +30,8 @@ class ERInformationActivity : BaseActivity(), NavigationView.OnNavigationItemSel
     }
 
 
-    // Actions selector
-    fun er_actions(view: View){
+    fun selection_actions(view: View){
+        // Select a destination function based on the tag
         when(view.tag){
             "goBack" -> goBack()
         }

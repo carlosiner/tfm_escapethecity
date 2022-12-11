@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainDL"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ERStatusActivity"
+    tools:openDrawer="start">
+
+    <LinearLayout
+        android:paddingTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Top information of the view -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/ib_goBack"
+                android:onClick="selectActions"
+                android:tag="goBack"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:src="@drawable/icon_goback"
+                android:scaleType="fitCenter"
+                android:background="@null"
+                android:layout_weight=".8"/>
+
+            <TextView
+                android:id="@+id/tv_er_description"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".2"
+                android:textSize="30dp"
+                android:text="@string/tv_er_status" />
+        </LinearLayout>
+
+        <!-- View information -->
+
+        <TextView
+            android:id="@+id/tv_er_status_title_message"
+            android:layout_margin="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="¡La sesión ha sido creada!" />
+
+        <TextView
+            android:id="@+id/tv_er_status_subtitle_message"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:text="Tu desafío comenzará pronto" />
+
+
+        <TextView
+            android:id="@+id/tv_er_status_location_url"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Ver en Google Maps" />
+
+        <TextView
+            android:id="@+id/tv_er_status_game"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Partida:" />
+
+        <TextView
+            android:id="@+id/tv_er_status_game_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/tv_er_status_date"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Fecha:" />
+
+        <TextView
+            android:id="@+id/tv_er_status_date_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="yyyy-mm-dd" />
+
+        <TextView
+            android:id="@+id/tv_er_status_time"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Hora:" />
+
+        <TextView
+            android:id="@+id/tv_er_status_time_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="hh:mm" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/b_er_status_start"
+                android:tag="b_er_status_start"
+                android:onClick="selectActions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:layout_weight="0.5"
+                android:layout_gravity="center"
+                android:textAllCaps="false"
+                android:textSize="20dp"
+                android:visibility="invisible"
+                android:text="@string/b_er_status_start"/>
+
+            <Button
+                android:tag="b_er_status_cancel"
+                android:onClick="selectActions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:layout_weight="0.5"
+                android:layout_gravity="center"
+                android:textAllCaps="false"
+                android:textSize="20dp"
+                android:text="@string/b_er_status_cancel"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--    Top bar that supports lateral menu-->
+    <include
+        layout="@layout/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <!--    Lateral menu-->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/lateralview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:translationZ="1dp"
+        app:menu="@menu/lateral_menu_resources"
+        />
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -1,10 +1,11 @@
 package uoc.tfm.escapethecity.data
 
-data class User(
-    var username: String,
-    var registrationDate: String,
-    var email: String,
-    val role: String
-) {
+import android.net.Uri
 
-}
+data class User(
+    var username: String ?= null,
+    var registrationDate: String ?= null,
+    var email: String ?= null,
+    var role: String ?= null,
+    var image: String ?= null
+)

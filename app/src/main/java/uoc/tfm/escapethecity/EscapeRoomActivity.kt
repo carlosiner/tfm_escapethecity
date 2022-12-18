@@ -86,10 +86,19 @@ class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         }
     }
 
+    private fun checkReadyToStart(){
+        /* Checks if the user can start the Game */
+        if (checkERStart() && currentERUser.user_status == 1){
+            currentERUser.user_status = 2
+        }
+    }
+
     private fun change_status(){
         /* Changes the status of the ER view */
         var image:ImageView = findViewById(R.id.im_er_multirole)
         var text: TextView = findViewById(R.id.tx_er_multirole)
+
+        checkReadyToStart()
 
         if (currentERUser.user_status == 1){
             image.setImageResource(R.drawable.icon_game_review_state)
@@ -149,7 +158,7 @@ class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     }
 
     private fun goERRanking(){
-        var intent = Intent(this, ERRanking::class.java)
+        var intent = Intent(this, ERRankingActivity::class.java)
         startActivity(intent)
     }
 
@@ -164,9 +173,8 @@ class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     }
 
     private fun goGame(){
-        TODO()
-//        var intent = Intent(this, GameActivity::class.java)
-//        startActivity(intent)
+        var intent = Intent(this, GameActivity::class.java)
+        startActivity(intent)
     }
 
     // Common item selection for navigationMenu
@@ -182,7 +190,6 @@ class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         when (item.itemId){
             R.id.lateralmenu_home -> goMain()
             R.id.lateralmenu_mygames -> goMyGames()
-            R.id.lateralmenu_chat -> goChat()
             R.id.lateralmenu_logout_button -> logout()
         }
         // Lateral menu closure

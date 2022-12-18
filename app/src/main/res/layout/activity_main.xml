@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
-    <!--    TODO RESTAURAR-->
+
     <!--    Lateral menu-->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/lateralview"

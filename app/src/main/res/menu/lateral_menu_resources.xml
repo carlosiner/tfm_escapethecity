@@ -11,10 +11,7 @@
             android:title="@string/lateralmenu_mygames"
             android:icon="@drawable/icon_lm_mygames"
             />
-        <item android:id="@+id/lateralmenu_chat"
-            android:title="@string/lateralmenu_chat"
-            android:icon="@drawable/icon_lm_chat"
-            />
+
     </group>
 
 <!--    Logout, help or others-->

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Always included -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Precise location access. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!--  Required only when requesting background location access on Android 10 (API level 29) and higher. -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> -->
+    <uses-feature android:name="android.hardware.location.gps" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -8,6 +16,34 @@
         android:roundIcon="@drawable/ic_run_fast"
         android:supportsRtl="true"
         android:theme="@style/Theme.EscapeTheCity.NoActionBar">
+        <activity
+            android:name=".GInvestigationActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".GMapActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".GOptionsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".GameActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".ERStatusActivity"
             android:exported="false">
@@ -19,7 +55,7 @@
             android:name=".ERCreateActivity"
             android:exported="false" />
         <activity
-            android:name=".ERRanking"
+            android:name=".ERRankingActivity"
             android:exported="false" />
         <activity
             android:name=".ERAchievementsActivity"
@@ -56,7 +92,10 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.EscapeTheCity.NoActionBar" />
+            android:theme="@style/Theme.EscapeTheCity.NoActionBar" /> <!-- API KEY for GEOLOCATION -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
     </application>
 
 </manifest>

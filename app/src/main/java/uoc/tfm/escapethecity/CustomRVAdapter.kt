@@ -7,12 +7,16 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import uoc.tfm.escapethecity.data.ItemsViewModel
 
 class CustomRVAdapter (private val itemList: List<ItemsViewModel>) : RecyclerView.Adapter<CustomRVAdapter.ViewHolder>() {
 
+    private lateinit var context: android.content.Context
+
     // Override to generate a new vview holder to add the items from the list
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        context = parent.context
         val view = LayoutInflater.from(parent.context).inflate(
             R.layout.item_achievement, parent, false)
         return ViewHolder(view)
@@ -22,8 +26,14 @@ class CustomRVAdapter (private val itemList: List<ItemsViewModel>) : RecyclerVie
     override fun onBindViewHolder(vHolder: ViewHolder, pos: Int) {
         val items = itemList[pos]
         vHolder.linearLayout.tag = items.tag
-        vHolder.imageView.setImageResource(items.image)
         vHolder.textView.text = items.text
+        if (items.image == ""){
+            vHolder.imageView.setImageResource(R.drawable.trophy)
+        }
+        else{
+            Glide.with(context).load(items.image).fitCenter().into(vHolder.imageView)
+        }
+
 
     }
 

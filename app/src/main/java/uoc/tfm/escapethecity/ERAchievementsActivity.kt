@@ -49,22 +49,30 @@ class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSe
                     - Custom images
          */
         data = ArrayList()
-        dbAch = arrayListOf()
         // Get items from scape room list
-        if (escapeList!= null){
-            for ((key, obj) in escapeList){
-                for (ach in obj.achievements){
-                    var image = R.drawable.trophy
-                    if (ach.ac_active as Boolean){
-                        // TODO retrieve and set image from Storage
-                        image = ach.ac_image as Int
-                    }
-                    data.add(ItemsViewModel(ach.ac_id!!, image, ach.ac_name!!))
-                    dbAch.add(ach)
-                }
-
+        for (i in currentERUser.achievements){
+//            var image = R.drawable.trophy //TODO?
+            var image = ""
+            if (i.value.ac_active){
+                image = i.value.ac_image!!
             }
+            data.add(ItemsViewModel(i.key, image, i.value.ac_name!!))
         }
+
+//        if (escapeList!= null){
+//            for ((key, obj) in escapeList){
+//                for (ach in obj.achievements){
+//                    var image = R.drawable.trophy
+//                    if (ach.ac_active as Boolean){
+//                        // TODO retrieve and set image from Storage
+//                        image = ach.ac_image as Int
+//                    }
+//                    data.add(ItemsViewModel(ach.ac_id!!, image, ach.ac_name!!))
+//                    dbAch.add(ach)
+//                }
+//
+//            }
+//        }
 
         // This will pass the ArrayList to the Adapter
         val adapter = CustomRVAdapter(data)
@@ -84,18 +92,13 @@ class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSe
         // TODO change this with the "data" itemList information
         if (view.tag == "goBack"){ goBack() }
         else{
-            var visible = false
-            for (i in dbAch){
-                if (i.ac_id == view.tag && i.ac_active){
-                    visible = true
-                    // TODO make description and image visible
-                    break
-                }
+            var achInfo: ERAchievements = currentERUser.achievements[view.tag]!!
+            if (achInfo.ac_active){
+                createDialogItem(achInfo.ac_name!!, achInfo.ac_description!!)
             }
-            if (!visible){
-                Toast.makeText(this,"No has conseguido este logro", Toast.LENGTH_SHORT).show()
+            else{
+                Toast.makeText(this,R.string.tv_er_achievemnts_not_achieved, Toast.LENGTH_SHORT).show()
             }
-
         }
     }
 
@@ -105,7 +108,6 @@ class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSe
         when (item.itemId){
             R.id.lateralmenu_home -> goMain()
             R.id.lateralmenu_mygames -> goMyGames()
-            R.id.lateralmenu_chat -> goChat()
             R.id.lateralmenu_logout_button -> logout()
         }
         // Lateral menu closure

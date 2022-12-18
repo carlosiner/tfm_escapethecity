@@ -23,20 +23,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-      //  layoutGenerator()
-
         drawerL = topBarActivation()
         lateralBarActivation(this)
 
-        // TODO Change this
-        //  To get the information from user collection!
-        //  If there is no user info, then copy the structure from
-        //  * The escapes collection
-        //  into the user
-
         load_db_escapes()
-
     }
 
     private fun load_db_escapes(){
@@ -66,8 +56,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         data = ArrayList()
         if (escapeList!= null){
             for ((key, obj) in escapeList){
-                //var image = R.drawable.game_el_secreto // TODO Set a dummy image (or get the image)
-
                 data.add(obj)
             }
         }
@@ -91,11 +79,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
-    private fun goEscapeRoom(){
-        var intent = Intent(this,EscapeRoomActivity::class.java)
-        startActivity(intent)
-    }
-
 
     // Common item selection for navigationMenu
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -103,7 +86,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         when (item.itemId){
             R.id.lateralmenu_home -> goMain()
             R.id.lateralmenu_mygames -> goMyGames()
-            R.id.lateralmenu_chat -> goChat()
             R.id.lateralmenu_logout_button -> logout()
         }
         // Lateral menu closure

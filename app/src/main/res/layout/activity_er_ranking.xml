@@ -5,7 +5,7 @@
     android:id="@+id/mainDL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ERRanking"
+    tools:context=".ERRankingActivity"
     tools:openDrawer="start">
 
     <LinearLayout

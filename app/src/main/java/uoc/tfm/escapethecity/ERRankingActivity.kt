@@ -1,15 +1,13 @@
 package uoc.tfm.escapethecity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 
-class ERRanking : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
+class ERRankingActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var drawerL: DrawerLayout
 
@@ -50,7 +48,6 @@ class ERRanking : BaseActivity(), NavigationView.OnNavigationItemSelectedListene
         when (item.itemId){
             R.id.lateralmenu_home -> goMain()
             R.id.lateralmenu_mygames -> goMyGames()
-            R.id.lateralmenu_chat -> goChat()
             R.id.lateralmenu_logout_button -> logout()
         }
         // Lateral menu closure

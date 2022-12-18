@@ -48,7 +48,6 @@ class ERInformationActivity : BaseActivity(), NavigationView.OnNavigationItemSel
         when (item.itemId){
             R.id.lateralmenu_home -> goMain()
             R.id.lateralmenu_mygames -> goMyGames()
-            R.id.lateralmenu_chat -> goChat()
             R.id.lateralmenu_logout_button -> logout()
         }
         // Lateral menu closure

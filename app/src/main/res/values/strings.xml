@@ -41,7 +41,7 @@
 
     <string name="lateralmenu_home">Inicio</string>
     <string name="lateralmenu_mygames">Mis juegos</string>
-    <string name="lateralmenu_chat">Chat</string>
+    <!--    <string name="lateralmenu_chat">Chat</string>-->
     <string name="lateralmenu_otheroptions">Opciones</string>
     <string name="lateralmenu_logout">Cerrar sesión</string>
 
@@ -64,6 +64,7 @@
     <!--    ***************************-->
     <!-- ER Achievements -->
     <string name="tv_achievement_name">Example of achievement</string>
+    <string name="tv_er_achievemnts_not_achieved">No has conseguido este logro</string>
 
     <!-- ER Ranking -->
     <string name="tv_er_ranking_titleposition">Tu posición:</string>
@@ -80,9 +81,59 @@
     <string name="b_multirole_date">Selección de fecha</string>
     <string name="b_multirole_confirmation">Crear</string>
 
-    <!-- ER Status / -->
+    <!-- ER Status -->
     <string name="tv_er_status">Estado</string>
     <string name="b_er_status_start">Empezar</string>
     <string name="b_er_status_cancel">Cancelar</string>
+
+    <!-- Game Menu -->
+    <string name="tv_game_investigation">Investigación</string>
+    <string name="tv_game_map">Mapa</string>
+    <string name="tv_game_inventory">Inventario</string>
+    <string name="tv_game_logbook">Bitácora</string>
+    <string name="tv_game_options">Opciones</string>
+    <string name="tv_game_timer">Tiempo</string>
+
+    <!-- Game GPS Dialog -->
+    <string name="tv_game_gps_dialog_title">Acceso a la ubicación</string>
+    <string name="tv_game_gps_dialog_message">Esta aplicación requiere acceso a la ubicación</string>
+    <string name="tv_game_gps_dialog_confirm">Activar</string>
+    <string name="tv_game_gps_dialog_cancel">Ignorar</string>
+
+    <!-- Game Options -->
+    <string name="tv_game_options_cancel">Finalizar Juego</string>
+
+    <!-- Game Investigation -->
+    <!-- Main Investigation view -->
+    <string name="tv_game_investigation_title">tv_game_investigation_title</string>
+    <string name="tv_game_investigation_description">tv_game_investigation_description</string>
+    <string name="b_game_investigation_clues">Pistas</string>
+    <string name="b_game_investigation_solve">Resolver</string>
+    <!-- GI PopUp clues -->
+    <string name="tv_game_investigation_clues_description">¡Aviso! \n Las pistas seleccionadas restarán puntos al valor total de la prueba</string>
+    <string name="cb_game_investigation_clue1">Pista 1</string>
+    <string name="cb_game_investigation_clue2">Pista 2</string>
+    <string name="cb_game_investigation_clue3">Pista 3</string>
+    <string name="tv_game_investigation_clue1_description"> - Description 1</string>
+    <string name="tv_game_investigation_clue2_description"> - Description 2</string>
+    <string name="tv_game_investigation_clue3_description"> - Description 3</string>
+    <string name="b_game_investigation_end">Finalizar\n Prueba</string>
+    <!-- GI PopUp Solutions -->
+    <string name="tv_game_investigation_check_title">Introduce la respuesta</string>
+    <string name="et_game_investigation_check_hint">Hint</string>
+    <string name="b_game_investigation_check">Comprobar</string>
+    <string name="b_game_investigation_goBack">Volver</string>
+    <!-- GI PopUp Acierto -->
+    <string name="tv_game_investigation_correct_continue">¡Bien hecho!</string>
+    <string name="tv_game_investigation_correct_continue_subtitle">A por la siguiente prueba</string>
+    <string name="b_game_investigation_correct_continue">Continuar</string>
+    <string name="tv_game_investigation_correct_end">¡Lo has logrado! Has terminado el juego</string>
+    <string name="b_game_investigation_correct_end">Terminar</string>
+    <!-- GI PopUp Error -->
+    <string name="tv_game_investigation_incorrect">¡Ops ... esa no era la respuesta!</string>
+
+
+
+
 
 </resources>

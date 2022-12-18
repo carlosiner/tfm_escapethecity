@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainDL"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameActivity"
+    tools:openDrawer="start">
+
+    <LinearLayout
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="20dp">
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <!-- Game Investigation -->
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2">
+
+            <RelativeLayout
+                android:tag="rl_g_investigation"
+                android:layout_width="150dp"
+                android:layout_margin="20dp"
+                android:layout_gravity="top"
+                android:layout_height="175dp"
+                android:clickable="true"
+                android:onClick="selectActions">
+
+                <ImageView
+                    android:id="@+id/iv_g_investigation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="140dp"
+                    android:src="@drawable/icon_game_investigation"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_g_investigation"
+                    android:text="@string/tv_game_investigation"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textSize="20dp"/>
+            </RelativeLayout>
+
+            <!-- Game Map -->
+            <RelativeLayout
+                android:tag="rl_g_map"
+                android:layout_width="150dp"
+                android:layout_margin="20dp"
+                android:layout_gravity="top"
+                android:layout_height="175dp"
+                android:clickable="true"
+                android:onClick="selectActions">
+
+                <ImageView
+                    android:id="@+id/iv_g_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="140dp"
+                    android:src="@drawable/icon_game_map"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:id="@+id/tv_g_map"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_g_map"
+                    android:text="@string/tv_game_map"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textSize="20dp"/>
+            </RelativeLayout>
+
+            <!-- Game Inventory -->
+            <RelativeLayout
+                android:tag="rl_er_achievements"
+                android:layout_width="150dp"
+                android:layout_margin="20dp"
+                android:layout_gravity="top"
+                android:layout_height="175dp"
+                android:clickable="true"
+                android:onClick="selectActions">
+
+                <ImageView
+                    android:id="@+id/iv_g_inventory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="140dp"
+                    android:src="@drawable/icon_game_inventory"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_g_inventory"
+                    android:text="@string/tv_game_inventory"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textSize="20dp"/>
+            </RelativeLayout>
+
+            <!-- Game Logbook -->
+            <RelativeLayout
+                android:tag="rl_g_logbook"
+                android:layout_width="150dp"
+                android:layout_margin="20dp"
+                android:layout_gravity="top"
+                android:layout_height="175dp"
+                android:clickable="true"
+                android:onClick="selectActions">
+
+                <ImageView
+                    android:id="@+id/iv_g_logbook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="140dp"
+                    android:src="@drawable/icon_game_log"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_g_logbook"
+                    android:text="@string/tv_game_logbook"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textSize="20dp"/>
+            </RelativeLayout>
+
+            <!-- Game Options -->
+            <RelativeLayout
+                android:tag="rl_g_options"
+                android:layout_width="150dp"
+                android:layout_margin="20dp"
+                android:layout_gravity="top"
+                android:layout_height="175dp"
+                android:clickable="true"
+                android:onClick="selectActions">
+
+                <ImageView
+                    android:id="@+id/iv_g_options"
+                    android:layout_width="wrap_content"
+                    android:layout_height="140dp"
+                    android:src="@drawable/icon_game_options"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_g_options"
+                    android:text="@string/tv_game_options"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textSize="20dp"/>
+            </RelativeLayout>
+
+            <!-- Game Timer -->
+            <RelativeLayout
+                android:tag="rl_g_timer"
+                android:layout_width="150dp"
+                android:layout_margin="20dp"
+                android:layout_gravity="top"
+                android:layout_height="175dp"
+                android:clickable="true"
+                android:onClick="selectActions">
+
+                <ImageView
+                    android:id="@+id/iv_g_timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="140dp"
+                    android:src="@drawable/icon_game_timer"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_g_timer"
+                    android:text="@string/tv_game_timer"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textSize="20dp"/>
+            </RelativeLayout>
+
+
+
+        </GridLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <!--    Top bar that supports lateral menu-->
+    <include
+        layout="@layout/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <!--    Lateral menu-->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/lateralview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/lateral_menu_resources"
+        />
+</androidx.drawerlayout.widget.DrawerLayout>

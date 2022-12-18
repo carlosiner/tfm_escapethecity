@@ -1,6 +1,7 @@
 package uoc.tfm.escapethecity
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -24,7 +25,7 @@ class ERStatusActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
         setContentView(R.layout.activity_erstatus)
         // Common top bar load
         loadTopBar()
-        checkERStart()
+        setStatusInformation(checkERStart())
     }
 
     private fun setStatusInformation(flagStart: Boolean){
@@ -56,36 +57,10 @@ class ERStatusActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
         }
     }
 
-    private fun checkERStart(){
-        val currentTime = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond()
-        val startTime = currentERUser.user_date_selected
-        val minAdd = 60 * 30 // 30m difference
-        if ((currentTime + minAdd) >= startTime){
-            setStatusInformation(true)
-        }
-        else{
-            setStatusInformation(false)
-        }
-    }
-
-    private fun showPopUpWindowDate(){
-        // Disable background layout
-        TODO()
-//        var llBack = findViewById<LinearLayout>(R.id.ll_local_main)
-//        llBack.isEnabled = false
-
-    }
-
-    private fun hidePopUpDate(){
-        TODO()
-    }
-
     private fun checkCancel(){
         // TODO PopUp
-
         goCancel()
     }
-
 
     // Actions selector
     fun selectActions(view: View){
@@ -98,7 +73,13 @@ class ERStatusActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
     }
 
     private fun goGame(){
-        TODO()
+        // Update the user current information to the final state
+        currentERUser.user_status = 3
+        // Update db
+        updateUserEscapeRoom()
+        // Go to Game
+        var intent = Intent(this, GameActivity::class.java)
+        startActivity(intent)
     }
 
     private fun goCancel(){

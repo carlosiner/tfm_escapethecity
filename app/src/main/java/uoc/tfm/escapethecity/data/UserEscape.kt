@@ -14,8 +14,8 @@ data class UserEscape(
 
     // Escape information copied & modified by each user
     var id: String ?= null,
-    var achievements: ArrayList<ERAchievements> = arrayListOf(),
-    var items: ArrayList<GameItems> = arrayListOf(),
-    var zones: ArrayList<GameZones> = arrayListOf(),
-    var trials: ArrayList<GameTrials> = arrayListOf()
+    var achievements: HashMap<String, ERAchievements> = hashMapOf(),
+    var items: HashMap<String, GameItems> = hashMapOf(),
+    var zones: HashMap<String, GameZones> = hashMapOf(),
+    var trials: HashMap<String, GameTrials> = hashMapOf()
 )

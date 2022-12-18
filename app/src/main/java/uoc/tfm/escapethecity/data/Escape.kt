@@ -8,6 +8,7 @@ import java.net.URL
 import java.security.Key
 import java.security.Timestamp
 import java.util.*
+import kotlin.collections.HashMap
 
 data class Escape(
     var name: String ?= null,
@@ -20,9 +21,9 @@ data class Escape(
 
     // Copied items for user per escape db
     var id: String ?= null,
-    var achievements: ArrayList<ERAchievements> = arrayListOf(),
-    var items: ArrayList<GameItems> = arrayListOf(),
-    var zones: ArrayList<GameZones> = arrayListOf(),
-    var trials: ArrayList<GameTrials> = arrayListOf()
+    var achievements: HashMap<String, ERAchievements> = hashMapOf(),
+    var items: HashMap<String, GameItems> = hashMapOf(),
+    var zones: HashMap<String, GameZones> = hashMapOf(),
+    var trials: HashMap<String, GameTrials> = hashMapOf()
 
 )

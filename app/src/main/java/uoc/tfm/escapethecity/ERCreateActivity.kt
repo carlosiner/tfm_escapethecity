@@ -40,20 +40,6 @@ class ERCreateActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
     }
 
 
-
-
-
-    // Actions selector
-    fun er_actions(view: View){
-        when(view.tag){
-            "goBack" -> goBack()
-            "b_er_date_selection" -> setDate()
-            "b_er_time_yes" -> setTimeSelector(true, true)
-            "b_er_time_no" -> setTimeSelector(false, true)
-            "b_er_confirmation" -> createGame()
-        }
-    }
-
     private fun setTimeSelector(selection:Boolean, clickable:Boolean){
         val buttonYes: Button = findViewById(R.id.b_er_time_yes)
         val buttonNo: Button = findViewById(R.id.b_er_time_no)
@@ -100,6 +86,8 @@ class ERCreateActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
             DateFormat.is24HourFormat(this))
         timePickerDialog.show()
     }
+
+
     override fun onTimeSet(view: TimePicker?, hour: Int, minute: Int) {
         // Time listener (Clock)
 
@@ -120,6 +108,8 @@ class ERCreateActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
         // Set User information
         currentERUser.user_date_selected = dateInstant.epochSecond
     }
+
+
     private fun createGame(){
         // Changes status of the User Escape Room
         currentERUser.user_status = 1 // Created
@@ -129,6 +119,16 @@ class ERCreateActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
         goBack()
     }
 
+    // Actions selector
+    fun er_actions(view: View){
+        when(view.tag){
+            "goBack" -> goBack()
+            "b_er_date_selection" -> setDate()
+            "b_er_time_yes" -> setTimeSelector(true, true)
+            "b_er_time_no" -> setTimeSelector(false, true)
+            "b_er_confirmation" -> createGame()
+        }
+    }
 
     /* --------------- COMMON --------------- */
 

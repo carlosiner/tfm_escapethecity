@@ -38,8 +38,6 @@ class GameActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
 
-
-
     // Actions selector
     fun selectActions(view: View){
         when(view.tag){
@@ -62,10 +60,12 @@ class GameActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     private fun goInventory() {
-        TODO("Not yet implemented")
+        var intent = Intent(this, GInventoryActivity::class.java)
+        startActivity(intent)
     }
 
     private fun goLogbook() {
+        Toast.makeText(this,"No disponible", Toast.LENGTH_SHORT).show()
         TODO("Not yet implemented")
     }
 
@@ -75,6 +75,7 @@ class GameActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     private fun goTimer() {
+        Toast.makeText(this,"No disponible", Toast.LENGTH_SHORT).show()
         TODO("Not yet implemented")
     }
 

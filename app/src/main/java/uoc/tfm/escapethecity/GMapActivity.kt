@@ -1,18 +1,22 @@
 package uoc.tfm.escapethecity
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.navigation.NavigationView
+import uoc.tfm.escapethecity.data.GameZones
 
 class GMapActivity : BaseActivity(),
     NavigationView.OnNavigationItemSelectedListener,
@@ -21,6 +25,7 @@ class GMapActivity : BaseActivity(),
     // Common Drawer definition
     private lateinit var drawerL: DrawerLayout
     private lateinit var mMap: GoogleMap
+    private lateinit var currentLocation: GameZones
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,25 +49,46 @@ class GMapActivity : BaseActivity(),
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
-//        googleMap.mapType = GoogleMap.MAP_TYPE_HYBRID
-
         mMap.mapType = GoogleMap.MAP_TYPE_HYBRID
-//        mMap.setOnMyLocationButtonClickListener (this)
-//        mMap.setOnMyLocationClickListener (this)
-//        mMap.setOnMapLongClickListener { mapCentered = false }
-//        mMap.setOnMapClickListener { mapCentered = false }
-//
-//        centerMap(init_lt, init_ln)
 
+        // From first non-finish trial, get location
+        var trials = currentERUser.trials
+        var flagFinish = false
+        for (i in trials){
+            if(!i.value.t_finished){
+                currentLocation = currentERUser.zones[i.value.t_id_zone]!!
+                flagFinish = false
+                // Get position
+                val position = LatLng(
+                    currentLocation.p_coord!!.latitude, currentLocation.p_coord!!.longitude)
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(
-            MarkerOptions()
-            .position(sydney)
-            .title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+                // Add a marker in the map to select the location
+                mMap.addMarker(
+                    MarkerOptions()
+                        .position(position)
+                        .title(currentLocation.p_name))
+
+                // Add the zone to search
+                mMap.addCircle(CircleOptions()
+                    .center(position)
+                    .radius(50.0)
+                    .fillColor(0x22ffff00) // Transparent yellow
+                    .strokeColor(Color.YELLOW))
+
+                // Center the camera in that position and zoom it
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 17f))
+                break
+            }
+            else{
+                flagFinish = true
+            }
+        }
+
+        if (flagFinish){
+            Toast.makeText(this,getString(R.string.b_game_map_finish), Toast.LENGTH_SHORT).show()
+            goBack()
+        }
+
 
     }
 

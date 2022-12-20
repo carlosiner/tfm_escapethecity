@@ -55,11 +55,17 @@
     <string name="tv_er_multirole">Crear Partida</string>
     <string name="tv_er_achievements">Logros</string>
     <string name="tv_er_ranking">Ranking</string>
-    <!-- TODO: Change this placeholder text -->
-    <string name="tv_er_ifno_description">
-        Bienvenido a "El Secreto", un juego de misterio y aventura en el
-        centro de tu ciudad...
-    </string>
+
+    <!-- ER Information -->
+    <string name="tv_er_information_city_title">Ciudad:</string>
+    <string name="tv_er_information_city">tv_er_information_city</string>
+    <string name="tv_er_information_time_title">Tiempo:</string>
+    <string name="tv_er_information_time">tv_er_information_time</string>
+    <string name="tv_er_information_time_unit">Minutos</string>
+    <string name="tv_er_information_difficulty_title">Dificultad:</string>
+    <string name="tv_er_information_difficulty">tv_er_information_difficulty</string>
+    <string name="tv_er_information_description_title">Descripción:</string>
+    <string name="tv_er_information_description">tv_er_information_description</string>
 
     <!--    ***************************-->
     <!-- ER Achievements -->
@@ -102,6 +108,9 @@
 
     <!-- Game Options -->
     <string name="tv_game_options_cancel">Finalizar Juego</string>
+    <string name="tv_game_options_confirmation_message">¿Desea finalizar el juego y volver a la vista del escape room?</string>
+    <string name="tv_game_options_confirmation_yes">Si</string>
+    <string name="tv_game_options_confirmation_no">No</string>
 
     <!-- Game Investigation -->
     <!-- Main Investigation view -->
@@ -118,6 +127,9 @@
     <string name="tv_game_investigation_clue2_description"> - Description 2</string>
     <string name="tv_game_investigation_clue3_description"> - Description 3</string>
     <string name="b_game_investigation_end">Finalizar\n Prueba</string>
+    <string name="tv_game_investigation_end_confirmation_title">Finalizar la prueba</string>
+    <string name="tv_game_investigation_end_confirmation_message">¿Desea finalizar esta prueba?</string>
+
     <!-- GI PopUp Solutions -->
     <string name="tv_game_investigation_check_title">Introduce la respuesta</string>
     <string name="et_game_investigation_check_hint">Hint</string>
@@ -131,9 +143,15 @@
     <string name="b_game_investigation_correct_end">Terminar</string>
     <!-- GI PopUp Error -->
     <string name="tv_game_investigation_incorrect">¡Ops ... esa no era la respuesta!</string>
+    <!-- GI Get Achievements or Items -->
+    <string name="b_game_investigation_get_achievement">¡Has obtenido un logro!</string>
+    <string name="b_game_investigation_get_item">¡Has obtenido un objeto!</string>
 
+    <!-- Game Map View  -->
+    <string name="b_game_map_finish">Ya has completado la escape room</string>
 
-
-
+    <!-- Game Inventory View -->
+    <string name="tv_game_inventory_title">Inventario</string>
+    <string name="tv_game_item_name">tv_game_item_name</string>
 
 </resources>

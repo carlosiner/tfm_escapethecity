@@ -18,6 +18,7 @@ data class Escape(
     var city: String ?= null,
     var location: com.google.firebase.firestore.GeoPoint ?= null,
     var escape_duration: Long ?= null,
+    var difficulty: String ?= null,
 
     // Copied items for user per escape db
     var id: String ?= null,

@@ -13,7 +13,7 @@
         android:tag="t_a_default"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="er_actions"
+        android:onClick="selectActions"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:clickable="true"

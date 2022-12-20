@@ -2,7 +2,6 @@ package uoc.tfm.escapethecity
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 
 import android.view.MenuItem
@@ -13,12 +12,9 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import android.text.format.DateFormat
-import com.google.firebase.Timestamp
 
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class ERCreateActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener,
@@ -120,7 +116,7 @@ class ERCreateActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
     }
 
     // Actions selector
-    fun er_actions(view: View){
+    fun selectActions(view: View){
         when(view.tag){
             "goBack" -> goBack()
             "b_er_date_selection" -> setDate()

@@ -67,19 +67,18 @@ class ERStatusActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
         // Select a destination function based on the tag
         when(view.tag){
             "goBack" -> goBack()
-            "b_er_status_start" -> goGame()
+            "b_er_status_start" -> goGameAndUpdate()
             "b_er_status_cancel" -> checkCancel()
         }
     }
 
-    private fun goGame(){
+    private fun goGameAndUpdate(){
         // Update the user current information to the final state
         currentERUser.user_status = 3
         // Update db
         updateUserEscapeRoom()
         // Go to Game
-        var intent = Intent(this, GameActivity::class.java)
-        startActivity(intent)
+        goGame()
     }
 
     private fun goCancel(){

@@ -18,17 +18,13 @@ class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSe
 
     private lateinit var drawerL: DrawerLayout
     private lateinit var data: ArrayList<ItemsViewModel>
-    private lateinit var dbAch: ArrayList<ERAchievements>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_er_achievements)
 
         // Menus: toolbar and navigation bar (top and lateral bars)
-        var topBar: androidx.appcompat.widget.Toolbar = findViewById(R.id.top_bar)
-        topBar.title = "Juego: El Secreto" //TODO change by DDBB variable
-        drawerL = topBarActivation()
-        lateralBarActivation(this)
+        loadTopBar()
 
         generateAchievementsList()
     }
@@ -39,40 +35,15 @@ class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSe
         // Manager of the view, in this case with an horizontal LinearLayout
         recyclerview.layoutManager = LinearLayoutManager(this)
 
-//        val data = ArrayList<ItemsViewModel>()
-
-        /* TODO:
-            First time: Load from DB the default list of items with descriptions,
-                    - Use the "trophy" image
-                    - The items are blocked for the user
-            Next times: Load from the DB the status of this user related with the escape room game
-                    - Custom images
-         */
         data = ArrayList()
         // Get items from scape room list
         for (i in currentERUser.achievements){
-//            var image = R.drawable.trophy //TODO?
             var image = ""
             if (i.value.ac_active){
                 image = i.value.ac_image!!
             }
             data.add(ItemsViewModel(i.key, image, i.value.ac_name!!))
         }
-
-//        if (escapeList!= null){
-//            for ((key, obj) in escapeList){
-//                for (ach in obj.achievements){
-//                    var image = R.drawable.trophy
-//                    if (ach.ac_active as Boolean){
-//                        // TODO retrieve and set image from Storage
-//                        image = ach.ac_image as Int
-//                    }
-//                    data.add(ItemsViewModel(ach.ac_id!!, image, ach.ac_name!!))
-//                    dbAch.add(ach)
-//                }
-//
-//            }
-//        }
 
         // This will pass the ArrayList to the Adapter
         val adapter = CustomRVAdapter(data)
@@ -88,8 +59,7 @@ class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSe
 
 
     // Actions selector
-    fun er_actions(view: View){
-        // TODO change this with the "data" itemList information
+    fun selectActions(view: View){
         if (view.tag == "goBack"){ goBack() }
         else{
             var achInfo: ERAchievements = currentERUser.achievements[view.tag]!!
@@ -100,6 +70,14 @@ class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSe
                 Toast.makeText(this,R.string.tv_er_achievemnts_not_achieved, Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    // Common item selection for navigationMenu
+    private fun loadTopBar() {
+        var topBar: androidx.appcompat.widget.Toolbar = findViewById(R.id.top_bar)
+        topBar.title = "Juego: " + currentERContent.name
+        drawerL = topBarActivation()
+        lateralBarActivation(this)
     }
 
     // Common item selection for navigationMenu

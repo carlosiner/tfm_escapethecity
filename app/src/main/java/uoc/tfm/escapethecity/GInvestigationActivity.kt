@@ -1,10 +1,12 @@
 package uoc.tfm.escapethecity
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.transition.Visibility
@@ -43,6 +45,7 @@ class GInvestigationActivity : BaseActivity(),
                 currentGameTrialValue = i.value
                 currentGameTrialKey = i.key
                 flagFinish = false
+                break
             }
             else{
                 flagFinish = true
@@ -99,7 +102,7 @@ class GInvestigationActivity : BaseActivity(),
             "solve" -> popupLayout = R.layout.popup_investigation_solve
             "clues" -> popupLayout = R.layout.popup_investigation_clues
             "correct" -> popupLayout = R.layout.popup_investigation_correct
-            "incorrect" -> popupLayout = R.layout.popup_investigation_incorrect
+//            "incorrect" -> popupLayout = R.layout.popup_investigation_incorrect
         }
 
         val notiView: View = LayoutInflater.from(this).inflate(
@@ -134,18 +137,18 @@ class GInvestigationActivity : BaseActivity(),
             clueDescr = currentPopupView.findViewById(R.id.tv_game_investigation_clue3_description)
             clueDescr.text = currentERUser.trials[currentGameTrialKey]!!.t_clue3
 
-            // Check if checkboxes where activated
+            // Check if checkboxes were activated
             if(currentERUser.trials[currentGameTrialKey]!!.t_clue1_activated){
                 idTV = R.id.tv_game_investigation_clue1_description
                 idCB = R.id.cb_game_investigation_clue1
                 activateClues(idTV, idCB, false)
             }
-            if (currentERUser.trials[currentGameTrialKey]!!.t_clue1_activated){
+            if (currentERUser.trials[currentGameTrialKey]!!.t_clue2_activated){
                 idTV = R.id.tv_game_investigation_clue2_description
                 idCB = R.id.cb_game_investigation_clue2
                 activateClues(idTV, idCB, false)
             }
-            if (currentERUser.trials[currentGameTrialKey]!!.t_clue1_activated){
+            if (currentERUser.trials[currentGameTrialKey]!!.t_clue3_activated){
                 idTV = R.id.tv_game_investigation_clue3_description
                 idCB = R.id.cb_game_investigation_clue3
                 activateClues(idTV, idCB, false)
@@ -185,8 +188,11 @@ class GInvestigationActivity : BaseActivity(),
             "cb_game_investigation_clue1" -> showClues("clue1")
             "cb_game_investigation_clue2" -> showClues("clue2")
             "cb_game_investigation_clue3" -> showClues("clue3")
+            "b_game_investigation_end" -> endTrial()
         }
     }
+
+
 
     private fun showClues(clue: String) {
         var idTV = 0
@@ -207,24 +213,57 @@ class GInvestigationActivity : BaseActivity(),
         }
 
         activateClues(idTV, idCB, true)
+
+        // TODO Update points
+        // TODO Generate logs
         // Update ER User info
         updateUserEscapeRoom()
 
     }
 
     private fun checkAnswer(view: View){
-        var tVAnswer: TextView = currentPopupView.findViewById(R.id.et_game_investigation_check_hint)
-        closeKeyBoard(view)
-        if (tVAnswer.text.toString().trim().lowercase()
-            == currentERContent.trials[currentGameTrialKey]!!.t_solution){
-            showPopUp("correct")
-            currentERUser.trials[currentGameTrialKey]!!.t_finished = true
-            updateUserEscapeRoom()
-        }
-        else{
-            Toast.makeText(this,R.string.tv_game_investigation_incorrect, Toast.LENGTH_SHORT).show()
+        try{
+            var tVAnswer: TextView = currentPopupView.findViewById(R.id.et_game_investigation_check_hint)
+            closeKeyBoard(view)
+            if (tVAnswer.text.toString().trim().lowercase()
+                == currentERContent.trials[currentGameTrialKey]!!.t_solution){
+                // TODO Update points
+                // TODO Generate logs
+                goEndThisTrial()
+            }
+            else{
+                Toast.makeText(this,R.string.tv_game_investigation_incorrect, Toast.LENGTH_SHORT).show()
+            }
+        } catch(e: Exception){
+            // Handles if the Popup is lost at this point
+            goGame()
         }
     }
+
+    private fun endTrial(){
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.tv_game_investigation_end_confirmation_title))
+            .setMessage(getString(R.string.tv_game_investigation_end_confirmation_message))
+            .setCancelable(true)
+            .setPositiveButton(getString(R.string.tv_game_options_confirmation_yes),
+                DialogInterface.OnClickListener{ _, _ ->
+                    goEndThisTrial()
+                })
+            .setNegativeButton(getString(R.string.tv_game_options_confirmation_no),
+                DialogInterface.OnClickListener{ _, _ ->
+                    // Do nothing
+                })
+            .show()
+    }
+
+    private fun goEndThisTrial() {
+        showPopUp("correct")
+        currentERUser.trials[currentGameTrialKey]!!.t_finished = true
+        getAchievements()
+        getItems()
+        updateUserEscapeRoom()
+    }
+
 
     private fun goPopUpBack() {
         if (lastSuperPopupWindow.contentView == null){
@@ -237,11 +276,33 @@ class GInvestigationActivity : BaseActivity(),
         }
     }
 
-    private fun goGame() {
-        /* After finishing a trial, go back to the Game menu */
-        var intent = Intent(this,GameActivity::class.java)
-        startActivity(intent)
+    private fun getAchievements(){
+        /* At the end of the trial get the achievement */
+        if(currentGameTrialValue.t_id_achievement != ""){
+            currentERUser.achievements[currentGameTrialValue.t_id_achievement]!!
+                .ac_active=true
+            Toast.makeText(this,
+                getString(R.string.b_game_investigation_get_achievement)
+                        + " "
+                        + currentERUser.achievements[currentGameTrialValue.t_id_achievement]!!.ac_name,
+                Toast.LENGTH_SHORT).show()
+        }
     }
+
+    private fun getItems(){
+        /* At the end of the trial get the item */
+        if(currentGameTrialValue.t_id_item_found != ""){
+            currentERUser.items[currentGameTrialValue.t_id_item_found]!!
+                .i_found=true
+            Toast.makeText(this,
+                getString(R.string.b_game_investigation_get_item)
+                        + " "
+                        + currentERUser.items[currentGameTrialValue.t_id_item_found]!!.i_name,
+                Toast.LENGTH_SHORT).show()
+            updateUserEscapeRoom()
+        }
+    }
+
 
 
     /* --------------- COMMON --------------- */

@@ -33,7 +33,7 @@
                 android:layout_gravity="top"
                 android:layout_height="175dp"
                 android:clickable="true"
-                android:onClick="er_selection">
+                android:onClick="selectActions">
 
                 <ImageView
                     android:id="@+id/im_er_info"
@@ -61,7 +61,7 @@
                 android:layout_gravity="top"
                 android:layout_height="175dp"
                 android:clickable="true"
-                android:onClick="er_selection">
+                android:onClick="selectActions">
 
                 <ImageView
                     android:id="@+id/im_er_multirole"
@@ -90,7 +90,7 @@
                 android:layout_gravity="top"
                 android:layout_height="175dp"
                 android:clickable="true"
-                android:onClick="er_selection">
+                android:onClick="selectActions">
 
                 <ImageView
                     android:id="@+id/im_er_achievements"
@@ -118,7 +118,7 @@
                 android:layout_gravity="top"
                 android:layout_height="175dp"
                 android:clickable="true"
-                android:onClick="er_selection">
+                android:onClick="selectActions">
 
                 <ImageView
                     android:id="@+id/im_er_ranking"

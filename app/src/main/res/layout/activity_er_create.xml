@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainDL"
@@ -24,7 +25,7 @@
 
             <ImageButton
                 android:id="@+id/ib_goBack"
-                android:onClick="er_actions"
+                android:onClick="selectActions"
                 android:tag="goBack"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -86,7 +87,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
                     android:layout_weight="0.5"
-                    android:onClick="er_actions"
+                    android:onClick="selectActions"
                     android:tag="b_er_date_selection"
                     android:text="@string/b_multirole_date"
                     android:textAllCaps="false"
@@ -108,7 +109,7 @@
                     <Button
                         android:id="@+id/b_er_time_yes"
                         android:tag="b_er_time_yes"
-                        android:onClick="er_actions"
+                        android:onClick="selectActions"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -121,7 +122,7 @@
                     <Button
                         android:id="@+id/b_er_time_no"
                         android:tag="b_er_time_no"
-                        android:onClick="er_actions"
+                        android:onClick="selectActions"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -138,7 +139,7 @@
 
                 <Button
                     android:tag="b_er_confirmation"
-                    android:onClick="er_actions"
+                    android:onClick="selectActions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"

@@ -10,7 +10,7 @@ data class UserEscape(
     var user_points: Int = 0,
     var timer_activated: Boolean = false,
     var timer_last_time: Int = 0,
-    var user_logs:  ArrayList<GameUserLogs> = arrayListOf(),
+    var user_logs:  HashMap<String, GameUserLogs> = hashMapOf(),
 
     // Escape information copied & modified by each user
     var id: String ?= null,

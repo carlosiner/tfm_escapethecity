@@ -62,6 +62,7 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import uoc.tfm.escapethecity.data.GameUserLogs
 import java.util.concurrent.TimeUnit
 
 open class BaseActivity : AppCompatActivity()  {
@@ -142,6 +143,19 @@ open class BaseActivity : AppCompatActivity()  {
         val startTime = currentERUser.user_date_selected
         val minAdd = 60 * 30 // 30m difference
         return (currentTime + minAdd) >= startTime
+    }
+
+    /* --- User data --- */
+    fun clearGameUserData(){
+        /* To remove any content from the game,
+        * with the exception of Achievements or points
+        * */
+        currentERUser.user_status = 0
+        currentERUser.trials = currentERContent.trials
+        currentERUser.items = currentERContent.items
+        currentERUser.zones = currentERContent.zones
+        currentERUser.user_logs = hashMapOf()
+
     }
 
 
@@ -365,6 +379,14 @@ open class BaseActivity : AppCompatActivity()  {
 
     fun goEscapeRoom(){
         var intent = Intent(this, EscapeRoomActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun goGame() {
+        /* After finishing a trial or finishing the game (in Map)
+        * go back to the Game menu
+        * */
+        var intent = Intent(this,GameActivity::class.java)
         startActivity(intent)
     }
 

@@ -21,7 +21,7 @@
 
             <ImageButton
                 android:id="@+id/ib_goBack"
-                android:onClick="er_actions"
+                android:onClick="selectActions"
                 android:tag="goBack"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"

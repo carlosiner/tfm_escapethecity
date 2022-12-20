@@ -36,7 +36,7 @@ class ERRankingActivity : BaseActivity(), NavigationView.OnNavigationItemSelecte
 
 
     // Actions selector
-    fun er_actions(view: View){
+    fun selectActions(view: View){
         when(view.tag){
             "goBack" -> goBack()
         }

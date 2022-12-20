@@ -81,7 +81,7 @@
 
             <!-- Game Inventory -->
             <RelativeLayout
-                android:tag="rl_er_achievements"
+                android:tag="rl_g_inventory"
                 android:layout_width="150dp"
                 android:layout_margin="20dp"
                 android:layout_gravity="top"

@@ -1,5 +1,6 @@
 package uoc.tfm.escapethecity
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.SpannableString
@@ -7,6 +8,8 @@ import android.text.style.UnderlineSpan
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
@@ -30,21 +33,20 @@ class GOptionsActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
         tView.text = sString
     }
 
-    private fun showPopUpWindowCancel(){
-        // Disable background layout
-        TODO()
-//        var llBack = findViewById<LinearLayout>(R.id.ll_local_main)
-//        llBack.isEnabled = false
-
-    }
-
-    private fun hidePopUpCancel(){
-        TODO()
-    }
-
     private fun checkCancel(){
-        // TODO PopUp
-        goCancel()
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.tv_game_options_cancel))
+            .setMessage(getString(R.string.tv_game_options_confirmation_message))
+            .setCancelable(true)
+            .setPositiveButton(getString(R.string.tv_game_options_confirmation_yes),
+                DialogInterface.OnClickListener{ _, _ ->
+                    goCancel()
+                })
+            .setNegativeButton(getString(R.string.tv_game_options_confirmation_no),
+                DialogInterface.OnClickListener{ _, _ ->
+                    // Do nothing
+                })
+            .show()
     }
 
     // Actions selector
@@ -59,11 +61,12 @@ class GOptionsActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
     private fun goCancel(){
         // Cancel the ER
         // User status changed to 0
-        currentERUser.user_status = 0
+        clearGameUserData()
+
         // Save the config in the DB
         updateUserEscapeRoom()
         // Return to the ER view
-        goEscapeRoom()
+        goMain()
     }
 
 

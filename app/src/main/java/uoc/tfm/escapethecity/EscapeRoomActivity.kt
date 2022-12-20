@@ -47,7 +47,6 @@ class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
     private fun load_db_escaperoom() {
         val db = FirebaseFirestore.getInstance()
         // Retrieves information of the user escape room from the global object
-        // TODO Check first if escape load in
         if(!currentERId.isEmpty()
             || currentERContent.id != currentERId){
             // Reload escape info
@@ -138,7 +137,7 @@ class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         }
     }
 
-    fun er_selection(view:View){
+    fun selectActions(view:View){
         when(view.tag){
             "t_er_achievements" -> goERAchievements()
             "t_er_info" -> goERInformation()
@@ -169,11 +168,6 @@ class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
 
     private fun goERStatus(){
         var intent = Intent(this, ERStatusActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun goGame(){
-        var intent = Intent(this, GameActivity::class.java)
         startActivity(intent)
     }
 

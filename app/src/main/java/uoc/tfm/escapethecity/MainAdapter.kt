@@ -1,10 +1,5 @@
 package uoc.tfm.escapethecity
 
-import android.content.res.Resources
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +8,10 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import io.grpc.Context
 import uoc.tfm.escapethecity.data.Escape
-import uoc.tfm.escapethecity.data.ItemsViewModel
 
-class MainAdapter(private val erList: ArrayList<Escape>) : RecyclerView.Adapter<MainAdapter.MyViewHolder>() {
+class MainAdapter(private val erList: ArrayList<Escape>) :
+    RecyclerView.Adapter<MainAdapter.MyViewHolder>() {
 
     private lateinit var context: android.content.Context
 

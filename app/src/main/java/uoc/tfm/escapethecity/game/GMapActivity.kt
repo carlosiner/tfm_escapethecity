@@ -1,7 +1,6 @@
-package uoc.tfm.escapethecity
+package uoc.tfm.escapethecity.game
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -16,6 +15,8 @@ import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.navigation.NavigationView
+import uoc.tfm.escapethecity.BaseActivity
+import uoc.tfm.escapethecity.R
 import uoc.tfm.escapethecity.data.GameZones
 
 class GMapActivity : BaseActivity(),

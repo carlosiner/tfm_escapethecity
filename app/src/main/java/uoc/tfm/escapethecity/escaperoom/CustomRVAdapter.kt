@@ -1,4 +1,4 @@
-package uoc.tfm.escapethecity
+package uoc.tfm.escapethecity.escaperoom
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import uoc.tfm.escapethecity.R
 import uoc.tfm.escapethecity.data.ItemsViewModel
 
 class CustomRVAdapter (private val itemList: List<ItemsViewModel>) : RecyclerView.Adapter<CustomRVAdapter.ViewHolder>() {

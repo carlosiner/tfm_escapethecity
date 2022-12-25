@@ -1,6 +1,7 @@
 package uoc.tfm.escapethecity
 
 import android.annotation.SuppressLint
+import android.content.ClipDescription
 //import android.content.Context
 import android.content.DialogInterface
 //import android.content.Intent
@@ -8,7 +9,6 @@ import android.content.pm.PackageManager
 //import android.location.Location
 import android.location.LocationManager
 //import android.location.LocationRequest
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 //import android.os.Looper
@@ -23,7 +23,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.drawerlayout.widget.DrawerLayout
 import com.bumptech.glide.Glide
 //import com.google.android.gms.location.FusedLocationProviderClient
@@ -38,31 +37,21 @@ import uoc.tfm.escapethecity.data.User
 import uoc.tfm.escapethecity.data.UserEscape
 import java.time.LocalDateTime
 import java.time.ZoneId
-import java.util.jar.Manifest
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.location.Location
-import android.os.Binder
-import android.os.Build
-import android.os.IBinder
 import android.os.Looper
-import android.util.Log
 import android.view.inputmethod.InputMethodManager
-import androidx.core.app.NotificationCompat
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import uoc.tfm.escapethecity.access.RegistrationActivity
 import uoc.tfm.escapethecity.data.GameUserLogs
+import uoc.tfm.escapethecity.escaperoom.EscapeRoomActivity
+import uoc.tfm.escapethecity.game.GameActivity
 import java.util.concurrent.TimeUnit
 
 open class BaseActivity : AppCompatActivity()  {
@@ -78,6 +67,9 @@ open class BaseActivity : AppCompatActivity()  {
         var currentERId: String = ""
         var currentERContent: Escape = Escape()
         var currentERUser: UserEscape = UserEscape()
+
+        /* Game - Timer */
+        var endTime: Long = 0
 
         /* Location */
         lateinit var fLocationProviderClient: FusedLocationProviderClient
@@ -111,9 +103,15 @@ open class BaseActivity : AppCompatActivity()  {
     */
 
     /* --- Utilities ---*/
-    fun getImageFromURL(context: Context, imageULR: String, imageView: ImageView){
+    fun getImageFromURL(context: Context, imageULR: String, imageView: ImageView, isGif: Boolean=false){
         /* Get image from URL (String) and insert into a view*/
-        Glide.with(context).load(imageULR).fitCenter().into(imageView)
+        if (!isGif){
+            Glide.with(context).load(imageULR).fitCenter().into(imageView)
+        }
+        else{
+            Glide.with(context).asGif().load(imageULR).fitCenter().into(imageView)
+        }
+
     }
 
 
@@ -145,6 +143,14 @@ open class BaseActivity : AppCompatActivity()  {
         return (currentTime + minAdd) >= startTime
     }
 
+    fun timerSetEndDate(){
+        /* Simple calcultation of the end of the Game */
+        val selectedStartTime = currentERUser.user_date_selected
+        val escapeTime = currentERContent.escape_duration
+        endTime = selectedStartTime + escapeTime!!
+    }
+
+
     /* --- User data --- */
     fun clearGameUserData(){
         /* To remove any content from the game,
@@ -156,6 +162,47 @@ open class BaseActivity : AppCompatActivity()  {
         currentERUser.zones = currentERContent.zones
         currentERUser.user_logs = hashMapOf()
 
+    }
+
+    fun setUserLog(title: String, description: String, points: Int=0){
+        /* Generates a new user log with the defined information */
+        val mapLogs = currentERUser.user_logs
+        var newLog = GameUserLogs()
+        var newId = "ul"
+        var lastId = 0
+        newLog.log_title = title
+        newLog.log_time = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond()
+        newLog.log_description = description
+        newLog.log_points = points
+
+        if (mapLogs.isNotEmpty()){
+            for (i in mapLogs){
+                var thisKey =  (i.key.split("ul")[1]).toInt()
+                if (lastId < thisKey){
+                    lastId = thisKey
+                }
+            }
+            newId += lastId+1
+        }
+        else{
+            newId += "0"
+        }
+        newLog.log_id = newId
+        currentERUser.user_logs[newId] = newLog
+
+        // Add points
+        if (points!=0){
+            setTotalPoints(points)
+        }
+    }
+
+    private fun setTotalPoints(points: Int){
+        /* Count the total user points */
+        currentERUser.user_points += points
+        if (currentERUser.user_points <= 0){
+            // User cannot have negative points
+            currentERUser.user_points = 0
+        }
     }
 
 
@@ -362,7 +409,6 @@ open class BaseActivity : AppCompatActivity()  {
         tvUser.text = userInfo.username
         val tvUserImage: ImageView = lateralView.findViewById(R.id.menu_profile_image)
         getImageFromURL(lateralView.context, userInfo.image!!, tvUserImage)
-        //Glide.with(lateralView.context).load(userInfo.image).fitCenter().into(tvUserImage)
     }
 
     /* Functions from NavigationMenu (lateral menu) */
@@ -386,13 +432,13 @@ open class BaseActivity : AppCompatActivity()  {
         /* After finishing a trial or finishing the game (in Map)
         * go back to the Game menu
         * */
-        var intent = Intent(this,GameActivity::class.java)
+        var intent = Intent(this, GameActivity::class.java)
         startActivity(intent)
     }
 
     fun logout(){
         FirebaseAuth.getInstance().signOut()
-        var intent = Intent(this,RegistrationActivity::class.java)
+        var intent = Intent(this, RegistrationActivity::class.java)
         startActivity(intent)
     }
 

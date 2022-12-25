@@ -1,4 +1,4 @@
-package uoc.tfm.escapethecity
+package uoc.tfm.escapethecity.escaperoom
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -12,6 +12,8 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import android.text.format.DateFormat
+import uoc.tfm.escapethecity.BaseActivity
+import uoc.tfm.escapethecity.R
 
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -41,16 +43,24 @@ class ERCreateActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
         val buttonNo: Button = findViewById(R.id.b_er_time_no)
         var timer = false
         if(selection){
-            buttonYes.backgroundTintList = ContextCompat.getColorStateList(this,R.color.escape_vivid_purple)
+            buttonYes.backgroundTintList = ContextCompat.getColorStateList(this,
+                R.color.escape_vivid_purple
+            )
             buttonYes.alpha = 1f
-            buttonNo.backgroundTintList = ContextCompat.getColorStateList(this,R.color.escape_dead_purple)
+            buttonNo.backgroundTintList = ContextCompat.getColorStateList(this,
+                R.color.escape_dead_purple
+            )
             buttonNo.alpha = 0.25f
             timer = true
         }
         else{
-            buttonNo.backgroundTintList = ContextCompat.getColorStateList(this,R.color.escape_vivid_purple)
+            buttonNo.backgroundTintList = ContextCompat.getColorStateList(this,
+                R.color.escape_vivid_purple
+            )
             buttonNo.alpha = 1f
-            buttonYes.backgroundTintList = ContextCompat.getColorStateList(this,R.color.escape_dead_purple)
+            buttonYes.backgroundTintList = ContextCompat.getColorStateList(this,
+                R.color.escape_dead_purple
+            )
             buttonYes.alpha = 0.25f
             timer = false
         }

@@ -1,21 +1,14 @@
-package uoc.tfm.escapethecity
+package uoc.tfm.escapethecity.access
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.ActionProvider
 import android.view.View
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import uoc.tfm.escapethecity.data.User
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.properties.Delegates
+import uoc.tfm.escapethecity.BaseActivity
+import uoc.tfm.escapethecity.MainActivity
+import uoc.tfm.escapethecity.R
 
 class LoginActivity : BaseActivity() {
 

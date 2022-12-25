@@ -6,7 +6,7 @@
     android:id="@+id/mainDL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GInventoryActivity"
+    tools:context=".game.GInventoryActivity"
     tools:openDrawer="start">
 
     <LinearLayout
@@ -48,7 +48,7 @@
             android:columnCount="2"
             android:scrollbars="vertical">
 
-            <!-- Item: Escape_room goes in here -->
+            <!-- Items goes in here -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerviewInventory"
                 android:layout_width="match_parent"

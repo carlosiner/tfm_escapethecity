@@ -1,4 +1,4 @@
-package uoc.tfm.escapethecity
+package uoc.tfm.escapethecity.game
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import uoc.tfm.escapethecity.R
 import uoc.tfm.escapethecity.data.GameItems
 
 class GInventoryAdapter(private val itemList: ArrayList<GameItems>) :

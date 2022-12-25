@@ -1,12 +1,12 @@
-package uoc.tfm.escapethecity
+package uoc.tfm.escapethecity.access
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import uoc.tfm.escapethecity.R
 
 class RecoveryActivity : AppCompatActivity() {
 

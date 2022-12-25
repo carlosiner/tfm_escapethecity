@@ -1,4 +1,4 @@
-package uoc.tfm.escapethecity
+package uoc.tfm.escapethecity.escaperoom
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,8 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
+import uoc.tfm.escapethecity.BaseActivity
+import uoc.tfm.escapethecity.R
 import uoc.tfm.escapethecity.data.UserEscape
 
 class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener  {
@@ -48,7 +50,8 @@ class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         val db = FirebaseFirestore.getInstance()
         // Retrieves information of the user escape room from the global object
         if(!currentERId.isEmpty()
-            || currentERContent.id != currentERId){
+            || currentERContent.id != currentERId
+        ){
             // Reload escape info
             try {
                 db.collection("escapes_by_users").document(userInfo.email!!)
@@ -111,6 +114,11 @@ class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             image.setImageResource(R.drawable.icon_g_continue)
             text.text = "Continuar"
         }
+        else if (currentERUser.user_status == 4){
+            image.setImageResource(R.drawable.icon_g_completed)
+            text.text = "Completado"
+
+        }
         else{
             image.setImageResource(R.drawable.icon_g_create_or_join)
             text.text = "Crear Partida"
@@ -128,7 +136,8 @@ class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
             // User to check status or to start
             goERStatus()
         }
-        else if (currentERUser.user_status == 3){
+        else if (currentERUser.user_status == 3
+            || currentERUser.user_status == 4){
             // Continue ER game
             goGame()
         }

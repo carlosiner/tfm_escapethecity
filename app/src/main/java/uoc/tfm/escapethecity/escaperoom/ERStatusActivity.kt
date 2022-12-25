@@ -1,4 +1,4 @@
-package uoc.tfm.escapethecity
+package uoc.tfm.escapethecity.escaperoom
 
 
 import android.content.Intent
@@ -10,6 +10,8 @@ import android.widget.TextView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import uoc.tfm.escapethecity.BaseActivity
+import uoc.tfm.escapethecity.R
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -75,6 +77,12 @@ class ERStatusActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
     private fun goGameAndUpdate(){
         // Update the user current information to the final state
         currentERUser.user_status = 3
+
+        // Log event
+        setUserLog(
+            getString(R.string.tv_game_userlog_title_SER),
+            getString(R.string.tv_game_userlog_desc_SER)
+        )
         // Update db
         updateUserEscapeRoom()
         // Go to Game

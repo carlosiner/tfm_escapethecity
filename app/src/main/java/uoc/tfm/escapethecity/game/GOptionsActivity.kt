@@ -1,20 +1,21 @@
-package uoc.tfm.escapethecity
+package uoc.tfm.escapethecity.game
 
 import android.content.DialogInterface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import uoc.tfm.escapethecity.BaseActivity
+import uoc.tfm.escapethecity.R
 
-class GOptionsActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
+class GOptionsActivity : BaseActivity(),
+    NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var drawerL: DrawerLayout
 
@@ -53,7 +54,7 @@ class GOptionsActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
     fun selectActions(view: View){
         // Select a destination function based on the tag
         when(view.tag){
-            "ib_goBack" -> goBack()
+            "goBack" -> goBack()
             "tv_g_options_cancel" -> checkCancel()
         }
     }

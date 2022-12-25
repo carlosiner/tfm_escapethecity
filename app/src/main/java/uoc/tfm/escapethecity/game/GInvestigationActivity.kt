@@ -1,17 +1,23 @@
-package uoc.tfm.escapethecity
+package uoc.tfm.escapethecity.game
 
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.transition.Visibility
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.firestore.FirebaseFirestore
+import uoc.tfm.escapethecity.BaseActivity
+import uoc.tfm.escapethecity.R
+import uoc.tfm.escapethecity.data.GameItems
 import uoc.tfm.escapethecity.data.GameTrials
+import uoc.tfm.escapethecity.data.User
+import uoc.tfm.escapethecity.data.UserRanking
 
 class GInvestigationActivity : BaseActivity(),
     NavigationView.OnNavigationItemSelectedListener{
@@ -54,12 +60,64 @@ class GInvestigationActivity : BaseActivity(),
 
         // Game is finished
         if (flagFinish){
-            Toast.makeText(this,R.string.tv_game_investigation_correct_end, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.tv_game_investigation_correct_end, Toast.LENGTH_SHORT).show()
+
+            if(currentERUser.user_status < 4){
+                // Update the user current information to the final state
+                currentERUser.user_status = 4 // Final status
+
+                // Log event
+                setUserLog(
+                    getString(R.string.tv_game_userlog_title_EER),
+                    getString(R.string.tv_game_userlog_desc_EER)
+                )
+
+                // Update Ranking
+                updateRanking()
+
+                // Update db
+                updateUserEscapeRoom()
+            }
+
+            // Return to ER menu
             goEscapeRoom()
         }
         else{
             // And load the view information for trial
             loadTrialView()
+        }
+    }
+
+    private fun updateRanking() {
+        val db = FirebaseFirestore.getInstance()
+        var userMap: HashMap<String, UserRanking> = hashMapOf()
+        var userR = UserRanking()
+        userR.user_name = userInfo.username!!
+        userR.user_points = currentERUser.user_points
+        // Encode needed as some characters (".", "/", ...) generates more objects than
+        // expected in Firebase Firestore (when using it as values)
+        var email = Uri.encode(userInfo.email!!).replace(".", "%2E")
+        userMap[email] = userR
+
+        try {
+            db.collection("ranking").document(currentERId).get()
+                .addOnSuccessListener {
+                    if (it.data?.size != null) {
+                        // Update the user Rankin
+                        db.collection("ranking")
+                            .document(currentERId)
+                            .update(userMap as Map<String, Any>)
+                    }
+                    else{
+                        //First time for Escape Room
+                        db.collection("ranking")
+                            .document(currentERId)
+                            .set(userMap)
+                    }
+                }
+        }
+        catch (err: Exception){
+            Log.d("error-db", "Cannot access to the DB to load the ranking info")
         }
     }
 
@@ -197,16 +255,20 @@ class GInvestigationActivity : BaseActivity(),
     private fun showClues(clue: String) {
         var idTV = 0
         var idCB = 0
+        var nameClue = ""
         when (clue){
             "clue1" -> {
+                nameClue = getString(R.string.cb_game_investigation_clue1)
                 idTV = R.id.tv_game_investigation_clue1_description
                 idCB = R.id.cb_game_investigation_clue1
                 currentERUser.trials[currentGameTrialKey]!!.t_clue1_activated = true}
             "clue2" -> {
+                nameClue = getString(R.string.cb_game_investigation_clue2)
                 idTV = R.id.tv_game_investigation_clue2_description
                 idCB = R.id.cb_game_investigation_clue2
                 currentERUser.trials[currentGameTrialKey]!!.t_clue2_activated = true}
             "clue3" -> {
+                nameClue = getString(R.string.cb_game_investigation_clue3)
                 idTV = R.id.tv_game_investigation_clue3_description
                 idCB = R.id.cb_game_investigation_clue3
                 currentERUser.trials[currentGameTrialKey]!!.t_clue3_activated = true}
@@ -215,7 +277,12 @@ class GInvestigationActivity : BaseActivity(),
         activateClues(idTV, idCB, true)
 
         // TODO Update points
-        // TODO Generate logs
+        // Log event
+        setUserLog(
+            getString(R.string.tv_game_userlog_title_UC) + nameClue,
+            getString(R.string.tv_game_userlog_desc_UC),
+            -20
+        )
         // Update ER User info
         updateUserEscapeRoom()
 
@@ -228,11 +295,16 @@ class GInvestigationActivity : BaseActivity(),
             if (tVAnswer.text.toString().trim().lowercase()
                 == currentERContent.trials[currentGameTrialKey]!!.t_solution){
                 // TODO Update points
-                // TODO Generate logs
+                // Log event
+                setUserLog(
+                    getString(R.string.tv_game_userlog_title_FT) + currentERContent.trials[currentGameTrialKey]!!.t_name,
+                    getString(R.string.tv_game_userlog_desc_FT),
+                    currentERUser.trials[currentGameTrialKey]!!.t_totalPoints
+                )
                 goEndThisTrial()
             }
             else{
-                Toast.makeText(this,R.string.tv_game_investigation_incorrect, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.tv_game_investigation_incorrect, Toast.LENGTH_SHORT).show()
             }
         } catch(e: Exception){
             // Handles if the Popup is lost at this point
@@ -286,20 +358,66 @@ class GInvestigationActivity : BaseActivity(),
                         + " "
                         + currentERUser.achievements[currentGameTrialValue.t_id_achievement]!!.ac_name,
                 Toast.LENGTH_SHORT).show()
+
+            // Log event
+            var achiName = currentERUser.achievements[currentGameTrialValue.t_id_achievement]!!.ac_name
+            setUserLog(
+                getString(R.string.tv_game_userlog_title_GA) + achiName,
+                getString(R.string.tv_game_userlog_desc_GA),
+                20
+            )
         }
     }
 
     private fun getItems(){
         /* At the end of the trial get the item */
         if(currentGameTrialValue.t_id_item_found != ""){
+            // Change objet status
             currentERUser.items[currentGameTrialValue.t_id_item_found]!!
                 .i_found=true
+
+            // Send notification (Toast)
             Toast.makeText(this,
                 getString(R.string.b_game_investigation_get_item)
                         + " "
                         + currentERUser.items[currentGameTrialValue.t_id_item_found]!!.i_name,
                 Toast.LENGTH_SHORT).show()
-            updateUserEscapeRoom()
+
+            // Log event
+            var itemName = currentERUser.items[currentGameTrialValue.t_id_item_found]!!.i_name
+            setUserLog(
+                getString(R.string.tv_game_userlog_title_GI) + itemName,
+                getString(R.string.tv_game_userlog_desc_FT),
+                20
+            )
+        }
+    }
+
+    private fun useItem(){
+        /* Use item in trial */
+
+        // TODO
+        if(currentGameTrialValue.t_id_item_found != ""){
+            // Change objet status
+            currentERUser.items[currentGameTrialValue.t_id_item_found]!!
+                .i_found=true
+
+            // Send notification (Toast)
+            Toast.makeText(this,
+                getString(R.string.b_game_investigation_get_item)
+                        + " "
+                        + currentERUser.items[currentGameTrialValue.t_id_item_found]!!.i_name,
+                Toast.LENGTH_SHORT).show()
+
+            // Log event
+            var itemName = currentERUser.items[currentGameTrialValue.t_id_item_found]!!.i_name
+            setUserLog(
+                getString(R.string.tv_game_userlog_title_GI) + itemName,
+                getString(R.string.tv_game_userlog_desc_FT),
+                20
+            )
+
+
         }
     }
 

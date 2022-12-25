@@ -1,4 +1,4 @@
-package uoc.tfm.escapethecity
+package uoc.tfm.escapethecity.access
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,9 @@ import androidx.core.net.toUri
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
-import uoc.tfm.escapethecity.data.User
+import uoc.tfm.escapethecity.BaseActivity
+import uoc.tfm.escapethecity.MainActivity
+import uoc.tfm.escapethecity.R
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -101,7 +103,6 @@ class RegistrationActivity : BaseActivity(){
                     userInfo.role = "player"
                     userInfo.image = "https://firebasestorage.googleapis.com/v0/b/tfm-escapethecity.appspot.com/o/default_resources%2Fdefault_user.png?alt=media&token=849fbfa5-a3ab-4799-9912-8973baee32da"
 
-//                    userObj = userInfo
                     setDBUser()
 
                     if (registeredUser != null) {

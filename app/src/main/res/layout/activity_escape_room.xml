@@ -5,7 +5,7 @@
     android:id="@+id/mainDL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EscapeRoomActivity"
+    tools:context=".escaperoom.EscapeRoomActivity"
     tools:openDrawer="start">
 
 
@@ -14,13 +14,13 @@
     <LinearLayout
         android:layout_marginTop="60dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:padding="20dp">
+>
 
         <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:columnCount="2"
             android:scrollbars="vertical">
 
@@ -29,9 +29,9 @@
                 android:id="@+id/rl_er_info"
                 android:tag="t_er_info"
                 android:layout_width="150dp"
-                android:layout_margin="20dp"
-                android:layout_gravity="top"
                 android:layout_height="175dp"
+                android:layout_margin="20dp"
+                android:layout_gravity="center"
                 android:clickable="true"
                 android:onClick="selectActions">
 
@@ -44,7 +44,7 @@
 
                 <TextView
                     android:layout_width="150dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_below="@+id/im_er_info"
                     android:text="@string/tv_er_info"
                     android:textStyle="bold"
@@ -73,7 +73,7 @@
                 <TextView
                     android:id="@+id/tx_er_multirole"
                     android:layout_width="150dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_below="@+id/im_er_multirole"
                     android:text="@string/tv_er_multirole"
                     android:textStyle="bold"
@@ -101,7 +101,7 @@
 
                 <TextView
                     android:layout_width="150dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_below="@+id/im_er_achievements"
                     android:text="@string/tv_er_achievements"
                     android:textStyle="bold"
@@ -129,7 +129,7 @@
 
                 <TextView
                     android:layout_width="150dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_below="@+id/im_er_ranking"
                     android:text="@string/tv_er_ranking"
                     android:textStyle="bold"

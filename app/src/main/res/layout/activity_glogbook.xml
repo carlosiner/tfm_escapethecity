@@ -6,10 +6,11 @@
     android:id="@+id/mainDL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".game.GMapActivity"
+    tools:context=".game.GLogbookActivity"
     tools:openDrawer="start">
 
     <LinearLayout
+        android:id="@+id/ll_local_main"
         android:paddingTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +22,6 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/ib_goBack"
                 android:onClick="selectActions"
                 android:tag="goBack"
                 android:layout_width="match_parent"
@@ -31,30 +31,30 @@
                 android:background="@null"
                 android:layout_weight=".8"/>
 
-
             <TextView
-                android:id="@+id/tv_game_map"
+                android:id="@+id/tv_game_inventory_title"
                 android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight=".2"
                 android:textSize="30dp"
-                android:text="@string/tv_game_map" />
+                android:text="@string/tv_game_logbook" />
 
         </LinearLayout>
 
-        <!-- MAP fragment -->
-        <fragment
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+
+
+        <!-- Items goes in here -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewLogbook"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/map"
-            tools:context=".game.GMapActivity"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            />
+            tools:listitem="@layout/item_inventory" />
+
+
 
     </LinearLayout>
+
     <!--    Top bar that supports lateral menu-->
     <include
         layout="@layout/top_bar"
@@ -68,6 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:translationZ="1dp"
         app:menu="@menu/lateral_menu_resources"
         />
 </androidx.drawerlayout.widget.DrawerLayout>

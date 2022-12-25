@@ -73,8 +73,11 @@
     <string name="tv_er_achievemnts_not_achieved">No has conseguido este logro</string>
 
     <!-- ER Ranking -->
+    <string name="tv_er_ranking_position">Nº</string>
+    <string name="tv_er_ranking_username">Usuario</string>
+    <string name="tv_er_ranking_points">Puntos</string>
     <string name="tv_er_ranking_titleposition">Tu posición:</string>
-    <string name="tv_er_ranking_position">...</string>
+    <string name="tv_er_ranking_user_position">...</string>
 
     <!-- ER Multiroles -->
     <string name="b_er_multirole_group">Grupos</string>
@@ -153,5 +156,32 @@
     <!-- Game Inventory View -->
     <string name="tv_game_inventory_title">Inventario</string>
     <string name="tv_game_item_name">tv_game_item_name</string>
+
+    <!-- Game Timer View -->
+    <string name="tv_game_inventory_timer_finalized">¡El tiempo se ha terminado!</string>
+
+    <!-- Game User Logs -->
+    <string name="tv_game_logbook_title_points">Puntos obtenidos: </string>
+        <!-- Start ER -->
+    <string name="tv_game_userlog_title_SER">"Empieza el juego"</string>
+    <string name="tv_game_userlog_desc_SER">El usuario ha iniciado el juego.</string>
+        <!-- End ER -->
+    <string name="tv_game_userlog_title_EER">"Finalizó el juego"</string>
+    <string name="tv_game_userlog_desc_EER">El juego se ha terminado.</string>
+        <!-- Finish Trial -->
+    <string name="tv_game_userlog_title_FT">"Finalizó la prueba: "</string>
+    <string name="tv_game_userlog_desc_FT">El usuario completó la prueba.</string>
+        <!-- Get Item -->
+    <string name="tv_game_userlog_title_GI">"Item encontrado: "</string>
+    <string name="tv_game_userlog_desc_GI">El usuario ha encontrado un item en la prueba.</string>
+        <!-- Use Item -->
+    <string name="tv_game_userlog_title_UI">"Item usado: "</string>
+    <string name="tv_game_userlog_desc_UI">El usuario ha usado un item en la prueba.</string>
+        <!-- Get Achievement -->
+    <string name="tv_game_userlog_title_GA">"Logro desbloqueado: "</string>
+    <string name="tv_game_userlog_desc_GA">El usuario ha desbloqueado un logro en la prueba.</string>
+        <!-- Use Clue  -->
+    <string name="tv_game_userlog_title_UC">"Pista usada: "</string>
+    <string name="tv_game_userlog_desc_UC">El usuario ha requerido una pista en la prueba.</string>
 
 </resources>

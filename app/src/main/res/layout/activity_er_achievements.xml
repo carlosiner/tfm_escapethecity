@@ -6,7 +6,7 @@
     android:id="@+id/mainDL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ERAchievementsActivity"
+    tools:context=".escaperoom.ERAchievementsActivity"
     tools:openDrawer="start">
 
     <LinearLayout

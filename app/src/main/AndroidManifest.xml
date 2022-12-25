@@ -16,73 +16,84 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EscapeTheCity.NoActionBar">
         <activity
-            android:name=".GInventoryActivity"
+            android:name=".game.GLogbookActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".GInvestigationActivity"
+            android:name=".game.GTimerActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".GMapActivity"
+            android:name=".game.GInventoryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".GOptionsActivity"
+            android:name=".game.GInvestigationActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".GameActivity"
+            android:name=".game.GMapActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ERStatusActivity"
+            android:name=".game.GOptionsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ERCreateActivity"
+            android:name=".game.GameActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".escaperoom.ERStatusActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".escaperoom.ERCreateActivity"
             android:exported="false" />
         <activity
-            android:name=".ERRankingActivity"
+            android:name=".escaperoom.ERRankingActivity"
             android:exported="false" />
         <activity
-            android:name=".ERAchievementsActivity"
+            android:name=".escaperoom.ERAchievementsActivity"
             android:exported="false" />
         <activity
-            android:name=".ERInformationActivity"
+            android:name=".escaperoom.ERInformationActivity"
             android:exported="false" />
         <activity
             android:name=".BaseActivity"
             android:exported="false" />
         <activity
-            android:name=".EscapeRoomActivity"
+            android:name=".escaperoom.EscapeRoomActivity"
             android:exported="false" />
         <activity
-            android:name=".ChatActivity"
-            android:exported="false" />
-        <activity
-            android:name=".RecoveryActivity"
+            android:name=".access.RecoveryActivity"
             android:exported="false" /> <!-- Set Registration as initial view -->
         <activity
-            android:name=".RegistrationActivity"
+            android:name=".access.RegistrationActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -92,7 +103,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".access.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity

@@ -5,7 +5,7 @@
     android:id="@+id/mainDL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ERStatusActivity"
+    tools:context=".escaperoom.ERStatusActivity"
     tools:openDrawer="start">
 
     <LinearLayout

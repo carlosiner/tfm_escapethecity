@@ -1,4 +1,4 @@
-package uoc.tfm.escapethecity
+package uoc.tfm.escapethecity.escaperoom
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -9,9 +9,10 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import androidx.recyclerview.widget.LinearLayoutManager
+import uoc.tfm.escapethecity.BaseActivity
+import uoc.tfm.escapethecity.R
 import uoc.tfm.escapethecity.data.ERAchievements
 import uoc.tfm.escapethecity.data.ItemsViewModel
-import java.util.HashMap
 
 
 class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -67,7 +68,7 @@ class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSe
                 createDialogItem(achInfo.ac_name!!, achInfo.ac_description!!)
             }
             else{
-                Toast.makeText(this,R.string.tv_er_achievemnts_not_achieved, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.tv_er_achievemnts_not_achieved, Toast.LENGTH_SHORT).show()
             }
         }
     }

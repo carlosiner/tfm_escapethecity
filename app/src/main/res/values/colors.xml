@@ -13,4 +13,7 @@
     <color name="escape_carbon">#D1D1D1</color>
     <color name="escape_vivid_purple">#a507be</color>
     <color name="escape_dead_purple">#360B73</color>
+
+    <!-- Log Cards -->
+    <color name="light_blue">#00b3cf</color>
 </resources>

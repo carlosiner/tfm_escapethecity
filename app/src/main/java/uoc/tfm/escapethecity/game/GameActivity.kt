@@ -1,17 +1,16 @@
-package uoc.tfm.escapethecity
+package uoc.tfm.escapethecity.game
 
-import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
 import android.view.MenuItem
 import android.view.View
+import android.widget.RelativeLayout
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import uoc.tfm.escapethecity.BaseActivity
+import uoc.tfm.escapethecity.R
 
 class GameActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -22,6 +21,12 @@ class GameActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setContentView(R.layout.activity_game)
         loadTopBar()
 
+        // Timer
+        if (currentERUser.timer_activated){
+            setTimerConfig()
+        }
+
+
         // Checks if GPS is enabled
         if (!checkLocationEnabled()){
             // Generates a Dialog box to activate the GPS
@@ -30,6 +35,16 @@ class GameActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Gets the permissions needed
         initPermissionsGPS()
 //        getLocation()
+    }
+
+    private fun setTimerConfig() {
+        /* Set time config if selected */
+        val rlTimer: RelativeLayout = findViewById(R.id.rl_g_timer)
+        timerSetEndDate()
+        rlTimer.isClickable = true
+        rlTimer.visibility = View.VISIBLE
+
+
     }
 
     override fun onResume() {
@@ -44,7 +59,7 @@ class GameActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             "rl_g_investigation" -> goInvestigation()
             "rl_g_map" -> goMap()
             "rl_g_inventory" -> goInventory()
-            "rl_g_log" -> goLogbook()
+            "rl_g_logbook" -> goLogbook()
             "rl_g_options" -> goOptions()
             "rl_g_timer" -> goTimer()
         }
@@ -65,8 +80,8 @@ class GameActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     private fun goLogbook() {
-        Toast.makeText(this,"No disponible", Toast.LENGTH_SHORT).show()
-        TODO("Not yet implemented")
+        var intent = Intent(this, GLogbookActivity::class.java)
+        startActivity(intent)
     }
 
     private fun goOptions() {
@@ -75,8 +90,8 @@ class GameActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     private fun goTimer() {
-        Toast.makeText(this,"No disponible", Toast.LENGTH_SHORT).show()
-        TODO("Not yet implemented")
+        var intent = Intent(this, GTimerActivity::class.java)
+        startActivity(intent)
     }
 
 

@@ -1,4 +1,4 @@
-package uoc.tfm.escapethecity
+package uoc.tfm.escapethecity.escaperoom
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -7,6 +7,8 @@ import android.widget.TextView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import uoc.tfm.escapethecity.BaseActivity
+import uoc.tfm.escapethecity.R
 
 class ERInformationActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 

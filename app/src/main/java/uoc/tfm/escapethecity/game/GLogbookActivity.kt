@@ -1,5 +1,6 @@
-package uoc.tfm.escapethecity
+package uoc.tfm.escapethecity.game
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -8,39 +9,43 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
+import uoc.tfm.escapethecity.BaseActivity
+import uoc.tfm.escapethecity.R
 import uoc.tfm.escapethecity.data.GameItems
+import uoc.tfm.escapethecity.data.GameUserLogs
 
-class GInventoryActivity : BaseActivity(),
-    NavigationView.OnNavigationItemSelectedListener {
+class GLogbookActivity : BaseActivity(),
+    NavigationView.OnNavigationItemSelectedListener  {
 
     // Common Drawer definition
     private lateinit var drawerL: DrawerLayout
-    private lateinit var items: ArrayList<GameItems>
+    private lateinit var items: ArrayList<GameUserLogs>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ginventory)
+        setContentView(R.layout.activity_glogbook)
 
         loadTopBar()
         getItemsList()
     }
 
     private fun getItemsList(){
-        val recyclerview: RecyclerView = findViewById(R.id.recyclerviewInventory)
+        val recyclerview: RecyclerView = findViewById(R.id.recyclerviewLogbook)
 
         // Manager of the view, in this case with an vertical LinearLayout
         recyclerview.layoutManager = LinearLayoutManager(this)
         items = ArrayList()
 
         // Get items from scape room list
-        for (i in currentERUser.items){
-            if (i.value.i_found && !i.value.i_used){
-                items.add(i.value)
-            }
+        for (i in currentERUser.user_logs){
+            items.add(i.value)
         }
+        // Sort by Date
+        items.sortByDescending { it.log_time }
 
         // This will pass the ArrayList to the Adapter
-        val adapter = GInventoryAdapter(items)
+        val adapter = GLogbookAdapter(items)
 
         // Setting the Adapter with the recyclerview
         recyclerview.adapter = adapter
@@ -48,20 +53,13 @@ class GInventoryActivity : BaseActivity(),
 
 
 
-
-    fun selectActions(view: View) {
-        if (view.tag == "goBack") {
-            goBack()
+    // Actions selector
+    fun selectActions(view: View){
+        // Select a destination function based on the tag
+        when(view.tag){
+            "goBack" -> goBack()
         }
-        else {
-            var itemInfo: GameItems = currentERUser.items[view.tag]!!
-            if (itemInfo.i_found) {
-                createDialogItem(itemInfo.i_name!!, itemInfo.i_description!!)
-            }
-        }
-
     }
-
 
     /* --------------- COMMON --------------- */
 

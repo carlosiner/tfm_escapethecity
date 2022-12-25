@@ -1,12 +1,15 @@
 package uoc.tfm.escapethecity.escaperoom
 
 
+import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
@@ -34,6 +37,7 @@ class ERStatusActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
         // Modifies the information from the Status
         val tTitle: TextView = findViewById(R.id.tv_er_status_title_message)
         val tSubTitle: TextView = findViewById(R.id.tv_er_status_subtitle_message)
+        val tLocation: TextView = findViewById(R.id.tv_er_status_check_maps)
         val tGame: TextView = findViewById(R.id.tv_er_status_game_content)
         val tDate: TextView = findViewById(R.id.tv_er_status_date_content)
         val tTime: TextView = findViewById(R.id.tv_er_status_time_content)
@@ -42,26 +46,39 @@ class ERStatusActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
         val startParam = LocalDateTime.ofInstant(Instant.ofEpochSecond(startTime),
             TimeZone.getDefault().toZoneId())
 
+        surlineText(tLocation, getString(R.string.tv_er_status_check_maps))
+
         tGame.text = currentERContent.name
         tDate.text = startParam.toLocalDate().toString()
         tTime.text = startParam.toLocalTime().toString()
 
         if (flagStart){
-            tTitle.text = "¡Ya puedes comenzar tu aventura!"
-            tSubTitle.text = "¿Estás listo? \n "+
-                    "Diríjete a la siguiente dirección y pulsa el botón de empezar"
+            tTitle.text = getString(R.string.tv_er_status_description_after_start_title)
+            tSubTitle.text = getString(R.string.tv_er_status_description_after_start_subtitle)
             bStart.visibility = View.VISIBLE
         }
         else{
-            tTitle.text = "¡La sesión ha sido creada!"
-            tSubTitle.text = "Tu desafío comenzará pronto"
+            tTitle.text = getString(R.string.tv_er_status_description_before_start_title)
+            tSubTitle.text = getString(R.string.tv_er_status_description_before_start_subtitle)
             bStart.visibility = View.INVISIBLE
         }
     }
 
     private fun checkCancel(){
-        // TODO PopUp
-        goCancel()
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.tv_er_status_cancel_game_title))
+            .setMessage(getString(R.string.tv_er_status_cancel_game_description))
+            .setCancelable(true)
+            .setPositiveButton(getString(R.string.tv_game_options_confirmation_yes),
+                DialogInterface.OnClickListener{ _, _ ->
+                    goCancel()
+                })
+            .setNegativeButton(getString(R.string.tv_game_options_confirmation_no),
+                DialogInterface.OnClickListener{ _, _ ->
+                    // Do nothing
+                })
+            .show()
+
     }
 
     // Actions selector
@@ -71,7 +88,22 @@ class ERStatusActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
             "goBack" -> goBack()
             "b_er_status_start" -> goGameAndUpdate()
             "b_er_status_cancel" -> checkCancel()
+            "tv_er_status_check_maps" -> goMaps()
         }
+    }
+
+    private fun goMaps() {
+        /* Open Google maps to the initial location */
+        var erPosition = currentERContent.location
+        // Set the position and the marker
+        val gmmIntentUri = Uri.parse("geo:0,0?q=" +
+                "${erPosition!!.latitude},${erPosition!!.longitude}("
+                +getString(R.string.tv_er_status_check_maps_name)+")")
+        // Itemn to the Uri defined for Maps
+        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+        // Use the Google Maps package
+        mapIntent.setPackage("com.google.android.apps.maps")
+        startActivity(mapIntent)
     }
 
     private fun goGameAndUpdate(){
@@ -83,6 +115,12 @@ class ERStatusActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
             getString(R.string.tv_game_userlog_title_SER),
             getString(R.string.tv_game_userlog_desc_SER)
         )
+
+        // if there is an initial item, get it
+        var idInitialItem = currentERContent.initial_item
+        if (idInitialItem != ""){
+            getSoleItem(idInitialItem!!)
+        }
         // Update db
         updateUserEscapeRoom()
         // Go to Game

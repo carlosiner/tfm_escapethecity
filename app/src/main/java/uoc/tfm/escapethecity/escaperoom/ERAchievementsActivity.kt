@@ -65,10 +65,12 @@ class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSe
         else{
             var achInfo: ERAchievements = currentERUser.achievements[view.tag]!!
             if (achInfo.ac_active){
-                createDialogItem(achInfo.ac_name!!, achInfo.ac_description!!)
+                createDialogAchievement(achInfo.ac_name!!, achInfo.ac_description!!)
             }
             else{
-                Toast.makeText(this, R.string.tv_er_achievemnts_not_achieved, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    R.string.tv_er_achievemnts_not_achieved,
+                    Toast.LENGTH_SHORT).show()
             }
         }
     }

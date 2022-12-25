@@ -89,11 +89,26 @@
     <string name="tv_multirole_settings_date">Fecha prevista de inicio:</string>
     <string name="b_multirole_date">Selección de fecha</string>
     <string name="b_multirole_confirmation">Crear</string>
+    <string name="toast_er_multirole_not_date">Por favor, seleccione una fecha posterior a la fecha actual</string>
+    <string name="toast_er_multirole_not_timer">Por favor, seleccione una opción en el limitador de tiempo</string>
 
     <!-- ER Status -->
     <string name="tv_er_status">Estado</string>
     <string name="b_er_status_start">Empezar</string>
     <string name="b_er_status_cancel">Cancelar</string>
+    <string name="tv_er_status_check_maps">Ver en Google Maps</string>
+    <string name="tv_er_status_check_maps_name">Empezar+el+juego+aquí</string>
+    <!--    ER Status before date -->
+    <string name="tv_er_status_description_before_start_title">¡La sesión ha sido creada!</string>
+    <string name="tv_er_status_description_before_start_subtitle">Tu desafío comenzará pronto</string>
+    <!--    ER Status after date -->
+    <string name="tv_er_status_description_after_start_title">¡Ya puedes comenzar tu aventura!</string>
+    <string name="tv_er_status_description_after_start_subtitle">¿Estás listo? \n Diríjete a la siguiente dirección y pulsa el botón de empezar</string>
+    <!--    ER Status Cancel message -->
+    <string name="tv_er_status_cancel_game_title">Cancelar el juego</string>
+    <string name="tv_er_status_cancel_game_description">¿Desea cancelar la reserva del juego?</string>
+    <!--    ER Status if initial item -->
+
 
     <!-- Game Menu -->
     <string name="tv_game_investigation">Investigación</string>
@@ -156,6 +171,7 @@
     <!-- Game Inventory View -->
     <string name="tv_game_inventory_title">Inventario</string>
     <string name="tv_game_item_name">tv_game_item_name</string>
+    <string name="b_game_item_use">Usar en prueba actual</string>
 
     <!-- Game Timer View -->
     <string name="tv_game_inventory_timer_finalized">¡El tiempo se ha terminado!</string>
@@ -171,6 +187,10 @@
         <!-- Finish Trial -->
     <string name="tv_game_userlog_title_FT">"Finalizó la prueba: "</string>
     <string name="tv_game_userlog_desc_FT">El usuario completó la prueba.</string>
+
+        <!-- Forced Finish Trial -->
+    <string name="tv_game_userlog_title_FFT">"Finalizó la prueba: "</string>
+    <string name="tv_game_userlog_desc_FFT">El usuario ha finalizado la prueba.</string>
         <!-- Get Item -->
     <string name="tv_game_userlog_title_GI">"Item encontrado: "</string>
     <string name="tv_game_userlog_desc_GI">El usuario ha encontrado un item en la prueba.</string>

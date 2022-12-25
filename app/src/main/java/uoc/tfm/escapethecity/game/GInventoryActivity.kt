@@ -1,8 +1,11 @@
 package uoc.tfm.escapethecity.game
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,6 +52,66 @@ class GInventoryActivity : BaseActivity(),
     }
 
 
+    private fun useItem(itemId: String){
+        /* Use item in trial */
+
+        // TODO
+        if(currentGameTrialValue.t_id_item_used != ""){
+            if (currentGameTrialValue.t_id_item_used == itemId &&
+                currentERUser.items[itemId]!!.i_found){
+                if (!currentERUser.items[itemId]!!.i_used) {
+                    // Use the item
+                    var itemName = currentERUser.items[itemId]!!.i_name
+                    // Change objet status
+                    currentERUser.items[itemId]!!.i_used = true
+
+                    // Send notification (Toast)
+                    Toast.makeText(
+                        this,
+    //                getString("R.string. ")
+                        "Has usado el objeto: " + itemName, //TODO
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    // Log event
+                    //TODO
+                    setUserLog(
+                        getString(R.string.tv_game_userlog_title_GI) + itemName,
+                        getString(R.string.tv_game_userlog_desc_FT),
+                        20)
+                }
+                else{
+                    // Item already used
+                    Toast.makeText(
+                        this,
+                        //                getString("R.string. ")
+                        "Ya has usado el objeto", //TODO
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            else{
+                // Item no correcto
+                // Send notification (Toast)
+                Toast.makeText(
+                    this,
+                    "No has usado el item correcto", //TODO
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        else{
+            // Trial no requiere esto
+            // Send notification (Toast)
+            Toast.makeText(
+                this,
+                "Esta prueba no requiere un objeto", //TODO
+                Toast.LENGTH_SHORT
+            ).show()
+
+        }
+    }
+
 
 
     fun selectActions(view: View) {
@@ -58,11 +121,26 @@ class GInventoryActivity : BaseActivity(),
         else {
             var itemInfo: GameItems = currentERUser.items[view.tag]!!
             if (itemInfo.i_found) {
-                createDialogItem(itemInfo.i_name!!, itemInfo.i_description!!)
+                createDialogItemInvetory(itemInfo.i_name!!, itemInfo.i_description!!,
+                    view.tag as String
+                )
             }
         }
-
     }
+
+    private fun createDialogItemInvetory(title: String, message: String, itemId: String){
+        AlertDialog.Builder(this)
+            .setTitle(title)
+            .setMessage(message)
+            .setCancelable(true)
+            .setPositiveButton(getString(R.string.b_game_item_use),
+                DialogInterface.OnClickListener{ _, _ ->
+                    //TODO
+                    useItem(itemId)
+                })
+            .show()
+    }
+
 
 
     /* --------------- COMMON --------------- */

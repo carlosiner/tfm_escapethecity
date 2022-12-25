@@ -29,6 +29,8 @@ class ERCreateActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
     var selDay = 0
     var selMonth: Int = 0
     var selYear: Int = 0
+    var flagDate = false
+    var flagTimer = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +54,7 @@ class ERCreateActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
             )
             buttonNo.alpha = 0.25f
             timer = true
+            flagTimer = true
         }
         else{
             buttonNo.backgroundTintList = ContextCompat.getColorStateList(this,
@@ -63,6 +66,7 @@ class ERCreateActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
             )
             buttonYes.alpha = 0.25f
             timer = false
+            flagTimer = true
         }
         buttonYes.isClickable = clickable
         buttonNo.isClickable = clickable
@@ -87,7 +91,7 @@ class ERCreateActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
         selDay = day
 
         val timePickerDialog = TimePickerDialog(this, this,
-            calendar.get(Calendar.HOUR),
+            calendar.get(Calendar.HOUR_OF_DAY), //24h format
             calendar.get(Calendar.MINUTE),
             DateFormat.is24HourFormat(this))
         timePickerDialog.show()
@@ -113,16 +117,38 @@ class ERCreateActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
 
         // Set User information
         currentERUser.user_date_selected = dateInstant.epochSecond
+
+        var now = getCurrentTimeInSeconds()
+        if (now <= dateInstant.epochSecond){
+            flagDate = true
+        }
     }
 
 
     private fun createGame(){
         // Changes status of the User Escape Room
-        currentERUser.user_status = 1 // Created
-        // update DDBB
-        updateUserEscapeRoom()
-        // Close the current move to ERMain window
-        goBack()
+        if (flagDate && flagTimer){
+            currentERUser.user_status = 1 // Created
+            // update DDBB
+            updateUserEscapeRoom()
+            // Close the current move to ERMain window
+            goBack()
+        }
+        else{
+            if(!flagDate){
+                // Date not set
+                Toast.makeText(this,
+                    R.string.toast_er_multirole_not_date,
+                    Toast.LENGTH_SHORT).show()
+            }
+            else{
+                // Timer not set
+                Toast.makeText(this,
+                    R.string.toast_er_multirole_not_timer,
+                    Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
     // Actions selector

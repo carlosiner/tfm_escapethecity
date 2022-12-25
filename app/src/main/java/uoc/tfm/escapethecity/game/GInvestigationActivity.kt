@@ -18,6 +18,8 @@ import uoc.tfm.escapethecity.data.GameItems
 import uoc.tfm.escapethecity.data.GameTrials
 import uoc.tfm.escapethecity.data.User
 import uoc.tfm.escapethecity.data.UserRanking
+import java.util.*
+import kotlin.collections.HashMap
 
 class GInvestigationActivity : BaseActivity(),
     NavigationView.OnNavigationItemSelectedListener{
@@ -26,7 +28,6 @@ class GInvestigationActivity : BaseActivity(),
     private lateinit var drawerL: DrawerLayout
     private lateinit var currentPopupView: View
     // Game Trial selected
-    var currentGameTrialValue = GameTrials()
     var currentGameTrialKey = ""
     var lastPopupWindow = PopupWindow()
     var lastSuperPopupWindow = PopupWindow()
@@ -35,18 +36,18 @@ class GInvestigationActivity : BaseActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ginvestigation)
 
-        // TODO Hide all popups
         trialSelection()
     }
 
     /* --- Operations section --- */
     private fun trialSelection(){
         val trialMap = currentERUser.trials
-        var selectedGame = GameTrials()
         var flagFinish = false
 
+        // Sort trial map
+        var trialMapSorted = trialMap.toSortedMap()
         // Get the lower id with 0 points (Trial not finished)
-        for (i in trialMap){
+        for (i in trialMapSorted){
             if(!i.value.t_finished){
                 currentGameTrialValue = i.value
                 currentGameTrialKey = i.key
@@ -148,11 +149,6 @@ class GInvestigationActivity : BaseActivity(),
     }
 
     private fun showPopUp(view_tag: String){
-        // Disable background layout
-//        var llpop: LinearLayout = findViewById(R.id.ll_game_investigation_popup_Check)
-//        llBack.isEnabled = false
-
-//        val popup = PopupWindow(this)
         val notiInf: LinearLayout = findViewById(R.id.ll_popup)
 
         var popupLayout: Int? = null
@@ -160,7 +156,6 @@ class GInvestigationActivity : BaseActivity(),
             "solve" -> popupLayout = R.layout.popup_investigation_solve
             "clues" -> popupLayout = R.layout.popup_investigation_clues
             "correct" -> popupLayout = R.layout.popup_investigation_correct
-//            "incorrect" -> popupLayout = R.layout.popup_investigation_incorrect
         }
 
         val notiView: View = LayoutInflater.from(this).inflate(
@@ -276,7 +271,6 @@ class GInvestigationActivity : BaseActivity(),
 
         activateClues(idTV, idCB, true)
 
-        // TODO Update points
         // Log event
         setUserLog(
             getString(R.string.tv_game_userlog_title_UC) + nameClue,
@@ -290,11 +284,9 @@ class GInvestigationActivity : BaseActivity(),
 
     private fun checkAnswer(view: View){
         try{
-            var tVAnswer: TextView = currentPopupView.findViewById(R.id.et_game_investigation_check_hint)
-            closeKeyBoard(view)
-            if (tVAnswer.text.toString().trim().lowercase()
-                == currentERContent.trials[currentGameTrialKey]!!.t_solution){
-                // TODO Update points
+            // If the item is used then END this trial
+            if(currentGameTrialValue.t_id_item_used != ""
+                && currentERUser.items[currentGameTrialValue.t_id_item_used]!!.i_used){
                 // Log event
                 setUserLog(
                     getString(R.string.tv_game_userlog_title_FT) + currentERContent.trials[currentGameTrialKey]!!.t_name,
@@ -304,8 +296,25 @@ class GInvestigationActivity : BaseActivity(),
                 goEndThisTrial()
             }
             else{
-                Toast.makeText(this, R.string.tv_game_investigation_incorrect, Toast.LENGTH_SHORT).show()
+                // Check the answer from the box
+                var tVAnswer: TextView = currentPopupView.findViewById(R.id.et_game_investigation_check_hint)
+                closeKeyBoard(view)
+                if (tVAnswer.text.toString().trim().lowercase()
+                    == currentERContent.trials[currentGameTrialKey]!!.t_solution){
+                    // TODO Update points
+                    // Log event
+                    setUserLog(
+                        getString(R.string.tv_game_userlog_title_FT) + currentERContent.trials[currentGameTrialKey]!!.t_name,
+                        getString(R.string.tv_game_userlog_desc_FT),
+                        currentERUser.trials[currentGameTrialKey]!!.t_totalPoints
+                    )
+                    goEndThisTrial()
+                }
+                else{
+                    Toast.makeText(this, R.string.tv_game_investigation_incorrect, Toast.LENGTH_SHORT).show()
+                }
             }
+
         } catch(e: Exception){
             // Handles if the Popup is lost at this point
             goGame()
@@ -319,6 +328,12 @@ class GInvestigationActivity : BaseActivity(),
             .setCancelable(true)
             .setPositiveButton(getString(R.string.tv_game_options_confirmation_yes),
                 DialogInterface.OnClickListener{ _, _ ->
+                    // Log event (half points)
+                    setUserLog(
+                        getString(R.string.tv_game_userlog_title_FFT) + currentERContent.trials[currentGameTrialKey]!!.t_name,
+                        getString(R.string.tv_game_userlog_desc_FFT),
+                        currentERUser.trials[currentGameTrialKey]!!.t_totalPoints /2
+                    )
                     goEndThisTrial()
                 })
             .setNegativeButton(getString(R.string.tv_game_options_confirmation_no),
@@ -331,8 +346,8 @@ class GInvestigationActivity : BaseActivity(),
     private fun goEndThisTrial() {
         showPopUp("correct")
         currentERUser.trials[currentGameTrialKey]!!.t_finished = true
-        getAchievements()
-        getItems()
+        getAchievements(currentGameTrialValue)
+        getItems(currentGameTrialValue)
         updateUserEscapeRoom()
     }
 
@@ -347,80 +362,6 @@ class GInvestigationActivity : BaseActivity(),
             lastSuperPopupWindow = PopupWindow()
         }
     }
-
-    private fun getAchievements(){
-        /* At the end of the trial get the achievement */
-        if(currentGameTrialValue.t_id_achievement != ""){
-            currentERUser.achievements[currentGameTrialValue.t_id_achievement]!!
-                .ac_active=true
-            Toast.makeText(this,
-                getString(R.string.b_game_investigation_get_achievement)
-                        + " "
-                        + currentERUser.achievements[currentGameTrialValue.t_id_achievement]!!.ac_name,
-                Toast.LENGTH_SHORT).show()
-
-            // Log event
-            var achiName = currentERUser.achievements[currentGameTrialValue.t_id_achievement]!!.ac_name
-            setUserLog(
-                getString(R.string.tv_game_userlog_title_GA) + achiName,
-                getString(R.string.tv_game_userlog_desc_GA),
-                20
-            )
-        }
-    }
-
-    private fun getItems(){
-        /* At the end of the trial get the item */
-        if(currentGameTrialValue.t_id_item_found != ""){
-            // Change objet status
-            currentERUser.items[currentGameTrialValue.t_id_item_found]!!
-                .i_found=true
-
-            // Send notification (Toast)
-            Toast.makeText(this,
-                getString(R.string.b_game_investigation_get_item)
-                        + " "
-                        + currentERUser.items[currentGameTrialValue.t_id_item_found]!!.i_name,
-                Toast.LENGTH_SHORT).show()
-
-            // Log event
-            var itemName = currentERUser.items[currentGameTrialValue.t_id_item_found]!!.i_name
-            setUserLog(
-                getString(R.string.tv_game_userlog_title_GI) + itemName,
-                getString(R.string.tv_game_userlog_desc_FT),
-                20
-            )
-        }
-    }
-
-    private fun useItem(){
-        /* Use item in trial */
-
-        // TODO
-        if(currentGameTrialValue.t_id_item_found != ""){
-            // Change objet status
-            currentERUser.items[currentGameTrialValue.t_id_item_found]!!
-                .i_found=true
-
-            // Send notification (Toast)
-            Toast.makeText(this,
-                getString(R.string.b_game_investigation_get_item)
-                        + " "
-                        + currentERUser.items[currentGameTrialValue.t_id_item_found]!!.i_name,
-                Toast.LENGTH_SHORT).show()
-
-            // Log event
-            var itemName = currentERUser.items[currentGameTrialValue.t_id_item_found]!!.i_name
-            setUserLog(
-                getString(R.string.tv_game_userlog_title_GI) + itemName,
-                getString(R.string.tv_game_userlog_desc_FT),
-                20
-            )
-
-
-        }
-    }
-
 
 
     /* --------------- COMMON --------------- */

@@ -32,7 +32,7 @@ class GTimerActivity : BaseActivity(),
     }
 
     fun setTimer(){
-        val currentTime = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond()
+        val currentTime = getCurrentTimeInSeconds()
         val time = endTime - currentTime
         object : CountDownTimer(time*1000, 1000) {
             val tv_timer: TextView = findViewById(R.id.tv_game_timer)
@@ -40,7 +40,11 @@ class GTimerActivity : BaseActivity(),
                 val hours = (millisUntilFinished / 1000) / 3600
                 val minute = (millisUntilFinished / 1000) % 3600 / 60
                 val seconds = (millisUntilFinished / 1000) % 60
-                tv_timer.text = "$hours:$minute:$seconds"
+
+                var strHour = if (hours<10) "0$hours" else hours.toString()
+                var strMinute = if (minute<10) "0$minute" else minute.toString()
+                var strSecond = if (seconds<10) "0$seconds" else seconds.toString()
+                tv_timer.text = "$strHour:$strMinute:$strSecond"
             }
 
             override fun onFinish() {

@@ -28,11 +28,6 @@ class GOptionsActivity : BaseActivity(),
         surlineText(cancelGame, getString(R.string.tv_game_options_cancel))
     }
 
-    private fun surlineText(tView: TextView, text: String){
-        val sString = SpannableString(text)
-        sString.setSpan(UnderlineSpan(), 0, sString.length, 0)
-        tView.text = sString
-    }
 
     private fun checkCancel(){
         AlertDialog.Builder(this)

@@ -32,9 +32,6 @@ import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import uoc.tfm.escapethecity.data.Escape
-import uoc.tfm.escapethecity.data.User
-import uoc.tfm.escapethecity.data.UserEscape
 import java.time.LocalDateTime
 import java.time.ZoneId
 
@@ -42,6 +39,8 @@ import android.content.Context
 import android.content.Intent
 import android.location.Location
 import android.os.Looper
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import android.view.inputmethod.InputMethodManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -49,7 +48,7 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import uoc.tfm.escapethecity.access.RegistrationActivity
-import uoc.tfm.escapethecity.data.GameUserLogs
+import uoc.tfm.escapethecity.data.*
 import uoc.tfm.escapethecity.escaperoom.EscapeRoomActivity
 import uoc.tfm.escapethecity.game.GameActivity
 import java.util.concurrent.TimeUnit
@@ -67,6 +66,7 @@ open class BaseActivity : AppCompatActivity()  {
         var currentERId: String = ""
         var currentERContent: Escape = Escape()
         var currentERUser: UserEscape = UserEscape()
+        var currentGameTrialValue: GameTrials = GameTrials()
 
         /* Game - Timer */
         var endTime: Long = 0
@@ -126,7 +126,7 @@ open class BaseActivity : AppCompatActivity()  {
         }
     }
 
-    fun createDialogItem(title: String, message: String, ){
+    fun createDialogAchievement(title: String, message: String){
         AlertDialog.Builder(this)
             .setTitle(title)
             .setMessage(message)
@@ -134,13 +134,24 @@ open class BaseActivity : AppCompatActivity()  {
             .show()
     }
 
+    fun surlineText(tView: TextView, text: String){
+        /* To surline the text */
+        val sString = SpannableString(text)
+        sString.setSpan(UnderlineSpan(), 0, sString.length, 0)
+        tView.text = sString
+    }
+
     /* --- Time & Date --- */
     fun checkERStart(): Boolean {
         /* Checks if the Game can start, the user is in the right time */
-        val currentTime = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond()
+        val currentTime = getCurrentTimeInSeconds()
         val startTime = currentERUser.user_date_selected
         val minAdd = 60 * 30 // 30m difference
         return (currentTime + minAdd) >= startTime
+    }
+
+    fun getCurrentTimeInSeconds(): Long {
+        return LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond()
     }
 
     fun timerSetEndDate(){
@@ -171,7 +182,7 @@ open class BaseActivity : AppCompatActivity()  {
         var newId = "ul"
         var lastId = 0
         newLog.log_title = title
-        newLog.log_time = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond()
+        newLog.log_time = getCurrentTimeInSeconds()
         newLog.log_description = description
         newLog.log_points = points
 
@@ -221,6 +232,73 @@ open class BaseActivity : AppCompatActivity()  {
             .document(userInfo.email!!).collection("escapes")
             .document(currentERId).set(currentERUser)
     }
+
+    /* --- Triañs --- */
+    fun getSoleItem(itemId: String){
+        if (!currentERUser.items[itemId]!!.i_used){
+            // Item not used
+            currentERUser.items[itemId]!!.i_found = true
+            // Send notification (Toast)
+            Toast.makeText(this,
+                getString(R.string.b_game_investigation_get_item)
+                        + " "
+                        + currentERUser.items[itemId]!!.i_name,
+                Toast.LENGTH_SHORT).show()
+            // Log event
+            var itemName = currentERUser.items[itemId]!!.i_name
+            setUserLog(
+                getString(R.string.tv_game_userlog_title_GI) + itemName,
+                getString(R.string.tv_game_userlog_desc_GI)
+            )
+        }
+    }
+
+
+    fun getItems(currentGameTrialValue: GameTrials){
+        /* At the end of the trial get the item */
+        if(currentGameTrialValue.t_id_item_found != ""){
+            // Change objet status
+            currentERUser.items[currentGameTrialValue.t_id_item_found]!!
+                .i_found=true
+
+            // Send notification (Toast)
+            Toast.makeText(this,
+                getString(R.string.b_game_investigation_get_item)
+                        + " "
+                        + currentERUser.items[currentGameTrialValue.t_id_item_found]!!.i_name,
+                Toast.LENGTH_SHORT).show()
+
+            // Log event
+            var itemName = currentERUser.items[currentGameTrialValue.t_id_item_found]!!.i_name
+            setUserLog(
+                getString(R.string.tv_game_userlog_title_GI) + itemName,
+                getString(R.string.tv_game_userlog_desc_GI),
+                20
+            )
+        }
+    }
+
+    fun getAchievements(currentGameTrialValue: GameTrials){
+        /* At the end of the trial get the achievement */
+        if(currentGameTrialValue.t_id_achievement != ""){
+            currentERUser.achievements[currentGameTrialValue.t_id_achievement]!!
+                .ac_active=true
+            Toast.makeText(this,
+                getString(R.string.b_game_investigation_get_achievement)
+                        + " "
+                        + currentERUser.achievements[currentGameTrialValue.t_id_achievement]!!.ac_name,
+                Toast.LENGTH_SHORT).show()
+
+            // Log event
+            var achiName = currentERUser.achievements[currentGameTrialValue.t_id_achievement]!!.ac_name
+            setUserLog(
+                getString(R.string.tv_game_userlog_title_GA) + achiName,
+                getString(R.string.tv_game_userlog_desc_GA),
+                20
+            )
+        }
+    }
+
 
     /* --- Location --- */
     fun checkLocationEnabled(): Boolean{

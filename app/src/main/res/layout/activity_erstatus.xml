@@ -65,14 +65,21 @@
 
 
         <TextView
-            android:id="@+id/tv_er_status_location_url"
+            android:id="@+id/tv_er_status_check_maps"
+            android:tag="tv_er_status_check_maps"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textAlignment="center"
             android:textSize="20dp"
-            android:text="Ver en Google Maps" />
+            android:text="@string/tv_er_status_check_maps"
+            android:textColor="@color/escape_dead_purple"
+            android:clickable="true"
+            android:onClick="selectActions"/>
 
         <TextView
             android:id="@+id/tv_er_status_game"
@@ -81,12 +88,13 @@
             android:layout_marginRight="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:textSize="20dp"
             android:text="Partida:" />
 
         <TextView
             android:id="@+id/tv_er_status_game_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="60dp"
             android:layout_marginRight="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,12 +108,13 @@
             android:layout_marginRight="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:textSize="20dp"
             android:text="Fecha:" />
 
         <TextView
             android:id="@+id/tv_er_status_date_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="60dp"
             android:layout_marginRight="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -119,12 +128,13 @@
             android:layout_marginRight="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:textSize="20dp"
             android:text="Hora:" />
 
         <TextView
             android:id="@+id/tv_er_status_time_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="60dp"
             android:layout_marginRight="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

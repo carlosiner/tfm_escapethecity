@@ -301,7 +301,6 @@ class GInvestigationActivity : BaseActivity(),
                 closeKeyBoard(view)
                 if (tVAnswer.text.toString().trim().lowercase()
                     == currentERContent.trials[currentGameTrialKey]!!.t_solution){
-                    // TODO Update points
                     // Log event
                     setUserLog(
                         getString(R.string.tv_game_userlog_title_FT) + currentERContent.trials[currentGameTrialKey]!!.t_name,

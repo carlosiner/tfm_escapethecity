@@ -68,34 +68,32 @@ class GInventoryActivity : BaseActivity(),
                     // Send notification (Toast)
                     Toast.makeText(
                         this,
-    //                getString("R.string. ")
-                        "Has usado el objeto: " + itemName, //TODO
+                    getString(R.string.toast_game_item_used) + itemName,
                         Toast.LENGTH_SHORT
                     ).show()
 
                     // Log event
                     //TODO
                     setUserLog(
-                        getString(R.string.tv_game_userlog_title_GI) + itemName,
-                        getString(R.string.tv_game_userlog_desc_FT),
+                        getString(R.string.log_game_item_use_title) + itemName,
+                        getString(R.string.log_game_item_use_desc),
                         20)
                 }
                 else{
                     // Item already used
                     Toast.makeText(
                         this,
-                        //                getString("R.string. ")
-                        "Ya has usado el objeto", //TODO
+                        getString(R.string.b_game_item_use_already),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
             }
             else{
-                // Item no correcto
+                // Not correct item for trial
                 // Send notification (Toast)
                 Toast.makeText(
                     this,
-                    "No has usado el item correcto", //TODO
+                    getString(R.string.b_game_item_use_not_correct_for_trial),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -105,7 +103,7 @@ class GInventoryActivity : BaseActivity(),
             // Send notification (Toast)
             Toast.makeText(
                 this,
-                "Esta prueba no requiere un objeto", //TODO
+                getString(R.string.b_game_item_use_trial_not_require),
                 Toast.LENGTH_SHORT
             ).show()
 

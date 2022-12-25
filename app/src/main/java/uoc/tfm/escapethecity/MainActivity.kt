@@ -1,11 +1,13 @@
 package uoc.tfm.escapethecity
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,6 +16,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import uoc.tfm.escapethecity.data.Escape
 import uoc.tfm.escapethecity.data.ItemsViewModel
+import kotlin.system.exitProcess
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     // Global vars
@@ -77,6 +80,27 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 }
             }
         }
+    }
+
+    /* --------------- COMMON --------------- */
+
+    // Override back
+    override fun onBackPressed() {
+        /* Exit from this app */
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.main_exit_title))
+            .setMessage(getString(R.string.main_exit_description))
+            .setPositiveButton(getString(R.string.main_exit_positive),
+                DialogInterface.OnClickListener{ _, _ ->
+                    // Exit from the App
+                    finishAffinity()
+                })
+            .setNegativeButton(getString(R.string.main_exit_negative),
+                DialogInterface.OnClickListener{ _, _ ->
+                    // Do nothing
+                })
+            .setCancelable(true)
+            .show()
     }
 
 

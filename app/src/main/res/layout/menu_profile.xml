@@ -15,7 +15,6 @@
     android:foreground="?attr/selectableItemBackgroundBorderless"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     >
-    <!--    TODO  -->
 
     <LinearLayout
         android:id="@+id/menu_profile_items_layout"

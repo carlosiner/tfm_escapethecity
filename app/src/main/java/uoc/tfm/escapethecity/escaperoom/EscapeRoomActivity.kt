@@ -180,6 +180,13 @@ class EscapeRoomActivity : BaseActivity(), NavigationView.OnNavigationItemSelect
         startActivity(intent)
     }
 
+    /* --------------- COMMON --------------- */
+
+    // Override back
+    override fun onBackPressed() {
+        goMain()
+    }
+
     // Common item selection for navigationMenu
     private fun loadTopBar() {
         var topBar: androidx.appcompat.widget.Toolbar = findViewById(R.id.top_bar)

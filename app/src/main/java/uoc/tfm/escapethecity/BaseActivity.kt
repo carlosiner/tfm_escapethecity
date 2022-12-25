@@ -1,19 +1,11 @@
 package uoc.tfm.escapethecity
-
 import android.annotation.SuppressLint
-import android.content.ClipDescription
-//import android.content.Context
 import android.content.DialogInterface
-//import android.content.Intent
 import android.content.pm.PackageManager
-//import android.location.Location
 import android.location.LocationManager
-//import android.location.LocationRequest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-//import android.os.Looper
 import android.provider.Settings
-//import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -25,16 +17,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.bumptech.glide.Glide
-//import com.google.android.gms.location.FusedLocationProviderClient
-//import com.google.android.gms.location.LocationCallback
-//import com.google.android.gms.location.LocationResult
-//import com.google.android.gms.location.LocationServices
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.time.LocalDateTime
 import java.time.ZoneId
-
 import android.content.Context
 import android.content.Intent
 import android.location.Location
@@ -316,11 +303,11 @@ open class BaseActivity : AppCompatActivity()  {
             .setTitle(getString(R.string.tv_game_gps_dialog_title))
             .setMessage(getString(R.string.tv_game_gps_dialog_message))
             .setPositiveButton(getString(R.string.tv_game_gps_dialog_confirm),
-                DialogInterface.OnClickListener{ dialog, which ->
+                DialogInterface.OnClickListener{ _, _ ->
                     activateGPS()
                 })
             .setNegativeButton(getString(R.string.tv_game_gps_dialog_cancel),
-                DialogInterface.OnClickListener{ dialog, which ->
+                DialogInterface.OnClickListener{ _, _ ->
                     Toast.makeText(this,"Por favor active el GPS", Toast.LENGTH_SHORT).show()
                 })
             .show()

@@ -48,6 +48,10 @@
     <!--    ***************************-->
     <!--    Home menu-->
     <string name="tv_h_escapeName">El Secreto</string>
+    <string name="main_exit_title">Salir de la aplicación</string>
+    <string name="main_exit_description">¿Desea cerrar y salir de esta aplicación?</string>
+    <string name="main_exit_positive">Salir</string>
+    <string name="main_exit_negative">Cancelar</string>
 
     <!--    ***************************-->
     <!--    Escape room menu-->
@@ -172,6 +176,15 @@
     <string name="tv_game_inventory_title">Inventario</string>
     <string name="tv_game_item_name">tv_game_item_name</string>
     <string name="b_game_item_use">Usar en prueba actual</string>
+    <string name="b_game_item_use_already">Ya has usado el objeto</string>
+
+    <string name="b_game_item_use_not_correct_for_trial">No has usado el item correcto</string>
+    <string name="b_game_item_use_trial_not_require">Esta prueba no requiere un objeto</string>
+
+    <string name="log_game_item_use_title">Has usado el objeto: </string>
+    <string name="log_game_item_use_desc">Se ha usado un objeto en la prueba actual</string>
+
+    <string name="toast_game_item_used">Has usado el objeto: </string>
 
     <!-- Game Timer View -->
     <string name="tv_game_inventory_timer_finalized">¡El tiempo se ha terminado!</string>

@@ -30,7 +30,7 @@ class LoginActivity : BaseActivity() {
         finish()
     }
 
-    fun login(){
+    fun login(view: View){
         loginUser()
     }
 

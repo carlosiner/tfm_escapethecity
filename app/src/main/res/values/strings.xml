@@ -80,7 +80,7 @@
     <string name="tv_er_ranking_position">Nº</string>
     <string name="tv_er_ranking_username">Usuario</string>
     <string name="tv_er_ranking_points">Puntos</string>
-    <string name="tv_er_ranking_titleposition">Tu posición:</string>
+    <string name="tv_er_ranking_titleposition">Tu puntuación:</string>
     <string name="tv_er_ranking_user_position">...</string>
 
     <!-- ER Multiroles -->

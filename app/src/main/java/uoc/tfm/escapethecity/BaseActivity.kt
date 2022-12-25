@@ -152,9 +152,10 @@ open class BaseActivity : AppCompatActivity()  {
     /* --- User data --- */
     fun clearGameUserData(){
         /* To remove any content from the game,
-        * with the exception of Achievements or points
+        * with the exception of Achievements
         * */
         currentERUser.user_status = 0
+        currentERUser.user_points = 0
         currentERUser.trials = currentERContent.trials
         currentERUser.items = currentERContent.items
         currentERUser.zones = currentERContent.zones
@@ -347,22 +348,6 @@ open class BaseActivity : AppCompatActivity()  {
         }
     }
 
-//    @SuppressLint("MissingPermission")
-//    private fun requestLocation(){
-//        /* Get user location (if all is enabled) */
-//        // TODO CHNG & TEST ! ! !
-//        val priorityHighAcc = com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
-//
-//        var locationRequest = com.google.android.gms.location.LocationRequest()
-//        locationRequest.priority = priorityHighAcc
-//        locationRequest.interval = 0
-//        locationRequest.fastestInterval = 0
-//        locationRequest.numUpdates = 1
-//
-//        fLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-//        fLocationProviderClient.requestLocationUpdates(locationRequest, locationCallBack, Looper.myLooper())
-//    }
-
     fun createLocationRequest(){
         locationRequest = LocationRequest.create().apply {
             interval = TimeUnit.SECONDS.toMillis(60)
@@ -381,25 +366,13 @@ open class BaseActivity : AppCompatActivity()  {
 
     @SuppressLint("MissingPermission")
     fun getLocation(){
-        // TODO CHNG & TEST ! ! !
         /* Manages the location */
         // Permissions already check in the following checks,
         if (checkGPSPermissions() && checkLocationEnabled()){
             // Get last location
             fLocationProviderClient.lastLocation
                 .addOnSuccessListener {
-////                requestLocation()
-//                    // LocationRequest -> QoS parameters for request, when updates
-//                    val priorityHighAcc = com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
-//                    var locationRequest = com.google.android.gms.location.LocationRequest()
-////                    locationRequest.priority = priorityHighAcc
-////                    locationRequest.interval = 0
-////                    locationRequest.fastestInterval = 0
-////                    locationRequest.numUpdates = 1
                     createLocationRequest()
-
-                    // LocationCallback -> Notifications when device location changed or not known
-                    // LocationResult -> Where stores the location
                     fLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
                     fLocationProviderClient.requestLocationUpdates(
                         locationRequest, locationCallBack, Looper.myLooper()!!)
@@ -453,21 +426,10 @@ open class BaseActivity : AppCompatActivity()  {
         lateralBar.removeHeaderView(lateralView)
         lateralBar.addHeaderView(lateralView)
 
-
-//        if (!this::user.isInitialized || !this::email.isInitialized ){
         if (userInfo.username == null || userInfo.email == null){
-//            if (RegistrationActivity.userObj != null){
-////                user = RegistrationActivity.userObj!!.username
-////                email = RegistrationActivity.userObj!!.email
-//                user = userInfo.username!!
-//                email = userInfo.email!!
-//            }
-//            else {
-//                user = "Username"
-//                email = "email@email"
-//            }
             loadUser()
         }
+
         var tvUser: TextView = lateralView.findViewById(R.id.menu_profile_email)
         tvUser.text = userInfo.email
         tvUser = lateralView.findViewById(R.id.menu_profile_name)
@@ -483,7 +445,6 @@ open class BaseActivity : AppCompatActivity()  {
     }
 
     fun goMyGames(){
-        // TODO - It should redirect to a Main with the games from the user (defined in the DB)
         var intent = Intent(this,MainActivity::class.java)
         startActivity(intent)
     }

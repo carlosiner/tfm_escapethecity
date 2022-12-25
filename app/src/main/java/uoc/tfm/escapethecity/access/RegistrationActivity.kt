@@ -17,10 +17,6 @@ import java.util.*
 
 
 class RegistrationActivity : BaseActivity(){
-    companion object{
-//        var userObj: User? = null
-    }
-
     private lateinit var auth: FirebaseAuth
 
     private lateinit var etEmail: EditText
@@ -51,21 +47,23 @@ class RegistrationActivity : BaseActivity(){
         }
     }
 
-    override fun onBackPressed() { // TODO
-//        super.onBackPressed()
+    override fun onBackPressed() {
+        // Return Home
         val intent = Intent(Intent.ACTION_MAIN)
         intent.addCategory(Intent.CATEGORY_HOME)
         intent.flags =Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
     }
 
-    // New user registration
+
     fun registration(view: View){
+        // New user registration
         registerUser()
     }
 
-    // Move to view: login
+
     fun login(view: View){
+        // Move to view: login
         goLogin()
     }
 
@@ -95,7 +93,7 @@ class RegistrationActivity : BaseActivity(){
         auth.createUserWithEmailAndPassword(emailStr, passStr)
             .addOnCompleteListener(this){
                 if (it.isSuccessful){
-                    // TODO TESTING
+                    // Register user for the DB
                     val registeredUser = auth.currentUser
                     userInfo.username = userStr
                     userInfo.registrationDate = SimpleDateFormat("dd/MM/yyyy").format(Date())
@@ -115,7 +113,6 @@ class RegistrationActivity : BaseActivity(){
 
 
                     Toast.makeText(this, "Tu registro se ha completado satisfactoriamente", Toast.LENGTH_SHORT).show()
-//                    mailER = emailStr
                     goHome()
                 }
                 else{
@@ -137,13 +134,7 @@ class RegistrationActivity : BaseActivity(){
         var db = FirebaseFirestore.getInstance()
         db.collection("users").document(email).get()
             .addOnSuccessListener {
-//                userObj = User(
-//                    it.data?.get("username") as String,
-//                    it.data?.get("registrationDate") as String,
-//                    it.data?.get("email") as String,
-//                    it.data?.get("role") as String)
                 loadUser()
-                //TODO
             }
             .addOnFailureListener {
                 Toast.makeText(this,"Error en la obtención del usuario", Toast.LENGTH_SHORT).show()

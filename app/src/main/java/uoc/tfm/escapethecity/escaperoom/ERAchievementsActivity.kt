@@ -47,7 +47,7 @@ class ERAchievementsActivity : BaseActivity(), NavigationView.OnNavigationItemSe
         }
 
         // This will pass the ArrayList to the Adapter
-        val adapter = CustomRVAdapter(data)
+        val adapter = ERAchievementsAdapter(data)
 
         // Setting the Adapter with the recyclerview
         recyclerview.adapter = adapter

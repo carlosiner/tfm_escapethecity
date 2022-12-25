@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import uoc.tfm.escapethecity.R
 import uoc.tfm.escapethecity.data.ItemsViewModel
 
-class CustomRVAdapter (private val itemList: List<ItemsViewModel>) : RecyclerView.Adapter<CustomRVAdapter.ViewHolder>() {
+class ERAchievementsAdapter (private val itemList: List<ItemsViewModel>) : RecyclerView.Adapter<ERAchievementsAdapter.ViewHolder>() {
 
     private lateinit var context: android.content.Context
 

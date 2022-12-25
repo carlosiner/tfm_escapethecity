@@ -33,7 +33,7 @@ class GLogbookAdapter(private val logList: ArrayList<GameUserLogs>):
         val logTime = LocalDateTime.ofInstant(
             Instant.ofEpochSecond(logs.log_time!!),
             TimeZone.getDefault().toZoneId())
-        vHolder.lDate.text = logTime.toString() //TODO TEST
+        vHolder.lDate.text = logTime.toString()
         vHolder.lDescription.text = logs.log_description
         vHolder.lPoints.text = logs.log_points.toString()
     }

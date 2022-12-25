@@ -138,7 +138,6 @@ class GInvestigationActivity : BaseActivity(),
     /* --- PopUp section --- */
 
     fun PopupWindow.dimBehind() {
-        // Todo check!
         val container = contentView.rootView
         val context = contentView.context
         val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager

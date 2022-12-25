@@ -140,15 +140,6 @@
         android:layout_marginVertical="150dp"
         android:orientation="vertical"/>
 
-    <!-- 2 - PopUp Clues-->
-    <!--    TODO-->
-
-    <!-- 3 - PopUp Correct-->
-    <!--    TODO-->
-
-    <!-- 3 - PopUp Incorrect-->
-    <!--    TODO-->
-
     <!--    Top bar that supports lateral menu-->
     <include
         layout="@layout/top_bar"

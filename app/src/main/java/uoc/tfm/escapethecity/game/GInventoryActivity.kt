@@ -54,8 +54,6 @@ class GInventoryActivity : BaseActivity(),
 
     private fun useItem(itemId: String){
         /* Use item in trial */
-
-        // TODO
         if(currentGameTrialValue.t_id_item_used != ""){
             if (currentGameTrialValue.t_id_item_used == itemId &&
                 currentERUser.items[itemId]!!.i_found){
@@ -73,7 +71,6 @@ class GInventoryActivity : BaseActivity(),
                     ).show()
 
                     // Log event
-                    //TODO
                     setUserLog(
                         getString(R.string.log_game_item_use_title) + itemName,
                         getString(R.string.log_game_item_use_desc),
@@ -133,7 +130,6 @@ class GInventoryActivity : BaseActivity(),
             .setCancelable(true)
             .setPositiveButton(getString(R.string.b_game_item_use),
                 DialogInterface.OnClickListener{ _, _ ->
-                    //TODO
                     useItem(itemId)
                 })
             .show()

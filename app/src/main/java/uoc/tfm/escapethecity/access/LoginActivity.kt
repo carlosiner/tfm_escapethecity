@@ -30,7 +30,7 @@ class LoginActivity : BaseActivity() {
         finish()
     }
 
-    fun login(view: View){
+    fun login(){
         loginUser()
     }
 
@@ -75,4 +75,5 @@ class LoginActivity : BaseActivity() {
         if (email.isNotEmpty()) intent.extras
         startActivity(intent)
     }
+
 }

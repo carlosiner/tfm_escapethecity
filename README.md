@@ -1,5 +1,8 @@
 # EscapeTheCity
 
+## Información de recursos y base de datos
+
+En ./BBDD_and_resources
 
 ## Compilación 
 

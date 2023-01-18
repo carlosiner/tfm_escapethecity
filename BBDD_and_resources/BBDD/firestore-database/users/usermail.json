@@ -1,0 +1,19 @@
+{
+    "fields": {
+        "image": {
+            "stringValue": "https://firebasestorage.googleapis.com/v0/b/tfm-escapethecity.appspot.com/o/default_resources%2Fdefault_user.png?alt=media&token=849fbfa5-a3ab-4799-9912-8973baee32da"
+        },
+        "role": {
+            "stringValue": "player"
+        },
+        "email": {
+            "stringValue": "my_email@uoc.edu"
+        },
+        "registrationDate": {
+            "stringValue": "22/12/2022"
+        },
+        "username": {
+            "stringValue": "User"
+        }
+    }
+}

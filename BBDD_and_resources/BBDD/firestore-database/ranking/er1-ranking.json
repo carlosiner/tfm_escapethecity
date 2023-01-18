@@ -1,0 +1,137 @@
+{
+    "fields": {
+        "testing@test1.xyzl": {
+            "mapValue": {
+                "fields": {
+                    "user_name": {
+                        "stringValue": "Pepe"
+                    },
+                    "user_points": {
+                        "integerValue": "110"
+                    }
+                }
+            }
+        },
+        "testing@test2.xyzl": {
+            "mapValue": {
+                "fields": {
+                    "user_name": {
+                        "stringValue": "Dragon"
+                    },
+                    "user_points": {
+                        "integerValue": "740"
+                    }
+                }
+            }
+        },
+        "testing@test3.xyzl": {
+            "mapValue": {
+                "fields": {
+                    "user_name": {
+                        "stringValue": "PRO"
+                    },
+                    "user_points": {
+                        "integerValue": "900"
+                    }
+                }
+            }
+        },
+        "testing@test4.xyzl": {
+            "mapValue": {
+                "fields": {
+                    "user_name": {
+                        "stringValue": "Nixna"
+                    },
+                    "user_points": {
+                        "integerValue": "20"
+                    }
+                }
+            }
+        },
+        "testing@test5.xyzl": {
+            "mapValue": {
+                "fields": {
+                    "user_name": {
+                        "stringValue": "NullPointer"
+                    },
+                    "user_points": {
+                        "integerValue": "0"
+                    }
+                }
+            }
+        },
+        "testing@test6.xyzl": {
+            "mapValue": {
+                "fields": {
+                    "user_name": {
+                        "stringValue": "Cat102"
+                    },
+                    "user_points": {
+                        "integerValue": "70"
+                    }
+                }
+            }
+        },
+        "testing@test7.xyzl": {
+            "mapValue": {
+                "fields": {
+                    "user_name": {
+                        "stringValue": "Alfon"
+                    },
+                    "user_points": {
+                        "integerValue": "70"
+                    }
+                }
+            }
+        },
+        "testing@test8.xyzl": {
+            "mapValue": {
+                "fields": {
+                    "user_name": {
+                        "stringValue": "Terminator"
+                    },
+                    "user_points": {
+                        "integerValue": "9000"
+                    }
+                }
+            }
+        },
+        "testing@test9.xyzl": {
+            "mapValue": {
+                "fields": {
+                    "user_name": {
+                        "stringValue": "h4k3r"
+                    },
+                    "user_points": {
+                        "integerValue": "404"
+                    }
+                }
+            }
+        },
+        "testing@test10.xyzl": {
+            "mapValue": {
+                "fields": {
+                    "user_name": {
+                        "stringValue": "Investigador"
+                    },
+                    "user_points": {
+                        "integerValue": "50"
+                    }
+                }
+            }
+        },
+        "testing@test11.xyzl": {
+            "mapValue": {
+                "fields": {
+                    "user_name": {
+                        "stringValue": "Carlos"
+                    },
+                    "user_points": {
+                        "integerValue": "150"
+                    }
+                }
+            }
+        }
+    
+    }
+}

@@ -27,7 +27,7 @@ class GTimerActivity : BaseActivity(),
         setTimer()
         val clockImage: ImageView = findViewById(R.id.iv_game_timer_image)
         getImageFromURL(this,
-            "https://firebasestorage.googleapis.com/v0/b/tfm-escapethecity.appspot.com/o/default_resources%2Fgame_timer.gif?alt=media&token=af541bb8-6f19-4332-9e5b-bd5bc48fc25b",
+            "https://firebasestorage.googleapis.com/v0/b/tfm-escapethecity.appspot.com/o/default_resources%2Fgame_timer2.gif?alt=media&token=d5ee245f-e121-4969-9579-ff14843db25a",
             clockImage, true)
     }
 

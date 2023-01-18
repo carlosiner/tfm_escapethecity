@@ -10,9 +10,10 @@
 
     <color name="escape_purple">#62389F</color>
     <color name="escape_back_light_purple">#A591C3</color>
-    <color name="escape_carbon">#D1D1D1</color>
-    <color name="escape_vivid_purple">#a507be</color>
-    <color name="escape_dead_purple">#360B73</color>
+    <color name="escape_carbon">#FFFFFFFF</color>
+    <color name="escape_vivid_purple">#C39DC7</color>
+    <color name="escape_dead_purple">#8b7d9f</color>
+    <color name="escape_dead_purple_noir">#B266BA</color>
 
     <!-- Log Cards -->
     <color name="light_blue">#00b3cf</color>

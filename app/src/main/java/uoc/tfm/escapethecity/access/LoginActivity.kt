@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import uoc.tfm.escapethecity.BaseActivity
@@ -24,6 +25,9 @@ class LoginActivity : BaseActivity() {
 
         etEmail = findViewById(R.id.etEmail)
         etPass = findViewById(R.id.etPass)
+
+        var forgotPass: TextView = findViewById(R.id.etForgotPass)
+        surlineText(forgotPass, getString(R.string.access_button_remember))
     }
 
     override fun onBackPressed() {

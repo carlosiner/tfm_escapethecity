@@ -112,6 +112,10 @@
     <string name="tv_er_status_cancel_game_title">Cancelar el juego</string>
     <string name="tv_er_status_cancel_game_description">¿Desea cancelar la reserva del juego?</string>
     <!--    ER Status if initial item -->
+    <!--    ER Status item list  -->
+    <string name="tv_er_status_game">Partida:</string>
+    <string name="tv_er_status_date">Fecha:</string>
+    <string name="tv_er_status_time">Hora:</string>
 
 
     <!-- Game Menu -->

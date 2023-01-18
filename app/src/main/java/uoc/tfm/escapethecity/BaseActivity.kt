@@ -1,5 +1,6 @@
 package uoc.tfm.escapethecity
 import android.annotation.SuppressLint
+import android.app.ActivityOptions
 import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.location.LocationManager
@@ -441,7 +442,7 @@ open class BaseActivity : AppCompatActivity()  {
     /* Functions from NavigationMenu (lateral menu) */
     fun goMain(){
         var intent = Intent(this,MainActivity::class.java)
-        startActivity(intent)
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
     }
 
     fun goMyGames(){

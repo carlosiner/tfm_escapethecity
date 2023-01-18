@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import uoc.tfm.escapethecity.BaseActivity
 import uoc.tfm.escapethecity.R
 
-class RecoveryActivity : AppCompatActivity() {
+class RecoveryActivity : BaseActivity() {
 
     // Initialization
     private lateinit var etEmail: EditText
@@ -23,6 +25,8 @@ class RecoveryActivity : AppCompatActivity() {
         // Objects in view
         etEmail = findViewById(R.id.etEmail)
 
+        var accessTV: TextView = findViewById(R.id.tvAccess)
+        surlineText(accessTV, getString(R.string.recovery_button_access))
     }
 
     override fun onBackPressed() {

@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textSize="20dp"
-            android:text="Tu desafío comenzará pronto" />
+            android:text="@string/tv_er_status_description_before_start_subtitle" />
 
 
         <TextView
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:text="Partida:" />
+            android:text="@string/tv_er_status_game" />
 
         <TextView
             android:id="@+id/tv_er_status_game_content"
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:text="Fecha:" />
+            android:text="@string/tv_er_status_date" />
 
         <TextView
             android:id="@+id/tv_er_status_date_content"
@@ -130,7 +130,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:text="Hora:" />
+            android:text="@string/tv_er_status_time" />
 
         <TextView
             android:id="@+id/tv_er_status_time_content"

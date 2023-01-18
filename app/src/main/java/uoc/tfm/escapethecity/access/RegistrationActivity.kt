@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.net.toUri
 import com.google.firebase.auth.FirebaseAuth
@@ -33,6 +34,8 @@ class RegistrationActivity : BaseActivity(){
         etUser = findViewById(R.id.etUser)
         etPass = findViewById(R.id.etPass)
 
+        var accessTV: TextView = findViewById(R.id.etAccess)
+        surlineText(accessTV, getString(R.string.registration_button_access))
     }
 
 

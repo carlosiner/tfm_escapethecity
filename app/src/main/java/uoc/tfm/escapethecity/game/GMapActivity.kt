@@ -55,7 +55,10 @@ class GMapActivity : BaseActivity(),
         // From first non-finish trial, get location
         var trials = currentERUser.trials
         var flagFinish = false
-        for (i in trials){
+
+        var trialMapSorted = trials.toSortedMap()
+
+        for (i in trialMapSorted){
             if(!i.value.t_finished){
                 currentLocation = currentERUser.zones[i.value.t_id_zone]!!
                 flagFinish = false

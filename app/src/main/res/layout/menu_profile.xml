@@ -39,6 +39,9 @@
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
         android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20dp"
         android:text="@string/lateralmenu_profile_name"/>
 
 <!--    Email-->
@@ -48,6 +51,8 @@
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
         android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20dp"
         android:text="@string/lateralmenu_profile_email"/>
 
 </LinearLayout>

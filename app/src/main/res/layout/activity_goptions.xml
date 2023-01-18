@@ -61,7 +61,7 @@
                 android:textSize="30dp"
                 android:textStyle="bold"
                 android:clickable="true"
-                android:textColor="@color/escape_dead_purple">
+                android:textColor="@color/escape_dead_purple_noir">
 
             </TextView>
 
